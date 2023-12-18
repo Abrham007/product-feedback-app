@@ -1,0 +1,10 @@
+.TagList {
+  width: 255px;
+  height: 166px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 24px;
+  border-radius: 10px;
+  background: #fff;
+}

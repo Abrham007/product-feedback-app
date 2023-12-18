@@ -1,0 +1,22 @@
+.RoadMapViewItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.RoadMapViewItem__name-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.RoadMapViewItem__name {
+  color: #647196;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.RoadMapViewItem__number {
+  color: #647196;
+  font-size: 1rem;
+  font-weight: 700;
+}

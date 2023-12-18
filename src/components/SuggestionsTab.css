@@ -1,0 +1,13 @@
+.SuggestionsTab {
+  width: 825px;
+  height: 72px;
+  border-radius: 10px;
+  background: #373f68;
+}
+
+.SuggestionsTab_header {
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+}

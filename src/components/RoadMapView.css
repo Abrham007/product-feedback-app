@@ -1,0 +1,40 @@
+.RoadMapView {
+  width: 255px;
+  height: 178px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 10px;
+  background: #fff;
+  padding: 19px 24px;
+}
+
+.RoadMapView__header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.RoadMapView__header {
+  color: #3a4374;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01563rem;
+}
+
+.RoadMapView__link {
+  color: #4661e6;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration-line: underline;
+}
+
+.RoadMapView__link:hover {
+  color: #8397f8;
+}
+
+.RoadMapView__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

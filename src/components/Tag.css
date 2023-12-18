@@ -1,0 +1,22 @@
+.Tag {
+  flex-shrink: 0;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: #f2f4ff;
+  padding: 5px 16px;
+  color: #4661e6;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.Tag:hover {
+  cursor: pointer;
+  background: #cfd7ff;
+}
+
+.Tag:active,
+.Tag:focus {
+  background: #4661e6;
+  color: #fff;
+}

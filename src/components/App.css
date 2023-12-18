@@ -1,0 +1,15 @@
+.App {
+  width: 100vw;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f8fd;
+  font-family: "Jost", sans-serif;
+}
+
+.App__board {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
