@@ -1,0 +1,19 @@
+.SuggestionsSort {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  margin-right: auto;
+  border: none;
+  outline: none;
+  color: #f2f4fe;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  opacity: 0.75;
+  background-color: transparent;
+}
+
+.SuggestionsSort__selected {
+  font-weight: 700;
+}
