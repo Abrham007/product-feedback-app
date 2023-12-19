@@ -32,3 +32,11 @@
 .SuggestionsSort__selected {
   font-weight: 700;
 }
+
+@media screen and (max-width: 768px) {
+  .SuggestionsSort__btn {
+    width: max-content;
+    font-size: 0.8125rem;
+    gap: 8px;
+  }
+}

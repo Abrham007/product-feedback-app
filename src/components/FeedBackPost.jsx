@@ -6,7 +6,10 @@ import Tag from "./Tag";
 function FeedBackPost() {
   return (
     <div className="FeedBackPost">
-      <ScoreButton score={112} />
+      <div className="FeedBackPost__score">
+        <ScoreButton score={112} />
+      </div>
+
       <div className="FeedBackPost__text">
         <h3 className="FeedBackPost__header">Add tags for solutions</h3>
         <p className="FeedBackPost__paragraph">
@@ -14,7 +17,9 @@ function FeedBackPost() {
         </p>
         <Tag text="Enhancement" isDisabled={true} />
       </div>
-      <PostComments numOfComments={2} />
+      <div className="FeedBackPost__comments">
+        <PostComments numOfComments={2} />
+      </div>
     </div>
   );
 }

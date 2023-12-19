@@ -38,3 +38,44 @@
   font-weight: 400;
   margin-bottom: auto;
 }
+
+.FeedBackPost__comments {
+  align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .FeedBackPost {
+    width: 327px;
+    height: 200px;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 4fr 1fr;
+    grid-template-areas:
+      "text text"
+      "score comments";
+    padding: 24px;
+  }
+
+  .FeedBackPost__score {
+    grid-area: score;
+  }
+
+  .FeedBackPost__text {
+    grid-area: text;
+  }
+
+  .FeedBackPost__comments {
+    grid-area: comments;
+    justify-self: flex-end;
+  }
+
+  .FeedBackPost__header {
+    font-size: 0.8125rem;
+    letter-spacing: -0.01131rem;
+  }
+
+  .FeedBackPost__paragraph {
+    font-size: 0.8125rem;
+  }
+}

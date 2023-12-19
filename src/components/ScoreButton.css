@@ -31,3 +31,11 @@
 .ScoreButton:focus .ScoreButton__icon {
   stroke: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .ScoreButton {
+    width: 69px;
+    height: 32px;
+    flex-direction: row;
+  }
+}

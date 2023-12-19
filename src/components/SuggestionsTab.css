@@ -25,3 +25,18 @@
     width: 689px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .SuggestionsTab {
+    width: 100vw;
+    height: 56px;
+    border-radius: 0px;
+    padding: 8px 24px;
+    gap: 0px;
+    justify-content: space-between;
+  }
+
+  .SuggestionsTab_header {
+    display: none;
+  }
+}

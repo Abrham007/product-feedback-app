@@ -26,3 +26,31 @@
   font-size: 1rem;
   font-weight: 400;
 }
+
+@media screen and (max-width: 768px) {
+  .FeedBackEmpty {
+    width: 327px;
+    height: 460px;
+    gap: 24px;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .FeedBackEmpty__icon {
+    width: 102px;
+    height: 108px;
+  }
+
+  .FeedBackEmpty__text {
+    gap: 14px;
+  }
+
+  .FeedBackEmpty__header {
+    font-size: 1.125rem;
+    letter-spacing: -0.01563rem;
+  }
+
+  .FeedBackEmpty__paragraph {
+    font-size: 0.8125rem;
+  }
+}
