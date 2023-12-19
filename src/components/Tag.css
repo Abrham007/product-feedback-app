@@ -1,4 +1,5 @@
 .Tag {
+  height: 30px;
   flex-shrink: 0;
   border: none;
   outline: none;
