@@ -1,8 +1,13 @@
 .SuggestionsSort {
+  position: relative;
+  margin-right: auto;
+}
+
+.SuggestionsSort__btn {
   display: flex;
   gap: 5px;
   align-items: center;
-  margin-right: auto;
+  background-color: transparent;
   border: none;
   outline: none;
   color: #f2f4fe;
@@ -11,7 +16,17 @@
   font-weight: 400;
   line-height: normal;
   opacity: 0.75;
-  background-color: transparent;
+}
+
+.SuggestionsSort__btn:hover {
+  cursor: pointer;
+}
+
+.SuggestionsSort__drop-menu {
+  background-color: white;
+  position: absolute;
+  top: 56px;
+  left: 2px;
 }
 
 .SuggestionsSort__selected {
