@@ -20,3 +20,11 @@
   font-weight: 500;
   opacity: 0.75;
 }
+
+@media screen and (max-width: 1120px) {
+  .CompanyName {
+    width: 223px;
+    height: 178px;
+    background-image: url(../assets/suggestions/tablet/background-header.png);
+  }
+}
