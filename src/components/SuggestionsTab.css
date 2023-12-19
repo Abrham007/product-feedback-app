@@ -1,13 +1,21 @@
 .SuggestionsTab {
   width: 825px;
   height: 72px;
+  display: flex;
+  gap: 38px;
+  align-items: center;
   border-radius: 10px;
   background: #373f68;
+  padding: 24px 16px 24px 24px;
 }
 
 .SuggestionsTab_header {
   display: inline-flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01563rem;
 }
