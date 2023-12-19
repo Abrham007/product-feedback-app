@@ -1,0 +1,33 @@
+.ScoreButton {
+  width: 40px;
+  height: 53px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: #f2f4fe;
+  color: #3a4374;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: -0.01131rem;
+  border: none;
+  outline: none;
+}
+
+.ScoreButton:hover {
+  cursor: pointer;
+  background: #cfd7ff;
+}
+
+.ScoreButton:focus,
+.ScoreButton:active {
+  cursor: pointer;
+  background: #4661e6;
+  color: #fff;
+}
+
+.ScoreButton:focus .ScoreButton__icon {
+  stroke: #fff;
+}
