@@ -8,7 +8,7 @@ function RoadMapViewItem(props) {
   };
   return (
     <li className="RoadMapViewItem" style={{ listStyleImage: props.color }}>
-      <span className="RoadMapViewItem__name-box">
+      <span className="RoadMapViewItem__name">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="8"
@@ -18,7 +18,7 @@ function RoadMapViewItem(props) {
         >
           <circle cx="4" cy="4" r="4" fill={colors[props.color]} />
         </svg>
-        <span className="RoadMapViewItem__name">{props.name}</span>
+        <span>{props.name}</span>
       </span>
 
       <span className="RoadMapViewItem__number">{props.number}</span>
