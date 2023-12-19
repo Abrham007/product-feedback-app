@@ -2,6 +2,8 @@
   width: 255px;
   height: 137px;
   flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
   border-radius: 10px;
   background-image: url(../assets/suggestions/desktop/background-header.png);
   padding: 62px 0px 0px 24px;
@@ -14,11 +16,18 @@
   letter-spacing: -0.01563rem;
 }
 
-.CompanyName__text {
+.CompanyName__paragraph {
   color: #fff;
   font-size: 0.9375rem;
   font-weight: 500;
   opacity: 0.75;
+}
+
+.CompanyName__btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  display: none;
 }
 
 @media screen and (max-width: 1120px) {
@@ -26,5 +35,34 @@
     width: 223px;
     height: 178px;
     background-image: url(../assets/suggestions/tablet/background-header.png);
+    padding-top: 103px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .CompanyName {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 72px;
+    background-image: url(../assets/suggestions/mobile/background-header.png);
+    padding: 16px 24px;
+    border-radius: 0px;
+    visibility: visible;
+  }
+
+  .CompanyName__header {
+    font-size: 0.9375rem;
+    letter-spacing: -0.01169rem;
+  }
+
+  .CompanyName__paragraph {
+    font-size: 0.8125rem;
+    opacity: 0.75;
+  }
+
+  .CompanyName__btn {
+    display: block;
   }
 }
