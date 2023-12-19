@@ -38,3 +38,10 @@
   flex-direction: column;
   gap: 8px;
 }
+
+@media screen and (max-width: 1120px) {
+  .RoadMapView {
+    width: 223px;
+    height: 178px;
+  }
+}
