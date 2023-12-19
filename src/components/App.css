@@ -20,3 +20,17 @@
   flex-direction: column;
   gap: 24px;
 }
+
+@media screen and (max-width: 1120px) {
+  .App {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .App__board {
+    flex-direction: row;
+
+    gap: 10px;
+  }
+}
