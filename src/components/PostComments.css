@@ -1,9 +1,7 @@
 .PostComments {
-  align-self: center;
   width: 44px;
   height: 23px;
   display: flex;
-
   justify-content: center;
   align-items: center;
   gap: 8px;
