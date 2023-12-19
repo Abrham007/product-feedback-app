@@ -8,3 +8,10 @@
   border-radius: 10px;
   background: #fff;
 }
+
+@media screen and (max-width: 1120px) {
+  .TagList {
+    width: 223px;
+    height: 178px;
+  }
+}
