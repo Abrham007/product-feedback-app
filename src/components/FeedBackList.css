@@ -1,0 +1,22 @@
+.FeedBackList {
+  width: 825px;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-radius: 10px;
+}
+
+.FeedBackList--empty {
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  gap: 24px;
+}
+
+@media screen and (max-width: 1120px) {
+  .FeedBackList {
+    width: 689px;
+    gap: 16px;
+  }
+}
