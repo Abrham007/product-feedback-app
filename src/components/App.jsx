@@ -3,6 +3,7 @@ import CompanyName from "./CompanyName";
 import TagList from "./TagList";
 import RoadMapView from "./RoadMapView";
 import SuggestionsTab from "./SuggestionsTab";
+import FeedBackList from "./FeedBackList";
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
         <TagList />
         <RoadMapView />
       </div>
-      <div>
+      <div className="App__content">
         <SuggestionsTab />
-        <div></div>
+        <FeedBackList />
       </div>
     </div>
   );
