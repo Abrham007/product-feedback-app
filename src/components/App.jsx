@@ -4,18 +4,39 @@ import TagList from "./TagList";
 import RoadMapView from "./RoadMapView";
 import SuggestionsTab from "./SuggestionsTab";
 import FeedBackList from "./FeedBackList";
+import data from "../../data.json";
+import { useState } from "react";
 
 function App() {
+  const [appData, setAppData] = useState(data);
+  const [suggestionList, setSuggestionList] = useState(
+    appData.productRequests.filter((req) => req.status === "suggestion")
+  );
+
+  function handleSuggestions(category) {
+    if (category === "all") {
+      setSuggestionList(
+        appData.productRequests.filter((req) => req.status === "suggestion")
+      );
+    } else {
+      setSuggestionList(
+        appData.productRequests.filter(
+          (req) => req.status === "suggestion" && req.category === category
+        )
+      );
+    }
+  }
+
   return (
     <div className="App">
       <div className="App__board">
         <CompanyName />
-        <TagList />
-        <RoadMapView />
+        <TagList handleClick={handleSuggestions} />
+        <RoadMapView appData={appData} />
       </div>
       <div className="App__content">
-        <SuggestionsTab />
-        <FeedBackList />
+        <SuggestionsTab numOfSuggestions={suggestionList.length} />
+        <FeedBackList listOfFeedback={suggestionList} />
       </div>
     </div>
   );
