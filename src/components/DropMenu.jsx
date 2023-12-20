@@ -2,15 +2,25 @@ import "./DropMenu.css";
 import checkIcon from "../assets/shared/icon-check.svg";
 
 function DropMenu(props) {
+  function handleClick(index) {
+    props.btnAction(index);
+
+    if (props.toggleIsOpen) {
+      props.toggleIsOpen();
+    }
+  }
+
   return (
     <menu className="DropMenu">
       {props.menuList.map((item, index) => (
         <li className="DropMenu__item" key={index}>
-          <button className="DropMenu__btn">
+          <button onClick={() => handleClick(index)} className="DropMenu__btn">
             <span>{item}</span>
             <img
               className="DropMenu__icon"
-              style={props.activeBtn === index ? { visibility: "visible" } : {}}
+              style={
+                props.selectedIndex === index ? { visibility: "visible" } : {}
+              }
               aria-live="polite"
               src={checkIcon}
               alt="check icon"
