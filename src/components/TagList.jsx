@@ -7,8 +7,18 @@ function TagList(props) {
   const tagList = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
 
   function onTagClick(category) {
+    if (category === "all") {
+      props.handleSuggestions(
+        props.SUGGESTIONLIST.filter((req) => req.status === "suggestion")
+      );
+    } else {
+      props.handleSuggestions(
+        props.SUGGESTIONLIST.filter(
+          (req) => req.status === "suggestion" && req.category === category
+        )
+      );
+    }
     setSelectedTag(category);
-    props.handleClick(category);
   }
   return (
     <div className="TagList">
