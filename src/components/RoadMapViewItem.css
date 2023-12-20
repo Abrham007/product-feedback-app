@@ -3,6 +3,18 @@
   justify-content: space-between;
 }
 
+.RoadMapViewItem:nth-child(1) svg {
+  fill: #f49f85;
+}
+
+.RoadMapViewItem:nth-child(2) svg {
+  fill: #ad1fea;
+}
+
+.RoadMapViewItem:nth-child(3) svg {
+  fill: #62bcfa;
+}
+
 .RoadMapViewItem__name {
   display: flex;
   align-items: center;
