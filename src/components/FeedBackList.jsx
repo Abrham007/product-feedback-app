@@ -2,15 +2,19 @@ import FeedBackEmpty from "./FeedBackEmpty";
 import "./FeedBackList.css";
 import FeedBackPost from "./FeedBackPost";
 
-function FeedBackList() {
+function FeedBackList(props) {
+  let isEmpty = props.listOfFeedback.length === 0;
   return (
-    <div className="FeedBackList">
-      {/* <FeedBackEmpty /> */}
-      <FeedBackPost />
-      <FeedBackPost />
-      <FeedBackPost />
-      <FeedBackPost />
-      <FeedBackPost />
+    <div
+      className={isEmpty ? "FeedBackList FeedBackList--empty" : "FeedBackList"}
+    >
+      {isEmpty ? (
+        <FeedBackEmpty />
+      ) : (
+        props.listOfFeedback.map((feedback) => (
+          <FeedBackPost key={feedback.id} {...feedback} />
+        ))
+      )}
     </div>
   );
 }

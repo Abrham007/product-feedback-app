@@ -1,15 +1,25 @@
 import "./TagList.css";
 import Tag from "./Tag";
+import { useState } from "react";
 
-function TagList() {
+function TagList(props) {
+  const [selectedTag, setSelectedTag] = useState("all");
+  const tagList = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"];
+
+  function onTagClick(category) {
+    setSelectedTag(category);
+    props.handleClick(category);
+  }
   return (
     <div className="TagList">
-      <Tag text="All" />
-      <Tag text="UI" />
-      <Tag text="UX" />
-      <Tag text="Enhancement" />
-      <Tag text="Bug" />
-      <Tag text="Feature" />
+      {tagList.map((item) => (
+        <Tag
+          key={item}
+          text={item}
+          isSelected={selectedTag}
+          onClick={onTagClick}
+        />
+      ))}
     </div>
   );
 }
