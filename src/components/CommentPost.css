@@ -1,0 +1,57 @@
+.CommentPost {
+  display: grid;
+  gap: 17px 32px;
+  grid-template-columns: min-content auto min-content;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "avatar info btn"
+    "avatar description description";
+  /* padding-bottom: 32px;
+  border-bottom: 1px solid rgba(140, 146, 179, 0.25); */
+}
+
+/* .CommentPost:last-child {
+  padding-bottom: 48px;
+  border-bottom: none;
+} */
+.CommentPost__avatar {
+  grid-area: avatar;
+  border-radius: 40px;
+}
+
+.CommentPost__info {
+  grid-area: info;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.CommentPost__name {
+  color: #3a4374;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: -0.01213rem;
+}
+
+.CommentPost__email {
+  color: #647196;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.CommentPost__btn {
+  grid-area: btn;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #4661e6;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.CommentPost__description {
+  grid-area: description;
+  color: #647196;
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
