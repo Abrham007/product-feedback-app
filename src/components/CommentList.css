@@ -1,0 +1,23 @@
+.CommentList {
+  width: 100%;
+  display: flex;
+  gap: 28px;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 24px 32px 48px;
+}
+
+.CommentList__header {
+  color: #3a4374;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01563rem;
+}
+
+.CommentList__line {
+  width: 100%;
+  height: 1px;
+  opacity: 0.25;
+  background: #8c92b3;
+}
