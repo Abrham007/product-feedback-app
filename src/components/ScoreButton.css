@@ -28,10 +28,6 @@
   color: #fff;
 }
 
-.ScoreButton:focus .ScoreButton__icon {
-  stroke: #fff;
-}
-
 @media screen and (max-width: 768px) {
   .ScoreButton {
     width: 69px;
