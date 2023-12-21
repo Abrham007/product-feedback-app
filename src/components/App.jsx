@@ -6,25 +6,23 @@ import FeedBackDetail from "./FeedbackDetail";
 
 function App() {
   const [appData, setAppData] = useState(data);
-  const SUGGESTIONLIST = appData.productRequests.filter(
-    (req) => req.status === "suggestion"
-  );
-  const [suggestionList, setSuggestionList] = useState(SUGGESTIONLIST);
 
-  function handleSuggestions(currentSuggestions) {
-    setSuggestionList(currentSuggestions);
+  function handleUpVotes(id) {
+    setAppData((prevValue) => {
+      let changedIndex = prevValue.productRequests.findIndex(
+        (req) => req.id === id
+      );
+      prevValue.productRequests[changedIndex].upvotes++;
+      console.log(prevValue);
+      return prevValue;
+    });
   }
 
   return (
     <div className="App">
-      <Suggestions
-        SUGGESTIONLIST={SUGGESTIONLIST}
-        handleSuggestions={handleSuggestions}
-        suggestionList={suggestionList}
-        appData={appData}
-      />
+      {/* <Suggestions appData={appData} handleUpVotes={handleUpVotes} /> */}
 
-      {/* <FeedBackDetail /> */}
+      <FeedBackDetail />
     </div>
   );
 }
