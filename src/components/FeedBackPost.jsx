@@ -7,7 +7,11 @@ function FeedBackPost(props) {
   return (
     <div className="FeedBackPost">
       <div className="FeedBackPost__score">
-        <ScoreButton score={props.upvotes} />
+        <ScoreButton
+          score={props.upvotes}
+          id={props.id}
+          handleScore={props.handleUpVotes}
+        />
       </div>
 
       <div className="FeedBackPost__text">
