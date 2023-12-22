@@ -16,5 +16,18 @@
 }
 
 .CommentPostWithReplay__replies {
+  display: flex;
+  flex-direction: column;
+  gap: 17px;
   margin-left: 45px;
+}
+
+@media screen and (max-width: 768px) {
+  .CommentPostWithReplay__line {
+    left: 2px;
+    top: 250px;
+  }
+  .CommentPostWithReplay__replies {
+    margin-left: 23px;
+  }
 }
