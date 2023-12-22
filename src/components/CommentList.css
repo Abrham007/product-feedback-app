@@ -21,3 +21,9 @@
   opacity: 0.25;
   background: #8c92b3;
 }
+
+@media screen and (max-width: 768px) {
+  .CommentList {
+    padding: 24px;
+  }
+}
