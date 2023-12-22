@@ -2,18 +2,13 @@
   display: grid;
   gap: 17px 32px;
   grid-template-columns: min-content auto min-content;
-  grid-template-rows: 1fr 2fr;
+  grid-template-rows: min-content 2fr;
   grid-template-areas:
     "avatar info btn"
-    "avatar description description";
-  /* padding-bottom: 32px;
-  border-bottom: 1px solid rgba(140, 146, 179, 0.25); */
+    "avatar description description"
+    "avatar post post";
 }
 
-/* .CommentPost:last-child {
-  padding-bottom: 48px;
-  border-bottom: none;
-} */
 .CommentPost__avatar {
   grid-area: avatar;
   border-radius: 40px;
@@ -39,7 +34,7 @@
   font-weight: 400;
 }
 
-.CommentPost__btn {
+.CommentPost__btn-get {
   grid-area: btn;
   border: none;
   outline: none;
@@ -49,9 +44,86 @@
   font-weight: 600;
 }
 
+.CommentPost__btn-get:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .CommentPost__description {
   grid-area: description;
   color: #647196;
   font-size: 0.9375rem;
   font-weight: 400;
+}
+
+.CommentPost__replay {
+  grid-area: post;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.CommentPost__input {
+  height: 80px;
+}
+
+.CommentPost__btn-post {
+  border: none;
+  outline: none;
+  flex-shrink: 0;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: #f2f4fe;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #f2f4fe;
+  background: #ad1fea;
+}
+.CommentPost__btn-post:hover {
+  cursor: pointer;
+  background: #c75af6;
+}
+
+.CommentPost__input {
+  width: 100%;
+  height: 80px;
+  border: none;
+  outline: none;
+  resize: none;
+  border-radius: 5px;
+  background: #f7f8fd;
+  padding: 16px 24px;
+  font-family: Jost;
+  color: #3a4374;
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
+
+.CommentPost__input:hover,
+.CommentPost__input:focus {
+  cursor: pointer;
+  border: 1px solid #4661e6;
+}
+
+::placeholder {
+  font-family: Jost;
+  color: #8c92b3;
+  font-size: 0.9375rem;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
+  .CommentPost {
+    gap: 16px;
+    grid-template-areas:
+      "avatar info btn"
+      "description description description"
+      "post post post";
+  }
+
+  .CommentPost__btn-post {
+    padding: 10.5px 16px;
+    font-size: 0.8125rem;
+  }
 }
