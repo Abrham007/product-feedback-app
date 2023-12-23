@@ -3,26 +3,37 @@ import data from "../../data.json";
 import { useEffect, useState } from "react";
 import Suggestions from "./Suggestions";
 import FeedBackDetail from "./FeedbackDetail";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 
 function App() {
   const [appData, setAppData] = useState(data);
 
-  function handleUpVotes(id) {
-    setAppData((prevValue) => {
-      let changedIndex = prevValue.productRequests.findIndex(
-        (req) => req.id === id
-      );
-      prevValue.productRequests[changedIndex].upvotes++;
-      console.log(prevValue);
-      return prevValue;
-    });
+  function handleAppData(cb) {
+    setAppData(cb);
   }
 
   return (
     <div className="App">
-      {/* <Suggestions appData={appData} handleUpVotes={handleUpVotes} /> */}
-
-      <FeedBackDetail />
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suggestions appData={appData} handleAppData={handleAppData} />
+            }
+          ></Route>
+          <Route
+            path="/feedbackdetail/:id"
+            element={<FeedBackDetail appData={appData} />}
+          />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
