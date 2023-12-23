@@ -5,6 +5,18 @@ import { useState } from "react";
 function ScoreButton(props) {
   const [isClicked, setIsClicked] = useState(false);
 
+  function handleUpVotes(event) {
+    setIsClicked(true);
+    event.preventDefault();
+    props.handleAppData((prevValue) => {
+      let changedIndex = prevValue.productRequests.findIndex(
+        (req) => req.id === props.id
+      );
+      prevValue.productRequests[changedIndex].upvotes++;
+      return prevValue;
+    });
+  }
+
   function handleClick(event) {
     setIsClicked(true);
     props.handleScore(props.id);
@@ -15,7 +27,7 @@ function ScoreButton(props) {
     <button
       style={isClicked ? { backgroundColor: "#4661e6", color: "#fff" } : {}}
       className="ScoreButton"
-      onClick={handleClick}
+      onClick={handleUpVotes}
       disabled={isClicked}
     >
       <svg

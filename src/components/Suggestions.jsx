@@ -13,16 +13,6 @@ function Suggestions(props) {
   const [suggestionList, setSuggestionList] = useState(SUGGESTIONLIST);
   const [isOpen, setIsOpen] = useState(false);
 
-  function handleUpVotes(id) {
-    props.handleAppData((prevValue) => {
-      let changedIndex = prevValue.productRequests.findIndex(
-        (req) => req.id === id
-      );
-      prevValue.productRequests[changedIndex].upvotes++;
-      return prevValue;
-    });
-  }
-
   function handleSuggestions(currentSuggestions) {
     setSuggestionList(currentSuggestions);
   }
@@ -48,8 +38,7 @@ function Suggestions(props) {
         />
         <FeedBackList
           listOfFeedback={suggestionList}
-          handleUpVotes={handleUpVotes}
-          showDetail={props.showDetail}
+          handleAppData={props.handleAppData}
         />
       </div>
     </div>
