@@ -1,11 +1,17 @@
+import { useState } from "react";
 import "./FeedBackPost.css";
 import PostComments from "./PostComments";
 import ScoreButton from "./ScoreButton";
 import Tag from "./Tag";
+import { Link } from "react-router-dom";
 
 function FeedBackPost(props) {
   return (
-    <div className="FeedBackPost">
+    <Link
+      to={`/feedbackdetail/${props.id}`}
+      className="FeedBackPost"
+      style={{ textDecoration: "none" }}
+    >
       <div className="FeedBackPost__score">
         <ScoreButton
           score={props.upvotes}
@@ -24,7 +30,7 @@ function FeedBackPost(props) {
           numOfComments={props.comments ? props.comments.length : 0}
         />
       </div>
-    </div>
+    </Link>
   );
 }
 
