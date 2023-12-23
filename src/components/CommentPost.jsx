@@ -1,10 +1,10 @@
 import "./CommentPost.css";
-import userImg from "../assets/user-images/image-elijah.jpg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function CommentPost(props) {
   const [isOpen, setIsOpen] = useState(false);
-  const userImg = props.user.image.replace(".", "..");
+  const userImgs = new URL(props.user.image.replace(".", ".."), import.meta.url)
+    .href;
 
   function toggleReplay() {
     setIsOpen((prevValue) => !prevValue);
@@ -13,7 +13,7 @@ function CommentPost(props) {
     <div className="CommentPost">
       <img
         className="CommentPost__avatar"
-        src="../assets/user-images/image-elijah.jpg"
+        src={userImgs}
         alt=""
         width={40}
         height={40}
@@ -25,7 +25,12 @@ function CommentPost(props) {
       <button className="CommentPost__btn-get" onClick={toggleReplay}>
         Replay
       </button>
-      <p className="CommentPost__description">{props.content}</p>
+      <p className="CommentPost__description">
+        <span className="CommentPost__replayto">
+          {props.replyingTo ? `@${props.replyingTo} ` : null}
+        </span>
+        {props.content}
+      </p>
       {isOpen && (
         <div className="CommentPost__replay">
           <textarea className="CommentPost__input"></textarea>
