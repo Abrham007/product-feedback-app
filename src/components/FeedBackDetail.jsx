@@ -3,8 +3,17 @@ import FeedBackPost from "./FeedBackPost";
 import leftArrowIcon from "../assets/shared/icon-arrow-left.svg";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
+import { useParams } from "react-router-dom";
 
 function FeedBackDetail(props) {
+  let { id } = useParams();
+  console.log(id);
+  const FEEDBACKDETAIL = props.appData.productRequests.find(
+    (req) => req.id == id
+  );
+  console.log(FEEDBACKDETAIL);
+  const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL.comments;
+
   return (
     <div className="FeedBackDetail">
       <div className="FeedBackDetail__header">
@@ -24,16 +33,8 @@ function FeedBackDetail(props) {
           <span>Edit Feedback</span>
         </button>
       </div>
-      <FeedBackPost
-        title={"Add tags for solutions"}
-        description={
-          "Easier to search for solutions based on a specific stack."
-        }
-        upvotes={112}
-        category={"enhancement"}
-        comments={[1, 1]}
-      />
-      <CommentList />
+      <FeedBackPost {...FEEDBACKDETAIL} />
+      <CommentList list={FEEDBACKDETAILCOMMENTS} />
       <AddComment />
     </div>
   );
