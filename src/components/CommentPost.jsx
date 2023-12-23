@@ -1,13 +1,38 @@
 import "./CommentPost.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CommentPost(props) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  let replayTextArea = useRef(null);
   const userImgs = new URL(props.user.image.replace(".", ".."), import.meta.url)
     .href;
 
   function toggleReplay() {
     setIsOpen((prevValue) => !prevValue);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    props.handleAppData((prevVaule) => {
+      let feedBackPostIndex = prevVaule.productRequests.findIndex(
+        (req) => req.id == props.feedbackPostId
+      );
+      let commentsArray = prevVaule.productRequests[feedBackPostIndex].comments;
+      let commentIndex = commentsArray.findIndex(
+        (comment) => comment.id == props.id
+      );
+      commentsArray[commentIndex].replies = {
+        contnet: replayTextArea.value,
+        replyingTo: props.user.username,
+        user: prevVaule.currentUser,
+      };
+      return prevVaule;
+    });
+
+    navigate(`/feedbackdetail/${props.feedbackPostId}`);
   }
   return (
     <div className="CommentPost">
@@ -32,10 +57,15 @@ function CommentPost(props) {
         {props.content}
       </p>
       {isOpen && (
-        <div className="CommentPost__replay">
-          <textarea className="CommentPost__input"></textarea>
-          <button className="CommentPost__btn-post">Post Reply</button>
-        </div>
+        <form onSubmit={handleSubmit} className="CommentPost__replay">
+          <textarea
+            ref={replayTextArea}
+            className="CommentPost__input"
+          ></textarea>
+          <button className="CommentPost__btn-post" type="submit">
+            Post Reply
+          </button>
+        </form>
       )}
     </div>
   );

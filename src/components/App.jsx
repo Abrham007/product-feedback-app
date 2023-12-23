@@ -15,6 +15,7 @@ function App() {
   const [appData, setAppData] = useState(data);
 
   function handleAppData(cb) {
+    console.log("reached");
     setAppData(cb);
   }
 
@@ -30,7 +31,9 @@ function App() {
           ></Route>
           <Route
             path="/feedbackdetail/:id"
-            element={<FeedBackDetail appData={appData} />}
+            element={
+              <FeedBackDetail appData={appData} handleAppData={handleAppData} />
+            }
           />
         </Routes>
       </BrowserRouter>

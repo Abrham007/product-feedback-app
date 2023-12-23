@@ -16,7 +16,7 @@ function FeedBackPost(props) {
         <ScoreButton
           score={props.upvotes}
           id={props.id}
-          handleScore={props.handleUpVotes}
+          handleAppData={props.handleAppData}
         />
       </div>
 

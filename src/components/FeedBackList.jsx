@@ -4,6 +4,7 @@ import FeedBackPost from "./FeedBackPost";
 
 function FeedBackList(props) {
   let isEmpty = props.listOfFeedback.length === 0;
+
   return (
     <div
       className={isEmpty ? "FeedBackList FeedBackList--empty" : "FeedBackList"}
@@ -15,7 +16,7 @@ function FeedBackList(props) {
           <FeedBackPost
             key={feedback.id}
             {...feedback}
-            handleUpVotes={props.handleUpVotes}
+            handleAppData={props.handleAppData}
           />
         ))
       )}

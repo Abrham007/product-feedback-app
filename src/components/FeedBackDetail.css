@@ -16,7 +16,7 @@
   align-items: center;
 }
 
-.FeedBackDetail__btn {
+.FeedBackDetail__link {
   display: flex;
   gap: 4px;
   align-items: center;
@@ -28,24 +28,25 @@
   color: #f2f4fe;
   font-size: 0.875rem;
   font-weight: 700;
+  text-decoration: none;
 }
 
-.FeedBackDetail__btn--1 {
+.FeedBackDetail__link--1 {
   gap: 15px;
   color: #647196;
   background-color: transparent;
 }
 
-.FeedBackDetail__btn--1:hover {
+.FeedBackDetail__link--1:hover {
   cursor: pointer;
   text-decoration: underline;
 }
 
-.FeedBackDetail__btn--2 {
+.FeedBackDetail__link--2 {
   background-color: #4661e6;
 }
 
-.FeedBackDetail__btn--2:hover {
+.FeedBackDetail__link--2:hover {
   cursor: pointer;
   background-color: #7c91f9;
 }

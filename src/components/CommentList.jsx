@@ -11,19 +11,36 @@ function CommentList(props) {
         if (!comment.replies) {
           return (
             <Fragment key={comment.id}>
-              <CommentPost key={comment.id} {...comment} />
+              <CommentPost
+                key={comment.id}
+                feedbackPostId={props.id}
+                {...comment}
+                handleAppData={props.handleAppData}
+              />
               <hr key={"line" + comment.id} className="CommentList__line"></hr>
             </Fragment>
           );
         } else {
-          let commentReplies = comment.replies?.map((replie, index) => (
-            <CommentPost key={index} {...replie} />
+          let commentReplies = comment.replies.map((replie, index) => (
+            <CommentPost
+              key={index}
+              feedbackPostId={props.id}
+              {...replie}
+              handleAppData={props.handleAppData}
+            />
           ));
           return (
             <Fragment key={comment.id}>
               <CommentPostWithReplay
                 key={comment.id}
-                comment={<CommentPost key={comment.id} {...comment} />}
+                comment={
+                  <CommentPost
+                    key={comment.id}
+                    feedbackPostId={props.id}
+                    {...comment}
+                    handleAppData={props.handleAppData}
+                  />
+                }
                 replies={commentReplies}
               />
               <hr key={"line" + comment.id} className="CommentList__line"></hr>

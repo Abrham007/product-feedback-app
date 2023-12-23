@@ -14,17 +14,16 @@ function AddComment(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    let newComment = {
-      id: 16,
-      content: newContent,
-      user: props.appData.currentUser,
-    };
 
     props.handleAppData((prevVaule) => {
       let feedBackPostIndex = prevVaule.productRequests.findIndex(
         (req) => req.id == props.id
       );
-      prevVaule.productRequests[feedBackPostIndex].comments.push(newComment);
+      prevVaule.productRequests[feedBackPostIndex].comments.push({
+        id: 16,
+        content: newContent,
+        user: prevVaule.currentUser,
+      });
       return prevVaule;
     });
 
