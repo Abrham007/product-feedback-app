@@ -5,9 +5,10 @@ import { useState } from "react";
 function ScoreButton(props) {
   const [isClicked, setIsClicked] = useState(false);
 
-  function handleClick() {
+  function handleClick(event) {
     setIsClicked(true);
     props.handleScore(props.id);
+    event.stopPropagation();
   }
 
   return (
