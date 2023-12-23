@@ -56,6 +56,12 @@
   font-weight: 400;
 }
 
+.CommentPost__replayto {
+  color: #ad1fea;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
 .CommentPost__replay {
   grid-area: post;
   display: flex;
