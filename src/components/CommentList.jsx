@@ -21,12 +21,13 @@ function CommentList(props) {
             </Fragment>
           );
         } else {
-          let commentReplies = comment.replies.map((replie, index) => (
+          let commentReplies = comment.replies?.map((replie, index) => (
             <CommentPost
               key={index}
               feedbackPostId={props.id}
               {...replie}
               handleAppData={props.handleAppData}
+              parentCommentId={comment.id}
             />
           ));
           return (
