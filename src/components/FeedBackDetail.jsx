@@ -33,7 +33,7 @@ function FeedBackDetail(props) {
           <span>Edit Feedback</span>
         </button>
       </div>
-      <FeedBackPost {...FEEDBACKDETAIL} />
+      <FeedBackPost handleAppData={props.handleAppData} {...FEEDBACKDETAIL} />
       <CommentList
         list={FEEDBACKDETAILCOMMENTS}
         handleAppData={props.handleAppData}

@@ -1,5 +1,4 @@
 import "./ScoreButton.css";
-import upIcon from "../assets/shared/icon-arrow-up.svg";
 import { useState } from "react";
 
 function ScoreButton(props) {
