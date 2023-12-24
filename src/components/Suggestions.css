@@ -4,15 +4,10 @@
   align-items: flex-start;
   justify-content: center;
   background-color: #f7f8fd;
-  padding-top: 94px;
+  margin-top: 94px;
 }
 
-.Suggestions__board {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
+.Suggestions__board,
 .Suggestions__content {
   display: flex;
   flex-direction: column;
@@ -24,7 +19,7 @@
     flex-direction: column;
     align-items: center;
     gap: 40px;
-    padding-top: 56px;
+    margin-top: 56px;
   }
 
   .Suggestions__board {
@@ -37,7 +32,7 @@
   .Suggestions {
     position: relative;
     gap: 0px;
-    padding-top: 72px;
+    margin-top: 72px;
   }
 
   .Suggestions__board {
