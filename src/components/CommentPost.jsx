@@ -21,17 +21,24 @@ function CommentPost(props) {
         (req) => req.id == props.feedbackPostId
       );
       let commentsArray = prevVaule.productRequests[feedBackPostIndex].comments;
-      let commentIndex = commentsArray.findIndex(
-        (comment) => comment.id == props.id
+      let commentIndex = commentsArray.findIndex((comment) =>
+        comment.id == props.parentCommentId ? props.parentCommentId : props.id
       );
-      commentsArray[commentIndex].replies = {
-        contnet: replayTextArea.value,
+      console.log(commentsArray[commentIndex]);
+      let repliesArrya = commentsArray[commentIndex].replies
+        ? commentsArray[commentIndex].replies
+        : [];
+      repliesArrya.push({
+        content: replayTextArea.current.value,
         replyingTo: props.user.username,
         user: prevVaule.currentUser,
-      };
+      });
+      commentsArray[commentIndex].replies = repliesArrya;
       return prevVaule;
     });
 
+    replayTextArea.current.value = "";
+    setIsOpen(false);
     navigate(`/feedbackdetail/${props.feedbackPostId}`);
   }
   return (
@@ -61,6 +68,7 @@ function CommentPost(props) {
           <textarea
             ref={replayTextArea}
             className="CommentPost__input"
+            maxLength={250}
           ></textarea>
           <button className="CommentPost__btn-post" type="submit">
             Post Reply
