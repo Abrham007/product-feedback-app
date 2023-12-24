@@ -5,8 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 80px 0px 120px;
-  margin: auto;
+  margin: 80px 0px 120px;
 }
 
 .FeedBackDetail__header {
@@ -35,6 +34,7 @@
   gap: 15px;
   color: #647196;
   background-color: transparent;
+  padding: 0px;
 }
 
 .FeedBackDetail__link--1:hover {
@@ -54,7 +54,7 @@
 @media screen and (max-width: 768px) {
   .FeedBackDetail {
     width: 327px;
-    padding: 24px 0px 88px;
+    margin: 24px 0px 88px;
   }
 
   .FeedBackDetail__btn {
