@@ -2,8 +2,8 @@ import "./DropMenu.css";
 import checkIcon from "../assets/shared/icon-check.svg";
 
 function DropMenu(props) {
-  function handleClick(index) {
-    props.btnAction(index);
+  function handleClick(index, event) {
+    props.btnAction(index, event);
 
     if (props.toggleIsOpen) {
       props.toggleIsOpen();
@@ -14,7 +14,13 @@ function DropMenu(props) {
     <menu className="DropMenu">
       {props.menuList.map((item, index) => (
         <li className="DropMenu__item" key={index}>
-          <button onClick={() => handleClick(index)} className="DropMenu__btn">
+          <button
+            onClick={(event) => {
+              handleClick(index);
+              event.preventDefault();
+            }}
+            className="DropMenu__btn"
+          >
             <span>{item}</span>
             <img
               className="DropMenu__icon"
