@@ -27,6 +27,7 @@ function AddComment(props) {
       return prevVaule;
     });
 
+    setNewContent("");
     navigate(`/feedbackdetail/${props.id}`);
   }
 
