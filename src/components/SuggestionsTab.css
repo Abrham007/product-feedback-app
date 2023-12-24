@@ -33,6 +33,7 @@
   font-size: 0.875rem;
   font-weight: 700;
   background-color: #ad1fea;
+  text-decoration: none;
 }
 
 .SuggestionsTab_btn:hover {

@@ -1,6 +1,7 @@
 import "./SuggestionsTab.css";
 import suggestionIcon from "../assets/shared/suggestions/icon-suggestions.svg";
 import SuggestionsSort from "./SuggestionsSort";
+import { Link } from "react-router-dom";
 
 function SuggestionsTab(props) {
   const sortList = [
@@ -45,7 +46,7 @@ function SuggestionsTab(props) {
       </div>
       <SuggestionsSort sortList={sortList} handleSort={handleSort} />
 
-      <button className="SuggestionsTab_btn">
+      <Link to={"/add"} className="SuggestionsTab_btn">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="12"
@@ -56,7 +57,7 @@ function SuggestionsTab(props) {
           <path d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z" />
         </svg>
         <span>Add Feedback</span>
-      </button>
+      </Link>
     </div>
   );
 }
