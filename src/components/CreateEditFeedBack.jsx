@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import newFeedbackIcon from "../assets/shared/icon-new-feedback.svg";
 import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import FeedBackInput from "./FeedBackInput";
 
 function CreateEditFeedBack(props) {
   let { id } = useParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -70,11 +71,25 @@ function CreateEditFeedBack(props) {
     });
   }
 
+  function handleDelete(event) {
+    event.preventDefault();
+    props.handleAppData((prevValue) => {
+      let feedbackIndex = prevValue.productRequests.findIndex(
+        (req) => req.id == id
+      );
+      prevValue.productRequests.splice(feedbackIndex, 1);
+      return prevValue;
+    });
+    navigate("/");
+  }
+
   function onSubmit(data) {
     if (props.appData) {
       editData(data);
+      navigate(`/feedbackdetail/${id}`);
     } else {
       addData(data);
+      navigate("/");
     }
   }
 
@@ -103,10 +118,10 @@ function CreateEditFeedBack(props) {
   }, [formState]);
   return (
     <div className="CreateEditFeedBack">
-      <Link to={"/"} className="CreateEditFeedBack__link">
+      <button onClick={() => navigate(-1)} className="CreateEditFeedBack__link">
         <img src={arrowLeftIcon} alt=""></img>
         Go Back
-      </Link>
+      </button>
       <img
         src={props.appData ? editFeedbackIcon : newFeedbackIcon}
         alt=""
@@ -170,16 +185,19 @@ function CreateEditFeedBack(props) {
         </div>
         <div className="CreateEditFeedBack__btn-box">
           {props.appData && (
-            <button className="CreateEditFeedBack__btn CreateEditFeedBack__btn--delete">
+            <button
+              onClick={handleDelete}
+              className="CreateEditFeedBack__btn CreateEditFeedBack__btn--delete"
+            >
               Delete
             </button>
           )}
-          <Link
-            to={"/"}
+          <button
+            onClick={() => navigate(-1)}
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--cancel"
           >
             Cancel
-          </Link>
+          </button>
           <button
             type="submit"
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
