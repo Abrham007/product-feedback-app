@@ -6,8 +6,8 @@ import CommentPostWithReplay from "./CommentPostWithReplay";
 function CommentList(props) {
   return (
     <div className="CommentList">
-      <h4 className="CommentList__header"> Comments</h4>
-      {props.list.map((comment) => {
+      <h4 className="CommentList__header">{props.list.length} Comments</h4>
+      {props.list?.map((comment) => {
         if (!comment.replies) {
           return (
             <Fragment key={comment.id}>
