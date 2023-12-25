@@ -7,6 +7,7 @@ function FeedBackInput(props) {
     input = (
       <input
         className="FeedBackInput__input"
+        id={props.name}
         name={props.name}
         {...props.register(props.name, { required: true })}
         style={props.errors[props.name] ? { border: "1px solid #D73737" } : {}}
@@ -17,6 +18,7 @@ function FeedBackInput(props) {
     input = (
       <textarea
         className="FeedBackInput__input FeedBackInput__input--text-area"
+        id={props.name}
         name={props.name}
         {...props.register(props.name, { required: true })}
         style={props.errors[props.name] ? { border: "1px solid #D73737" } : {}}
@@ -34,7 +36,10 @@ function FeedBackInput(props) {
   }
   return (
     <div className="FeedBackInput">
-      <label className="FeedBackInput__label">
+      <label
+        className="FeedBackInput__label"
+        htmlFor={props.type !== "select" ? props.name : null}
+      >
         <h3 className="FeedBackInput__header">{props.title}</h3>
         <p className="FeedBackInput__description">{props.description}</p>
       </label>
