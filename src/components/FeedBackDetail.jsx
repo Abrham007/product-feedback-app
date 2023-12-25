@@ -12,7 +12,7 @@ function FeedBackDetail(props) {
     (req) => req.id == id
   );
 
-  const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL.comments;
+  const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL?.comments;
 
   return (
     <div className="FeedBackDetail">
@@ -29,16 +29,22 @@ function FeedBackDetail(props) {
           </svg>
           <span>Go Back</span>
         </Link>
-        <button className="FeedBackDetail__link FeedBackDetail__link--2">
-          <span>Edit Feedback</span>
-        </button>
+        <Link
+          to={`/edit/${id}`}
+          className="FeedBackDetail__link FeedBackDetail__link--2"
+        >
+          Edit Feedback
+        </Link>
       </div>
       <FeedBackPost handleAppData={props.handleAppData} {...FEEDBACKDETAIL} />
-      <CommentList
-        list={FEEDBACKDETAILCOMMENTS}
-        handleAppData={props.handleAppData}
-        id={id}
-      />
+      {FEEDBACKDETAILCOMMENTS && (
+        <CommentList
+          list={FEEDBACKDETAILCOMMENTS}
+          handleAppData={props.handleAppData}
+          id={id}
+        />
+      )}
+
       <AddComment id={id} handleAppData={props.handleAppData} />
     </div>
   );
