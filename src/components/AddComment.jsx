@@ -16,14 +16,20 @@ function AddComment(props) {
     event.preventDefault();
 
     props.handleAppData((prevVaule) => {
-      let feedBackPostIndex = prevVaule.productRequests.findIndex(
-        (req) => req.id == props.id
-      );
-      prevVaule.productRequests[feedBackPostIndex].comments.push({
+      let newComment = {
         id: 16,
         content: newContent,
         user: prevVaule.currentUser,
-      });
+      };
+      let feedBackPostIndex = prevVaule.productRequests.findIndex(
+        (req) => req.id == props.id
+      );
+      let productObj = prevVaule.productRequests[feedBackPostIndex];
+      if (productObj.comments) {
+        productObj.comments.push(newComment);
+      } else {
+        productObj.comments = [newComment];
+      }
       return prevVaule;
     });
 
