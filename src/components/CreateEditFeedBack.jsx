@@ -1,14 +1,14 @@
 import "./CreateEditFeedBack.css";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import FormSelect from "./FormSelect";
 import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
 import newFeedbackIcon from "../assets/shared/icon-new-feedback.svg";
 import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
+import { Link, useParams } from "react-router-dom";
+import FeedBackInput from "./FeedBackInput";
 
-function CreateEditFeedBack() {
-  const [currentCategory, setCurrentCategory] = useState(0);
-  const [currentStatus, setCurrentStatus] = useState(0);
+function CreateEditFeedBack(props) {
+  let { id } = useParams();
   const {
     register,
     handleSubmit,
@@ -16,11 +16,17 @@ function CreateEditFeedBack() {
     formState,
     formState: { errors, isSubmitSuccessful },
   } = useForm();
-  const [isEdit, setIsEdit] = useState(false);
+
+  const [currentCategory, setCurrentCategory] = useState(0);
+  const [currentStatus, setCurrentStatus] = useState(0);
   let categoryList = ["Feature", "UI", "UX", "Enhancement", "Bug"];
   let statusList = ["Suggestion", "Planned", "In-Progress", "Live"];
+  let CURRENTFEEDBACK = props.appData?.productRequests.find(
+    (req) => req.id == id
+  );
 
   function handleCurrentCategory(categoryIndex) {
+    console.log("somflds");
     setCurrentCategory(categoryIndex);
   }
 
@@ -28,31 +34,81 @@ function CreateEditFeedBack() {
     setCurrentStatus(statusIndex);
   }
 
+  function addData(data) {
+    props.handleAppData((prevValue) => {
+      prevValue.productRequests.push({
+        id: prevValue.productRequests.length + 1,
+        title: data.title,
+        category: categoryList[currentCategory].toLowerCase(),
+        upvotes: 0,
+        status: statusList[currentStatus].toLowerCase(),
+        description: data.description,
+      });
+      return prevValue;
+    });
+  }
+
+  function editData(data) {
+    props.handleAppData((prevValue) => {
+      let oldFeedback = prevValue.productRequests.find((req) => req.id == id);
+      let feedbackIndex = prevValue.productRequests.findIndex(
+        (req) => req.id == id
+      );
+      let newFeedback = {
+        id: oldFeedback.id,
+        title: data.title,
+        category: categoryList[currentCategory].toLowerCase(),
+        upvotes: oldFeedback.upvotes,
+        status: statusList[currentStatus].toLowerCase(),
+        description: data.description,
+      };
+      if (oldFeedback.comments) {
+        newFeedback.comments = oldFeedback.comments;
+      }
+      prevValue.productRequests[feedbackIndex] = newFeedback;
+      return prevValue;
+    });
+  }
+
   function onSubmit(data) {
-    let newFeedback = {
-      id: "13",
-      title: data.title,
-      category: categoryList[currentCategory].toLowerCase(),
-      upvotes: 0,
-      status: statusList[currentStatus].toLowerCase(),
-      description: data.description,
-    };
-    console.log(newFeedback);
+    if (props.appData) {
+      editData(data);
+    } else {
+      addData(data);
+    }
   }
 
   useEffect(() => {
-    if (formState.isSubmitSuccessful) {
+    if (props.appData) {
+      setCurrentCategory((prevVaule) => {
+        let index = categoryList.findIndex(
+          (category) => category.toLowerCase() == CURRENTFEEDBACK.category
+        );
+        return index;
+      });
+
+      setCurrentStatus((prevVaule) => {
+        let index = statusList.findIndex(
+          (status) => status.toLowerCase() == CURRENTFEEDBACK.status
+        );
+        return index;
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
       reset({ title: "", description: "" });
     }
   }, [formState]);
   return (
     <div className="CreateEditFeedBack">
-      <button className="CreateEditFeedBack__link">
+      <Link to={"/"} className="CreateEditFeedBack__link">
         <img src={arrowLeftIcon} alt=""></img>
         Go Back
-      </button>
+      </Link>
       <img
-        src={isEdit ? editFeedbackIcon : newFeedbackIcon}
+        src={props.appData ? editFeedbackIcon : newFeedbackIcon}
         alt=""
         height={56}
         width={56}
@@ -63,89 +119,72 @@ function CreateEditFeedBack() {
         className="CreateEditFeedBack__form"
       >
         <h2 className="CreateEditFeedBack__header">
-          {isEdit ? "Editing ‘Add a dark theme option’" : "Create New Feedback"}
+          {props.appData
+            ? `Editing ‘${CURRENTFEEDBACK.title}’`
+            : "Create New Feedback"}
         </h2>
         <div className="CreateEditFeedBack__input-section">
-          <div className="CreateEditFeedBack__input-box">
-            <label className="CreateEditFeedBack__label">
-              <h3 className="CreateEditFeedBack__sub-header">Feedback Title</h3>
-              <p className="CreateEditFeedBack__detail">
-                Add a short, descriptive headline
-              </p>
-            </label>
-            <input
-              className="CreateEditFeedBack__input CreateEditFeedBack__input--text"
-              type="text"
-              name="title"
-              {...register("title", { required: true })}
-              style={errors.title ? { border: "1px solid #D73737" } : {}}
-            ></input>
-            {errors.title && <span className="error">Can’t be empty</span>}
-          </div>
-          <div className="CreateEditFeedBack__input-box">
-            <label className="CreateEditFeedBack__label">
-              <h3 className="CreateEditFeedBack__sub-header">Category</h3>
-              <p className="CreateEditFeedBack__detail">
-                Choose a category for your feedback
-              </p>
-            </label>
-            <FormSelect
-              selectList={categoryList}
-              handleCurrent={handleCurrentCategory}
+          <FeedBackInput
+            register={register}
+            errors={errors}
+            name={"title"}
+            title={"Feedback Title"}
+            description={"Add a short, descriptive headline"}
+            type={"text"}
+            defaultValue={props.appData ? CURRENTFEEDBACK.title : ""}
+          />
+
+          <FeedBackInput
+            name={"category"}
+            title={"Category"}
+            description={"Choose a category for your feedback"}
+            type={"select"}
+            selectList={categoryList}
+            handleCurrent={handleCurrentCategory}
+            selectedIndex={currentCategory}
+          />
+
+          {props.appData && (
+            <FeedBackInput
+              name={"status"}
+              title={"Update Status"}
+              description={"Change feedback state"}
+              type={"select"}
+              selectList={statusList}
+              handleCurrent={handleCurrentStatus}
+              selectedIndex={currentStatus}
             />
-          </div>
-          {isEdit && (
-            <div className="CreateEditFeedBack__input-box">
-              <label className="CreateEditFeedBack__label">
-                <h3 className="CreateEditFeedBack__sub-header">
-                  Update Status
-                </h3>
-                <p className="CreateEditFeedBack__detail">
-                  Change feedback state
-                </p>
-              </label>
-              <FormSelect
-                selectList={statusList}
-                handleCurrent={handleCurrentStatus}
-              />
-            </div>
           )}
-          <div className="CreateEditFeedBack__input-box">
-            <label className="CreateEditFeedBack__label">
-              <h3 className="CreateEditFeedBack__sub-header">
-                Feedback Detail
-              </h3>
-              <p className="CreateEditFeedBack__detail">
-                Include any specific comments on what should be improved, added,
-                etc.
-              </p>
-            </label>
-            <textarea
-              className="CreateEditFeedBack__input CreateEditFeedBack__input--text-area"
-              type="text"
-              name="description"
-              {...register("description", { required: true })}
-              style={errors.description ? { border: "1px solid #D73737" } : {}}
-            ></textarea>
-            {errors.description && (
-              <span className="error">Can’t be empty</span>
-            )}
-          </div>
+
+          <FeedBackInput
+            register={register}
+            errors={errors}
+            name={"description"}
+            title={"Feedback Detail"}
+            description={
+              "Include any specific comments on what should be improved, added, etc."
+            }
+            type={"text-area"}
+            defaultValue={props.appData ? CURRENTFEEDBACK.description : ""}
+          />
         </div>
         <div className="CreateEditFeedBack__btn-box">
-          {isEdit && (
+          {props.appData && (
             <button className="CreateEditFeedBack__btn CreateEditFeedBack__btn--delete">
               Delete
             </button>
           )}
-          <button className="CreateEditFeedBack__btn CreateEditFeedBack__btn--cancel">
+          <Link
+            to={"/"}
+            className="CreateEditFeedBack__btn CreateEditFeedBack__btn--cancel"
+          >
             Cancel
-          </button>
+          </Link>
           <button
             type="submit"
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
           >
-            {isEdit ? "Save Changes" : "Add Feedback"}
+            {props.appData ? "Save Changes" : "Add Feedback"}
           </button>
         </div>
       </form>
