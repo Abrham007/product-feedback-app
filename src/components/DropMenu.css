@@ -1,4 +1,5 @@
 .DropMenu {
+  min-width: 255px;
   width: 100%;
   display: flex;
   flex-direction: column;
