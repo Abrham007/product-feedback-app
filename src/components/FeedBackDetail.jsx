@@ -3,10 +3,11 @@ import FeedBackPost from "./FeedBackPost";
 import leftArrowIcon from "../assets/shared/icon-arrow-left.svg";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 function FeedBackDetail(props) {
   let { id } = useParams();
+  let navigate = useNavigate();
 
   const FEEDBACKDETAIL = props.appData.productRequests.find(
     (req) => req.id == id
@@ -17,7 +18,10 @@ function FeedBackDetail(props) {
   return (
     <div className="FeedBackDetail">
       <div className="FeedBackDetail__header">
-        <Link to="/" className="FeedBackDetail__link FeedBackDetail__link--1">
+        <button
+          onClick={() => navigate(-1)}
+          className="FeedBackDetail__link FeedBackDetail__link--1"
+        >
           <svg width="7" height="10" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M6 9L2 5l4-4"
@@ -28,7 +32,7 @@ function FeedBackDetail(props) {
             />
           </svg>
           <span>Go Back</span>
-        </Link>
+        </button>
         <Link
           to={`/edit/${id}`}
           className="FeedBackDetail__link FeedBackDetail__link--2"
