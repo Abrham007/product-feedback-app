@@ -5,11 +5,9 @@ import { useState } from "react";
 import DropMenu from "./DropMenu";
 
 function FormSelect(props) {
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
   function handleSelect(index) {
-    setSelectedIndex(index);
     toggleIsOpen();
     props.handleCurrent(index);
   }
@@ -19,7 +17,7 @@ function FormSelect(props) {
   }
   return (
     <div className="FromSelect" onClick={toggleIsOpen}>
-      <span>{props.selectList[selectedIndex]}</span>
+      <span>{props.selectList[props.selectedIndex]}</span>
       {isOpen ? (
         <img src={arrowUpIcon} alt=""></img>
       ) : (
@@ -31,7 +29,7 @@ function FormSelect(props) {
           <DropMenu
             menuList={props.selectList}
             btnAction={handleSelect}
-            selectedIndex={selectedIndex}
+            selectedIndex={props.selectedIndex}
             toggleIsOpen={toggleIsOpen}
           />
         </div>
