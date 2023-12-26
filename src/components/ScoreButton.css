@@ -28,6 +28,18 @@
   color: #fff;
 }
 
+.ScoreButton--road-map {
+  width: 69px;
+  height: 40px;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 1120px) {
+  .ScoreButton--road-map {
+    height: 32px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .ScoreButton {
     width: 69px;

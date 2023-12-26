@@ -1,0 +1,47 @@
+.RoadMapDetail {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.RoadMapDetail__header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.RoadMapDetail__heading {
+  color: #3a4374;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01563rem;
+}
+
+.RoadMapDetail__paragraph {
+  color: #647196;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.RoadMapDetail__content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media screen and (max-width: 1120px) {
+  .RoadMapDetail__heading {
+    font-size: 0.875rem;
+    letter-spacing: -0.01213rem;
+  }
+
+  .RoadMapDetail__paragraph {
+    font-size: 0.875rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .RoadMapDetail__content {
+    gap: 16px;
+  }
+}

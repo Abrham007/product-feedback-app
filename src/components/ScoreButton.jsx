@@ -24,25 +24,17 @@ function ScoreButton(props) {
   let btnStyles = {};
   if (isClicked) {
     btnStyles = { ...btnStyles, backgroundColor: "#4661e6", color: "#fff" };
-  } else {
-    btnStyles = { ...btnStyles };
   }
 
+  let btnClass = "ScoreButton";
   if (props.inRoadMap) {
-    btnStyles = {
-      ...btnStyles,
-      width: "69px",
-      height: "40px",
-      flexDirection: "row",
-    };
-  } else {
-    btnStyles = { ...btnStyles };
+    btnClass += " " + "ScoreButton--road-map";
   }
 
   return (
     <button
       style={btnStyles}
-      className="ScoreButton"
+      className={btnClass}
       onClick={handleUpVotes}
       disabled={isClicked}
     >
