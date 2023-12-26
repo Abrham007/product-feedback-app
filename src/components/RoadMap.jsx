@@ -4,7 +4,16 @@ import AddBtn from "./AddBtn";
 import RoadMapDetail from "./RoadMapDetail";
 import RoadMapTabs from "./RoadMapTabs";
 
-function RoadMap() {
+function RoadMap(props) {
+  let status = ["planned", "in-progress", "live"];
+
+  let roadMapList = status.map((status) => {
+    let roadMapItem = props.appData.productRequests.filter(
+      (req) => req.status === status
+    );
+    return roadMapItem;
+  });
+
   return (
     <div className="RoadMap">
       <div className="RoadMap__header">
@@ -17,9 +26,9 @@ function RoadMap() {
       <div className="RoadMap__tab-content">
         <RoadMapTabs />
         <div className="RoadMap__content">
-          <RoadMapDetail />
-          <RoadMapDetail />
-          <RoadMapDetail />
+          {roadMapList.map((item) => (
+            <RoadMapDetail detailList={item} />
+          ))}
         </div>
       </div>
     </div>

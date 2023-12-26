@@ -1,7 +1,7 @@
 import "./RoadMapDetail.css";
 import RoadMapPost from "./RoadMapPost";
 
-function RoadMapDetail() {
+function RoadMapDetail(props) {
   return (
     <div className="RoadMapDetail">
       <div className="RoadMapDetail__header">
@@ -11,9 +11,9 @@ function RoadMapDetail() {
         </p>
       </div>
       <div className="RoadMapDetail__content">
-        <RoadMapPost />
-        <RoadMapPost />
-        <RoadMapPost />
+        {props.detail.map((item) => (
+          <RoadMapPost {...item} />
+        ))}
       </div>
     </div>
   );
