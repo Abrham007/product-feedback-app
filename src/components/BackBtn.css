@@ -1,0 +1,20 @@
+.BackBtn {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border: none;
+  outline: none;
+  flex-shrink: 0;
+  border-radius: 10px;
+  padding: 0px;
+  color: #647196;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.BackBtn:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

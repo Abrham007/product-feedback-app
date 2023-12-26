@@ -1,0 +1,27 @@
+.AddBtn {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  border: none;
+  outline: none;
+  flex-shrink: 0;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: #f2f4fe;
+  font-size: 0.875rem;
+  font-weight: 700;
+  background-color: #ad1fea;
+  text-decoration: none;
+}
+
+.AddBtn:hover {
+  cursor: pointer;
+  background-color: #c75af6;
+}
+
+@media screen and (max-width: 768px) {
+  .AddBtn {
+    padding: 10.5px 16px;
+    font-size: 0.8125rem;
+  }
+}
