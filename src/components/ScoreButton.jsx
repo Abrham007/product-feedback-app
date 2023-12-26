@@ -21,10 +21,27 @@ function ScoreButton(props) {
     props.handleScore(props.id);
     event.stopPropagation();
   }
+  let btnStyles = {};
+  if (isClicked) {
+    btnStyles = { ...btnStyles, backgroundColor: "#4661e6", color: "#fff" };
+  } else {
+    btnStyles = { ...btnStyles };
+  }
+
+  if (props.inRoadMap) {
+    btnStyles = {
+      ...btnStyles,
+      width: "69px",
+      height: "40px",
+      flexDirection: "row",
+    };
+  } else {
+    btnStyles = { ...btnStyles };
+  }
 
   return (
     <button
-      style={isClicked ? { backgroundColor: "#4661e6", color: "#fff" } : {}}
+      style={btnStyles}
       className="ScoreButton"
       onClick={handleUpVotes}
       disabled={isClicked}
