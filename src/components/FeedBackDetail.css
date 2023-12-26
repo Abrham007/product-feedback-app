@@ -28,25 +28,10 @@
   font-size: 0.875rem;
   font-weight: 700;
   text-decoration: none;
-}
-
-.FeedBackDetail__link--1 {
-  gap: 15px;
-  color: #647196;
-  background-color: transparent;
-  padding: 0px;
-}
-
-.FeedBackDetail__link--1:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.FeedBackDetail__link--2 {
   background-color: #4661e6;
 }
 
-.FeedBackDetail__link--2:hover {
+.FeedBackDetail__link:hover {
   cursor: pointer;
   background-color: #7c91f9;
 }
