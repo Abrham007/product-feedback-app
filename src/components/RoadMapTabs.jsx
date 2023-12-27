@@ -1,17 +1,18 @@
 import "./RoadMapTabs.css";
 
-function RoadMapTabs() {
+function RoadMapTabs(props) {
   return (
     <menu className="RoadMapTabs">
-      <li className="RoadMapTabs__item">
-        <button className="RoadMapTabs__btn">Planned (2)</button>
-      </li>
-      <li className="RoadMapTabs__item">
-        <button className="RoadMapTabs__btn">In-Progress (3)</button>
-      </li>
-      <li className="RoadMapTabs__item">
-        <button className="RoadMapTabs__btn">Live (1)</button>
-      </li>
+      {props.roadMapData.map((item) => (
+        <li key={item[0].status} className="RoadMapTabs__item">
+          <button
+            className="RoadMapTabs__btn"
+            onClick={() => props.handleSelectedStatus(item[0].status)}
+          >
+            {item[0].status} ({item[1].length})
+          </button>
+        </li>
+      ))}
     </menu>
   );
 }

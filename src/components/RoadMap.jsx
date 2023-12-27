@@ -3,16 +3,61 @@ import BackBtn from "./BackBtn";
 import AddBtn from "./AddBtn";
 import RoadMapDetail from "./RoadMapDetail";
 import RoadMapTabs from "./RoadMapTabs";
+import { useState } from "react";
 
 function RoadMap(props) {
-  let status = ["planned", "in-progress", "live"];
+  const [selectedStatus, setSelectedStatus] = useState("In-Progress");
+  let statusData = [
+    {
+      status: "Planned",
+      text: "Ideas prioritized for research",
+      color: "#F49F85",
+    },
+    {
+      status: "In-Progress",
+      text: "Currently being developed",
+      color: "#AD1FEA",
+    },
+    {
+      status: "Live",
+      text: "Released features",
+      color: "#62BCFA",
+    },
+  ];
 
-  let roadMapList = status.map((status) => {
-    let roadMapItem = props.appData.productRequests.filter(
-      (req) => req.status === status
+  let roadMapData = statusData.map((item) => {
+    let roadMapList = props.appData.productRequests.filter(
+      (req) => req.status === item.status.toLowerCase()
     );
-    return roadMapItem;
+    return [item, roadMapList];
   });
+
+  const mediaQuery = window.matchMedia("(max-width: 768px)");
+
+  let roadMapDetailList = roadMapData.map((item) => (
+    <RoadMapDetail
+      key={item[0].status}
+      detailList={item}
+      handleAppData={props.handleAppData}
+    />
+  ));
+
+  if (mediaQuery.matches) {
+    let tempRoadMapDetail = roadMapData.find(
+      (item) => item[0].status === selectedStatus
+    );
+
+    roadMapDetailList = (
+      <RoadMapDetail
+        detailList={tempRoadMapDetail}
+        handleAppData={props.handleAppData}
+      />
+    );
+  }
+
+  function handleSelectedStatus(newStatus) {
+    setSelectedStatus(newStatus);
+  }
 
   return (
     <div className="RoadMap">
@@ -24,12 +69,11 @@ function RoadMap(props) {
         <AddBtn />
       </div>
       <div className="RoadMap__tab-content">
-        <RoadMapTabs />
-        <div className="RoadMap__content">
-          {roadMapList.map((item) => (
-            <RoadMapDetail detailList={item} />
-          ))}
-        </div>
+        <RoadMapTabs
+          roadMapData={roadMapData}
+          handleSelectedStatus={handleSelectedStatus}
+        />
+        <div className="RoadMap__content">{roadMapDetailList}</div>
       </div>
     </div>
   );
