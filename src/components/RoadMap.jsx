@@ -7,6 +7,7 @@ import { useState } from "react";
 
 function RoadMap(props) {
   const [selectedStatus, setSelectedStatus] = useState("In-Progress");
+  const [isMobileDisplay, setIsMobileDispaly] = useState(false);
   let statusData = [
     {
       status: "Planned",
@@ -34,26 +35,37 @@ function RoadMap(props) {
 
   const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-  let roadMapDetailList = roadMapData.map((item) => (
-    <RoadMapDetail
-      key={item[0].status}
-      detailList={item}
-      handleAppData={props.handleAppData}
-    />
-  ));
+  let roadMapDetailList;
 
-  if (mediaQuery.matches) {
-    let tempRoadMapDetail = roadMapData.find(
-      (item) => item[0].status === selectedStatus
-    );
+  function handleMobileChange(e) {
+    if (e.matches) {
+      let tempRoadMapDetail = roadMapData.find(
+        (item) => item[0].status === selectedStatus
+      );
 
-    roadMapDetailList = (
-      <RoadMapDetail
-        detailList={tempRoadMapDetail}
-        handleAppData={props.handleAppData}
-      />
-    );
+      roadMapDetailList = (
+        <RoadMapDetail
+          detailList={tempRoadMapDetail}
+          handleAppData={props.handleAppData}
+        />
+      );
+    } else {
+      roadMapDetailList = roadMapData.map((item) => (
+        <RoadMapDetail
+          key={item[0].status}
+          detailList={item}
+          handleAppData={props.handleAppData}
+        />
+      ));
+    }
   }
+
+  handleMobileChange(mediaQuery);
+
+  mediaQuery.addEventListener("change", () => {
+    setIsMobileDispaly((prevValue) => !prevValue);
+    handleMobileChange(mediaQuery);
+  });
 
   function handleSelectedStatus(newStatus) {
     setSelectedStatus(newStatus);
@@ -72,6 +84,7 @@ function RoadMap(props) {
         <RoadMapTabs
           roadMapData={roadMapData}
           handleSelectedStatus={handleSelectedStatus}
+          selectedStatus={selectedStatus}
         />
         <div className="RoadMap__content">{roadMapDetailList}</div>
       </div>

@@ -6,6 +6,11 @@ function RoadMapTabs(props) {
       {props.roadMapData.map((item) => (
         <li key={item[0].status} className="RoadMapTabs__item">
           <button
+            style={
+              props.selectedStatus === item[0].status
+                ? { borderBottom: "4px solid #ad1fea" }
+                : {}
+            }
             className="RoadMapTabs__btn"
             onClick={() => props.handleSelectedStatus(item[0].status)}
           >
