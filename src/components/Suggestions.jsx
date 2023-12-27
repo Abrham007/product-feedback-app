@@ -30,7 +30,10 @@ function Suggestions(props) {
         />
         <RoadMapView appData={props.appData} />
       </div>
-      <div className="Suggestions__content">
+      <div
+        className="Suggestions__content"
+        style={isOpen ? { opacity: "0.4" } : {}}
+      >
         <SuggestionsTab
           numOfSuggestions={suggestionList.length}
           SUGGESTIONLIST={SUGGESTIONLIST}

@@ -37,8 +37,8 @@ function RoadMap(props) {
 
   let roadMapDetailList;
 
-  function handleMobileChange(e) {
-    if (e.matches) {
+  function handleDisplayChange(query) {
+    if (query.matches) {
       let tempRoadMapDetail = roadMapData.find(
         (item) => item[0].status === selectedStatus
       );
@@ -60,11 +60,11 @@ function RoadMap(props) {
     }
   }
 
-  handleMobileChange(mediaQuery);
+  handleDisplayChange(mediaQuery);
 
   mediaQuery.addEventListener("change", () => {
     setIsMobileDispaly((prevValue) => !prevValue);
-    handleMobileChange(mediaQuery);
+    handleDisplayChange(mediaQuery);
   });
 
   function handleSelectedStatus(newStatus) {
