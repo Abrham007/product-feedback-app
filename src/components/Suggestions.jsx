@@ -1,21 +1,28 @@
 import "./Suggestions.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CompanyName from "./CompanyName";
 import TagList from "./TagList";
 import RoadMapView from "./RoadMapView";
 import SuggestionsTab from "./SuggestionsTab";
 import FeedBackList from "./FeedBackList";
+import { useSelector } from "react-redux";
+import { selectSuggestionList } from "../features/productRequests/productRequestsSlice";
 
 function Suggestions(props) {
-  const SUGGESTIONLIST = props.appData.productRequests.filter(
-    (req) => req.status === "suggestion"
-  );
-  const [suggestionList, setSuggestionList] = useState(SUGGESTIONLIST);
+  const suggestions = useSelector(selectSuggestionList);
+  console.log(suggestions);
+
+  const [suggestionList, setSuggestionList] = useState(suggestions);
   const [isOpen, setIsOpen] = useState(false);
 
   function handleSuggestions(currentSuggestions) {
     setSuggestionList(currentSuggestions);
   }
+
+  useEffect(() => {
+    console.log("heire");
+    handleSuggestions(suggestions);
+  }, [suggestions]);
 
   return (
     <div className="Suggestions">
@@ -24,16 +31,12 @@ function Suggestions(props) {
         style={isOpen ? { visibility: "visible" } : {}}
       >
         <CompanyName isOpen={isOpen} setIsOpen={setIsOpen} />
-        <TagList
-          SUGGESTIONLIST={SUGGESTIONLIST}
-          handleSuggestions={handleSuggestions}
-        />
-        <RoadMapView appData={props.appData} />
+        <TagList handleSuggestions={handleSuggestions} />
+        <RoadMapView />
       </div>
       <div className="Suggestions__content">
         <SuggestionsTab
           numOfSuggestions={suggestionList.length}
-          SUGGESTIONLIST={SUGGESTIONLIST}
           handleSuggestions={handleSuggestions}
         />
         <FeedBackList
