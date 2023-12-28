@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import "./RoadMapView.css";
 import RoadMapViewItem from "./RoadMapViewItem";
+import { useSelector } from "react-redux";
+import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 
 function RoadMapView(props) {
-  let plannedNum = props.appData.productRequests.filter(
+  const productRequests = useSelector(selectProductRequests);
+
+  let plannedNum = productRequests.filter(
     (req) => req.status === "planned"
   ).length;
 
-  let inProgressNum = props.appData.productRequests.filter(
+  let inProgressNum = productRequests.filter(
     (req) => req.status === "in-progress"
   ).length;
 
-  let liveNum = props.appData.productRequests.filter(
-    (req) => req.status === "live"
-  ).length;
+  let liveNum = productRequests.filter((req) => req.status === "live").length;
 
   return (
     <div className="RoadMapView">
