@@ -50,6 +50,16 @@
     visibility: hidden;
   }
 
+  .Suggestions__board::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: calc(271px - 100vw);
+    height: calc(100vh - 72px);
+    width: calc(100vw - 271px);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
   .Suggestions__content {
     align-items: center;
     gap: 32px;
