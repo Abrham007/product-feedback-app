@@ -1,20 +1,25 @@
 import "./ScoreButton.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { increaseVote } from "../features/productRequests/productRequestsSlice";
 
 function ScoreButton(props) {
   const [isClicked, setIsClicked] = useState(false);
+  const dispatch = useDispatch();
 
   function handleUpVotes(event) {
+    dispatch(increaseVote({ id: props.id }));
     setIsClicked(true);
     event.preventDefault();
-    props.handleAppData((prevValue) => {
-      let changedIndex = prevValue.productRequests.findIndex(
-        (req) => req.id === props.id
-      );
-      let tempValue = { ...prevValue };
-      tempValue.productRequests[changedIndex].upvotes++;
-      return tempValue;
-    });
+
+    // props.handleAppData((prevValue) => {
+    //   let changedIndex = prevValue.productRequests.findIndex(
+    //     (req) => req.id === props.id
+    //   );
+    //   let tempValue = { ...prevValue };
+    //   tempValue.productRequests[changedIndex].upvotes++;
+    //   return tempValue;
+    // });
   }
 
   let btnStyles = {};
