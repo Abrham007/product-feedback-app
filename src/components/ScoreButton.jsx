@@ -11,19 +11,15 @@ function ScoreButton(props) {
       let changedIndex = prevValue.productRequests.findIndex(
         (req) => req.id === props.id
       );
-      prevValue.productRequests[changedIndex].upvotes++;
-      return prevValue;
+      let tempValue = { ...prevValue };
+      tempValue.productRequests[changedIndex].upvotes++;
+      return tempValue;
     });
   }
 
-  function handleClick(event) {
-    setIsClicked(true);
-    props.handleScore(props.id);
-    event.stopPropagation();
-  }
   let btnStyles = {};
   if (isClicked) {
-    btnStyles = { ...btnStyles, backgroundColor: "#4661e6", color: "#fff" };
+    btnStyles = { backgroundColor: "#4661e6", color: "#fff" };
   }
 
   let btnClass = "ScoreButton";
@@ -47,7 +43,7 @@ function ScoreButton(props) {
       >
         <path d="M1 6l4-4 4 4" strokeWidth="2" fill="none" fillRule="evenodd" />
       </svg>
-      <span>{isClicked ? props.score + 1 : props.score}</span>
+      <span>{props.score}</span>
     </button>
   );
 }
