@@ -37,7 +37,8 @@ function CreateEditFeedBack(props) {
 
   function addData(data) {
     props.handleAppData((prevValue) => {
-      prevValue.productRequests.push({
+      let tempValue = { ...prevValue };
+      tempValue.productRequests.push({
         id: prevValue.productRequests.length + 1,
         title: data.title,
         category: categoryList[currentCategory].toLowerCase(),
@@ -45,7 +46,7 @@ function CreateEditFeedBack(props) {
         status: statusList[currentStatus].toLowerCase(),
         description: data.description,
       });
-      return prevValue;
+      return tempValue;
     });
   }
 
@@ -66,8 +67,9 @@ function CreateEditFeedBack(props) {
       if (oldFeedback.comments) {
         newFeedback.comments = oldFeedback.comments;
       }
-      prevValue.productRequests[feedbackIndex] = newFeedback;
-      return prevValue;
+      let tempValue = { ...prevValue };
+      tempValue.productRequests[feedbackIndex] = newFeedback;
+      return tempValue;
     });
   }
 
@@ -77,8 +79,9 @@ function CreateEditFeedBack(props) {
       let feedbackIndex = prevValue.productRequests.findIndex(
         (req) => req.id == id
       );
-      prevValue.productRequests.splice(feedbackIndex, 1);
-      return prevValue;
+      let tempValue = { ...prevValue };
+      tempValue.productRequests.splice(feedbackIndex, 1);
+      return tempValue;
     });
     navigate("/");
   }

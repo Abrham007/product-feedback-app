@@ -24,13 +24,14 @@ function AddComment(props) {
       let feedBackPostIndex = prevVaule.productRequests.findIndex(
         (req) => req.id == props.id
       );
-      let productObj = prevVaule.productRequests[feedBackPostIndex];
+      let tempValue = { ...prevVaule };
+      let productObj = tempValue.productRequests[feedBackPostIndex];
       if (productObj.comments) {
         productObj.comments.push(newComment);
       } else {
         productObj.comments = [newComment];
       }
-      return prevVaule;
+      return tempValue;
     });
 
     setNewContent("");

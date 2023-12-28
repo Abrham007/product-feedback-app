@@ -20,11 +20,11 @@ function CommentPost(props) {
       let feedBackPostIndex = prevVaule.productRequests.findIndex(
         (req) => req.id == props.feedbackPostId
       );
+      let tempValue = { ...prevVaule };
       let commentsArray = prevVaule.productRequests[feedBackPostIndex].comments;
       let commentIndex = commentsArray.findIndex((comment) =>
         comment.id == props.parentCommentId ? props.parentCommentId : props.id
       );
-      console.log(commentsArray[commentIndex]);
       let repliesArrya = commentsArray[commentIndex].replies
         ? commentsArray[commentIndex].replies
         : [];
@@ -33,8 +33,10 @@ function CommentPost(props) {
         replyingTo: props.user.username,
         user: prevVaule.currentUser,
       });
-      commentsArray[commentIndex].replies = repliesArrya;
-      return prevVaule;
+      tempValue.productRequests[feedBackPostIndex].comments[
+        commentIndex
+      ].replies = repliesArrya;
+      return tempValue;
     });
 
     replayTextArea.current.value = "";

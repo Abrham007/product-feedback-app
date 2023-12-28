@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./RoadMapView.css";
 import RoadMapViewItem from "./RoadMapViewItem";
 
@@ -18,9 +19,9 @@ function RoadMapView(props) {
     <div className="RoadMapView">
       <div className="RoadMapView__header-box">
         <h2 className="RoadMapView__header">Roadmap</h2>
-        <a className="RoadMapView__link" href="#">
+        <Link to={"/roadmap"} className="RoadMapView__link">
           View
-        </a>
+        </Link>
       </div>
 
       <ul className="RoadMapView__list">
