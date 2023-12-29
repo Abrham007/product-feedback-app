@@ -1,10 +1,14 @@
 import "./CommentPost.css";
 import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addReplay } from "../features/productRequests/productRequestsSlice";
 
 function CommentPost(props) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser);
   let replayTextArea = useRef(null);
   const userImgs = new URL(props.user.image.replace(".", ".."), import.meta.url)
     .href;
@@ -16,28 +20,39 @@ function CommentPost(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    props.handleAppData((prevVaule) => {
-      let feedBackPostIndex = prevVaule.productRequests.findIndex(
-        (req) => req.id == props.feedbackPostId
-      );
-      let tempValue = { ...prevVaule };
-      let commentsArray = prevVaule.productRequests[feedBackPostIndex].comments;
-      let commentIndex = commentsArray.findIndex((comment) =>
-        comment.id == props.parentCommentId ? props.parentCommentId : props.id
-      );
-      let repliesArrya = commentsArray[commentIndex].replies
-        ? commentsArray[commentIndex].replies
-        : [];
-      repliesArrya.push({
+    dispatch(
+      addReplay({
         content: replayTextArea.current.value,
         replyingTo: props.user.username,
-        user: prevVaule.currentUser,
-      });
-      tempValue.productRequests[feedBackPostIndex].comments[
-        commentIndex
-      ].replies = repliesArrya;
-      return tempValue;
-    });
+        user: currentUser,
+        feedbackPostId: props.feedbackPostId,
+        parentCommentId: props.parentCommentId,
+        id: props.id,
+      })
+    );
+
+    // props.handleAppData((prevVaule) => {
+    //   let feedBackPostIndex = prevVaule.productRequests.findIndex(
+    //     (req) => req.id == props.feedbackPostId
+    //   );
+    //   let tempValue = { ...prevVaule };
+    //   let commentsArray = prevVaule.productRequests[feedBackPostIndex].comments;
+    //   let commentIndex = commentsArray.findIndex((comment) =>
+    //     comment.id == props.parentCommentId ? props.parentCommentId : props.id
+    //   );
+    //   let repliesArrya = commentsArray[commentIndex].replies
+    //     ? commentsArray[commentIndex].replies
+    //     : [];
+    //   repliesArrya.push({
+    //     content: replayTextArea.current.value,
+    //     replyingTo: props.user.username,
+    //     user: prevVaule.currentUser,
+    //   });
+    //   tempValue.productRequests[feedBackPostIndex].comments[
+    //     commentIndex
+    //   ].replies = repliesArrya;
+    //   return tempValue;
+    // });
 
     replayTextArea.current.value = "";
     setIsOpen(false);

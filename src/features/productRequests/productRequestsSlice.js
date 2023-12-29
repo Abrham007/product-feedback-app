@@ -14,9 +14,15 @@ const productRequestsSlice = createSlice({
       }
     },
     addComment(state, action) {
-      let newComment = action.payload;
+      let lastPost = state[state.length - 1];
+      let lastComment = lastPost.comments[lastPost.comments.length - 1];
+      let newComment = {
+        id: lastComment.id + 1,
+        content: action.payload.content,
+        user: action.payload.user,
+      };
       let feedBackPostIndex = state.findIndex(
-        (req) => req.id == action.payload.postid
+        (req) => req.id == action.payload.postId
       );
       let productObj = state[feedBackPostIndex];
       if (productObj.comments) {
@@ -25,10 +31,32 @@ const productRequestsSlice = createSlice({
         productObj.comments = [newComment];
       }
     },
+    addReplay(state, action) {
+      let feedBackPostIndex = state.findIndex(
+        (req) => req.id == action.payload.feedbackPostId
+      );
+      let commentsArray = state[feedBackPostIndex].comments;
+      let commentId = action.payload.parentCommentId
+        ? action.payload.parentCommentId
+        : action.payload.id;
+      let commentIndex = commentsArray.findIndex(
+        (comment) => comment.id === commentId
+      );
+      let repliesArrya = commentsArray[commentIndex].replies
+        ? commentsArray[commentIndex].replies
+        : [];
+      repliesArrya.push({
+        content: action.payload.content,
+        replyingTo: action.payload.replyingTo,
+        user: action.payload.user,
+      });
+      state[feedBackPostIndex].comments[commentIndex].replies = repliesArrya;
+    },
   },
 });
 
-export const { increaseVote, addComment } = productRequestsSlice.actions;
+export const { increaseVote, addComment, addReplay } =
+  productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
 
