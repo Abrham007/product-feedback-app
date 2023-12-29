@@ -4,13 +4,13 @@ import CommentList from "./CommentList";
 import AddComment from "./AddComment";
 import { Link, useParams } from "react-router-dom";
 import BackBtn from "./BackBtn";
-
+import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
+import { useSelector } from "react-redux";
 function FeedBackDetail(props) {
+  const productRequests = useSelector(selectProductRequests);
   let { id } = useParams();
 
-  const FEEDBACKDETAIL = props.appData.productRequests.find(
-    (req) => req.id == id
-  );
+  const FEEDBACKDETAIL = productRequests.find((req) => req.id == id);
 
   const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL?.comments;
 
@@ -22,7 +22,7 @@ function FeedBackDetail(props) {
           Edit Feedback
         </Link>
       </div>
-      <FeedBackPost handleAppData={props.handleAppData} {...FEEDBACKDETAIL} />
+      <FeedBackPost {...FEEDBACKDETAIL} />
       {FEEDBACKDETAILCOMMENTS && (
         <CommentList
           list={FEEDBACKDETAILCOMMENTS}

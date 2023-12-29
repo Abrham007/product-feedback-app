@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddComment.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addComment } from "../features/productRequests/productRequestsSlice";
 
 function AddComment(props) {
   const [newContent, setNewContent] = useState("");
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser);
   const navigate = useNavigate();
   const charLeft = 250 - newContent.length;
 
@@ -15,24 +19,16 @@ function AddComment(props) {
   function handleSubmit(event) {
     event.preventDefault();
 
-    props.handleAppData((prevVaule) => {
-      let newComment = {
-        id: 16,
-        content: newContent,
-        user: prevVaule.currentUser,
-      };
-      let feedBackPostIndex = prevVaule.productRequests.findIndex(
-        (req) => req.id == props.id
+    if (newContent) {
+      dispatch(
+        addComment({
+          id: 16,
+          content: newContent,
+          user: currentUser,
+          postId: props,
+        })
       );
-      let tempValue = { ...prevVaule };
-      let productObj = tempValue.productRequests[feedBackPostIndex];
-      if (productObj.comments) {
-        productObj.comments.push(newComment);
-      } else {
-        productObj.comments = [newComment];
-      }
-      return tempValue;
-    });
+    }
 
     setNewContent("");
     navigate(`/feedbackdetail/${props.id}`);
