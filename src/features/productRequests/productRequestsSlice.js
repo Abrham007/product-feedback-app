@@ -14,8 +14,15 @@ const productRequestsSlice = createSlice({
       }
     },
     addComment(state, action) {
-      let lastPost = state[state.length - 1];
-      let lastComment = lastPost.comments[lastPost.comments.length - 1];
+      let lastPostWithComment = { comments: [] };
+      for (let i = state.length - 1; i > 0; i--) {
+        if (state[i].comments) {
+          lastPostWithComment = state[i];
+          break;
+        }
+      }
+      let lastComment =
+        lastPostWithComment.comments[lastPostWithComment.comments.length - 1];
       let newComment = {
         id: lastComment.id + 1,
         content: action.payload.content,
@@ -52,10 +59,16 @@ const productRequestsSlice = createSlice({
       });
       state[feedBackPostIndex].comments[commentIndex].replies = repliesArrya;
     },
+    addPost(state, action) {
+      state.push({
+        id: state.length + 1,
+        ...action.payload,
+      });
+    },
   },
 });
 
-export const { increaseVote, addComment, addReplay } =
+export const { increaseVote, addComment, addReplay, addPost } =
   productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;

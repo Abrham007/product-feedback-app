@@ -6,10 +6,13 @@ import newFeedbackIcon from "../assets/shared/icon-new-feedback.svg";
 import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import FeedBackInput from "./FeedBackInput";
+import { useDispatch } from "react-redux";
+import { addPost } from "../features/productRequests/productRequestsSlice";
 
 function CreateEditFeedBack(props) {
   let { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -27,7 +30,6 @@ function CreateEditFeedBack(props) {
   );
 
   function handleCurrentCategory(categoryIndex) {
-    console.log("somflds");
     setCurrentCategory(categoryIndex);
   }
 
@@ -36,18 +38,27 @@ function CreateEditFeedBack(props) {
   }
 
   function addData(data) {
-    props.handleAppData((prevValue) => {
-      let tempValue = { ...prevValue };
-      tempValue.productRequests.push({
-        id: prevValue.productRequests.length + 1,
+    dispatch(
+      addPost({
         title: data.title,
         category: categoryList[currentCategory].toLowerCase(),
         upvotes: 0,
         status: statusList[currentStatus].toLowerCase(),
         description: data.description,
-      });
-      return tempValue;
-    });
+      })
+    );
+    // props.handleAppData((prevValue) => {
+    //   let tempValue = { ...prevValue };
+    //   tempValue.productRequests.push({
+    //     id: prevValue.productRequests.length + 1,
+    //     title: data.title,
+    //     category: categoryList[currentCategory].toLowerCase(),
+    //     upvotes: 0,
+    //     status: statusList[currentStatus].toLowerCase(),
+    //     description: data.description,
+    //   });
+    //   return tempValue;
+    // });
   }
 
   function editData(data) {
@@ -87,7 +98,7 @@ function CreateEditFeedBack(props) {
   }
 
   function onSubmit(data) {
-    if (props.appData) {
+    if (props.isEdit) {
       editData(data);
       navigate(`/feedbackdetail/${id}`);
     } else {
@@ -97,7 +108,7 @@ function CreateEditFeedBack(props) {
   }
 
   useEffect(() => {
-    if (props.appData) {
+    if (props.isEdit) {
       setCurrentCategory((prevVaule) => {
         let index = categoryList.findIndex(
           (category) => category.toLowerCase() == CURRENTFEEDBACK.category
@@ -126,7 +137,7 @@ function CreateEditFeedBack(props) {
         Go Back
       </button>
       <img
-        src={props.appData ? editFeedbackIcon : newFeedbackIcon}
+        src={props.isEdit ? editFeedbackIcon : newFeedbackIcon}
         alt=""
         height={56}
         width={56}
@@ -137,7 +148,7 @@ function CreateEditFeedBack(props) {
         className="CreateEditFeedBack__form"
       >
         <h2 className="CreateEditFeedBack__header">
-          {props.appData
+          {props.isEdit
             ? `Editing ‘${CURRENTFEEDBACK.title}’`
             : "Create New Feedback"}
         </h2>
@@ -149,7 +160,7 @@ function CreateEditFeedBack(props) {
             title={"Feedback Title"}
             description={"Add a short, descriptive headline"}
             type={"text"}
-            defaultValue={props.appData ? CURRENTFEEDBACK.title : ""}
+            defaultValue={props.isEdit ? CURRENTFEEDBACK.title : ""}
           />
 
           <FeedBackInput
@@ -162,7 +173,7 @@ function CreateEditFeedBack(props) {
             selectedIndex={currentCategory}
           />
 
-          {props.appData && (
+          {props.isEdit && (
             <FeedBackInput
               name={"status"}
               title={"Update Status"}
@@ -183,11 +194,11 @@ function CreateEditFeedBack(props) {
               "Include any specific comments on what should be improved, added, etc."
             }
             type={"text-area"}
-            defaultValue={props.appData ? CURRENTFEEDBACK.description : ""}
+            defaultValue={props.isEdit ? CURRENTFEEDBACK.description : ""}
           />
         </div>
         <div className="CreateEditFeedBack__btn-box">
-          {props.appData && (
+          {props.isEdit && (
             <button
               onClick={handleDelete}
               className="CreateEditFeedBack__btn CreateEditFeedBack__btn--delete"
@@ -205,7 +216,7 @@ function CreateEditFeedBack(props) {
             type="submit"
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
           >
-            {props.appData ? "Save Changes" : "Add Feedback"}
+            {props.isEdit ? "Save Changes" : "Add Feedback"}
           </button>
         </div>
       </form>
