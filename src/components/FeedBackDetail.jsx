@@ -31,7 +31,7 @@ function FeedBackDetail(props) {
         />
       )}
 
-      <AddComment id={id} handleAppData={props.handleAppData} />
+      <AddComment id={id} />
     </div>
   );
 }

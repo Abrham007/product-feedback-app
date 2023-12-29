@@ -22,10 +22,9 @@ function AddComment(props) {
     if (newContent) {
       dispatch(
         addComment({
-          id: 16,
           content: newContent,
           user: currentUser,
-          postId: props,
+          postId: props.id,
         })
       );
     }
