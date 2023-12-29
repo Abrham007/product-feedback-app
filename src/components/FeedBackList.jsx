@@ -13,11 +13,7 @@ function FeedBackList(props) {
         <FeedBackEmpty />
       ) : (
         props.listOfFeedback.map((feedback) => (
-          <FeedBackPost
-            key={feedback.id}
-            {...feedback}
-            handleAppData={props.handleAppData}
-          />
+          <FeedBackPost key={feedback.id} {...feedback} />
         ))
       )}
     </div>
