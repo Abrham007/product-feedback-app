@@ -20,10 +20,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={<Suggestions handleAppData={handleAppData} />}
-          ></Route>
+          <Route path="/" element={<Suggestions />}></Route>
           <Route
             path="/feedbackdetail/:id"
             element={
