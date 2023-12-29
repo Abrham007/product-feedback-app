@@ -1,13 +1,9 @@
 import "./SuggestionsTab.css";
 import suggestionIcon from "../assets/shared/suggestions/icon-suggestions.svg";
 import SuggestionsSort from "./SuggestionsSort";
-import { Link } from "react-router-dom";
 import AddBtn from "./AddBtn";
-import { useSelector } from "react-redux";
-import { selectSuggestionList } from "../features/productRequests/productRequestsSlice";
 
 function SuggestionsTab(props) {
-  const suggestions = useSelector(selectSuggestionList);
   const sortList = [
     "Most Upvotes",
     "Least Upvotes",
@@ -18,15 +14,15 @@ function SuggestionsTab(props) {
   function handleSort(sortIndex) {
     if (sortList[sortIndex] === "Most Upvotes") {
       props.handleSuggestions(
-        suggestions.toSorted((a, b) => b.upvotes - a.upvotes)
+        props.suggestions.toSorted((a, b) => b.upvotes - a.upvotes)
       );
     } else if (sortList[sortIndex] === "Least Upvotes") {
       props.handleSuggestions(
-        suggestions.toSorted((a, b) => a.upvotes - b.upvotes)
+        props.suggestions.toSorted((a, b) => a.upvotes - b.upvotes)
       );
     } else if (sortList[sortIndex] === "Most Comments") {
       props.handleSuggestions(
-        suggestions.toSorted((a, b) => {
+        props.suggestions.toSorted((a, b) => {
           let AComments = a.comments ? a.comments.length : 0;
           let BComments = b.comments ? b.comments.length : 0;
           return BComments - AComments;
@@ -34,7 +30,7 @@ function SuggestionsTab(props) {
       );
     } else if (sortList[sortIndex] === "Least Comments") {
       props.handleSuggestions(
-        suggestions.toSorted((a, b) => {
+        props.suggestions.toSorted((a, b) => {
           let AComments = a.comments ? a.comments.length : 0;
           let BComments = b.comments ? b.comments.length : 0;
           return AComments - BComments;

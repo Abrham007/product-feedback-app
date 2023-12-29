@@ -10,7 +10,6 @@ import { selectSuggestionList } from "../features/productRequests/productRequest
 
 function Suggestions(props) {
   const suggestions = useSelector(selectSuggestionList);
-  console.log(suggestions);
 
   const [suggestionList, setSuggestionList] = useState(suggestions);
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +19,6 @@ function Suggestions(props) {
   }
 
   useEffect(() => {
-    console.log("heire");
     handleSuggestions(suggestions);
   }, [suggestions]);
 
@@ -31,18 +29,19 @@ function Suggestions(props) {
         style={isOpen ? { visibility: "visible" } : {}}
       >
         <CompanyName isOpen={isOpen} setIsOpen={setIsOpen} />
-        <TagList handleSuggestions={handleSuggestions} />
+        <TagList
+          handleSuggestions={handleSuggestions}
+          suggestions={suggestions}
+        />
         <RoadMapView />
       </div>
       <div className="Suggestions__content">
         <SuggestionsTab
           numOfSuggestions={suggestionList.length}
           handleSuggestions={handleSuggestions}
+          suggestions={suggestions}
         />
-        <FeedBackList
-          listOfFeedback={suggestionList}
-          handleAppData={props.handleAppData}
-        />
+        <FeedBackList listOfFeedback={suggestionList} />
       </div>
     </div>
   );
