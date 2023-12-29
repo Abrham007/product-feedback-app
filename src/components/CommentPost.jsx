@@ -31,29 +31,6 @@ function CommentPost(props) {
       })
     );
 
-    // props.handleAppData((prevVaule) => {
-    //   let feedBackPostIndex = prevVaule.productRequests.findIndex(
-    //     (req) => req.id == props.feedbackPostId
-    //   );
-    //   let tempValue = { ...prevVaule };
-    //   let commentsArray = prevVaule.productRequests[feedBackPostIndex].comments;
-    //   let commentIndex = commentsArray.findIndex((comment) =>
-    //     comment.id == props.parentCommentId ? props.parentCommentId : props.id
-    //   );
-    //   let repliesArrya = commentsArray[commentIndex].replies
-    //     ? commentsArray[commentIndex].replies
-    //     : [];
-    //   repliesArrya.push({
-    //     content: replayTextArea.current.value,
-    //     replyingTo: props.user.username,
-    //     user: prevVaule.currentUser,
-    //   });
-    //   tempValue.productRequests[feedBackPostIndex].comments[
-    //     commentIndex
-    //   ].replies = repliesArrya;
-    //   return tempValue;
-    // });
-
     replayTextArea.current.value = "";
     setIsOpen(false);
     navigate(`/feedbackdetail/${props.feedbackPostId}`);

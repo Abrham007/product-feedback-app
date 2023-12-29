@@ -8,7 +8,7 @@ import FeedBackList from "./FeedBackList";
 import { useSelector } from "react-redux";
 import { selectSuggestionList } from "../features/productRequests/productRequestsSlice";
 
-function Suggestions(props) {
+function Suggestions() {
   const suggestions = useSelector(selectSuggestionList);
 
   const [suggestionList, setSuggestionList] = useState(suggestions);

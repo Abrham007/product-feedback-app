@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 import BackBtn from "./BackBtn";
 import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 import { useSelector } from "react-redux";
-function FeedBackDetail(props) {
+function FeedBackDetail() {
   const productRequests = useSelector(selectProductRequests);
   let { id } = useParams();
 
@@ -24,11 +24,7 @@ function FeedBackDetail(props) {
       </div>
       <FeedBackPost {...FEEDBACKDETAIL} />
       {FEEDBACKDETAILCOMMENTS && (
-        <CommentList
-          list={FEEDBACKDETAILCOMMENTS}
-          handleAppData={props.handleAppData}
-          id={id}
-        />
+        <CommentList list={FEEDBACKDETAILCOMMENTS} id={id} />
       )}
 
       <AddComment id={id} />

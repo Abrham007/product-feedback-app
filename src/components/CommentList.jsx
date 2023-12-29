@@ -15,7 +15,6 @@ function CommentList(props) {
                 key={comment.id}
                 feedbackPostId={props.id}
                 {...comment}
-                handleAppData={props.handleAppData}
               />
               <hr key={"line" + comment.id} className="CommentList__line"></hr>
             </Fragment>
@@ -26,7 +25,6 @@ function CommentList(props) {
               key={index}
               feedbackPostId={props.id}
               {...replie}
-              handleAppData={props.handleAppData}
               parentCommentId={comment.id}
             />
           ));
@@ -39,7 +37,6 @@ function CommentList(props) {
                     key={comment.id}
                     feedbackPostId={props.id}
                     {...comment}
-                    handleAppData={props.handleAppData}
                   />
                 }
                 replies={commentReplies}
