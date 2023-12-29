@@ -65,6 +65,27 @@ const productRequestsSlice = createSlice({
         ...action.payload,
       });
     },
+    editPost(state, action) {
+      let oldFeedback = prevValue.productRequests.find(
+        (req) => req.id == action.payload.postId
+      );
+      let feedbackIndex = prevValue.productRequests.findIndex(
+        (req) => req.id == action.payload.postId
+      );
+      let newFeedback = {
+        id: oldFeedback.id,
+        title: action.payload.title,
+        category: action.payload.category,
+        upvotes: oldFeedback.upvotes,
+        status: action.payload.state,
+        description: action.payload.description,
+      };
+      if (oldFeedback.comments) {
+        newFeedback.comments = oldFeedback.comments;
+      }
+
+      state[feedbackIndex] = newFeedback;
+    },
   },
 });
 

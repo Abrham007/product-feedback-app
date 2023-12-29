@@ -47,21 +47,16 @@ function CreateEditFeedBack(props) {
         description: data.description,
       })
     );
-    // props.handleAppData((prevValue) => {
-    //   let tempValue = { ...prevValue };
-    //   tempValue.productRequests.push({
-    //     id: prevValue.productRequests.length + 1,
-    //     title: data.title,
-    //     category: categoryList[currentCategory].toLowerCase(),
-    //     upvotes: 0,
-    //     status: statusList[currentStatus].toLowerCase(),
-    //     description: data.description,
-    //   });
-    //   return tempValue;
-    // });
   }
 
   function editData(data) {
+    dispatch(editPost({
+      postId: id,
+      title: data.title,
+      category: categoryList[currentCategory].toLowerCase(),
+      status: statusList[currentStatus].toLowerCase(),
+      description: data.description,
+    }))
     props.handleAppData((prevValue) => {
       let oldFeedback = prevValue.productRequests.find((req) => req.id == id);
       let feedbackIndex = prevValue.productRequests.findIndex(
