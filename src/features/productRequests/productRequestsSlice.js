@@ -84,11 +84,23 @@ const productRequestsSlice = createSlice({
 
       state[feedbackIndex] = newFeedback;
     },
+    deletePost(state, action) {
+      let feedbackIndex = state.findIndex(
+        (req) => req.id == action.payload.postId
+      );
+      state.splice(feedbackIndex, 1);
+    },
   },
 });
 
-export const { increaseVote, addComment, addReplay, addPost, editPost } =
-  productRequestsSlice.actions;
+export const {
+  increaseVote,
+  addComment,
+  addReplay,
+  addPost,
+  editPost,
+  deletePost,
+} = productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
 

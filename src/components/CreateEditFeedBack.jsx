@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addPost,
   editPost,
+  deletePost,
   selectProductRequests,
 } from "../features/productRequests/productRequestsSlice";
 
@@ -68,14 +69,11 @@ function CreateEditFeedBack(props) {
 
   function handleDelete(event) {
     event.preventDefault();
-    props.handleAppData((prevValue) => {
-      let feedbackIndex = prevValue.productRequests.findIndex(
-        (req) => req.id == id
-      );
-      let tempValue = { ...prevValue };
-      tempValue.productRequests.splice(feedbackIndex, 1);
-      return tempValue;
-    });
+    dispatch(
+      deletePost({
+        postId: id,
+      })
+    );
     navigate("/");
   }
 
