@@ -3,11 +3,13 @@ import BackBtn from "./BackBtn";
 import AddBtn from "./AddBtn";
 import RoadMapDetail from "./RoadMapDetail";
 import RoadMapTabs from "./RoadMapTabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
+import { useSelector } from "react-redux";
 
 function RoadMap(props) {
-  const [selectedStatus, setSelectedStatus] = useState("In-Progress");
-  const [isMobileDisplay, setIsMobileDispaly] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState("");
+  const productRequests = useSelector(selectProductRequests);
   let statusData = [
     {
       status: "Planned",
@@ -27,7 +29,7 @@ function RoadMap(props) {
   ];
 
   let roadMapData = statusData.map((item) => {
-    let roadMapList = props.appData.productRequests.filter(
+    let roadMapList = productRequests.filter(
       (req) => req.status === item.status.toLowerCase()
     );
     return [item, roadMapList];
@@ -35,36 +37,28 @@ function RoadMap(props) {
 
   const mediaQuery = window.matchMedia("(max-width: 768px)");
 
-  let roadMapDetailList;
+  let roadMapDetailList = roadMapData.map((item) => (
+    <RoadMapDetail key={item[0].status} detailList={item} />
+  ));
 
-  function handleDisplayChange(query) {
-    if (query.matches) {
-      let tempRoadMapDetail = roadMapData.find(
-        (item) => item[0].status === selectedStatus
-      );
+  if (mediaQuery.matches && selectedStatus !== "") {
+    let tempRoadMapDetail = roadMapData.find(
+      (item) => item[0].status === selectedStatus
+    );
 
-      roadMapDetailList = (
-        <RoadMapDetail
-          detailList={tempRoadMapDetail}
-          handleAppData={props.handleAppData}
-        />
-      );
-    } else {
-      roadMapDetailList = roadMapData.map((item) => (
-        <RoadMapDetail
-          key={item[0].status}
-          detailList={item}
-          handleAppData={props.handleAppData}
-        />
-      ));
-    }
+    roadMapDetailList = <RoadMapDetail detailList={tempRoadMapDetail} />;
   }
 
-  handleDisplayChange(mediaQuery);
-
   mediaQuery.addEventListener("change", () => {
-    setIsMobileDispaly((prevValue) => !prevValue);
-    handleDisplayChange(mediaQuery);
+    if (mediaQuery.matches) {
+      if (selectedStatus === "") {
+        setSelectedStatus("In-Progress");
+      }
+    } else {
+      if (selectedStatus !== "") {
+        setSelectedStatus("");
+      }
+    }
   });
 
   function handleSelectedStatus(newStatus) {
