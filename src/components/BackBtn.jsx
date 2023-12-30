@@ -1,11 +1,11 @@
 import "./BackBtn.css";
 import { useNavigate } from "react-router-dom";
-function BackBtn({ color = "#647196", ...props }) {
+function BackBtn({ color = "#647196", backPage = -1, ...props }) {
   let navigate = useNavigate();
   return (
     <button
       {...props}
-      onClick={() => navigate(-1)}
+      onClick={() => navigate(backPage)}
       className="BackBtn"
       style={{ color: color }}
     >
