@@ -3,11 +3,11 @@ import BackBtn from "./BackBtn";
 import AddBtn from "./AddBtn";
 import RoadMapDetail from "./RoadMapDetail";
 import RoadMapTabs from "./RoadMapTabs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 import { useSelector } from "react-redux";
 
-function RoadMap(props) {
+function RoadMap() {
   const [selectedStatus, setSelectedStatus] = useState("");
   const productRequests = useSelector(selectProductRequests);
   let statusData = [
