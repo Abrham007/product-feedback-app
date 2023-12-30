@@ -6,11 +6,16 @@ import newFeedbackIcon from "../assets/shared/icon-new-feedback.svg";
 import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import FeedBackInput from "./FeedBackInput";
-import { useDispatch } from "react-redux";
-import { addPost } from "../features/productRequests/productRequestsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addPost,
+  editPost,
+  selectProductRequests,
+} from "../features/productRequests/productRequestsSlice";
 
 function CreateEditFeedBack(props) {
   let { id } = useParams();
+  const productRequests = useSelector(selectProductRequests);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -23,11 +28,11 @@ function CreateEditFeedBack(props) {
 
   const [currentCategory, setCurrentCategory] = useState(0);
   const [currentStatus, setCurrentStatus] = useState(0);
+
   let categoryList = ["Feature", "UI", "UX", "Enhancement", "Bug"];
   let statusList = ["Suggestion", "Planned", "In-Progress", "Live"];
-  let CURRENTFEEDBACK = props.appData?.productRequests.find(
-    (req) => req.id == id
-  );
+
+  let CURRENTFEEDBACK = productRequests.find((req) => req.id == id);
 
   function handleCurrentCategory(categoryIndex) {
     setCurrentCategory(categoryIndex);
@@ -50,33 +55,15 @@ function CreateEditFeedBack(props) {
   }
 
   function editData(data) {
-    dispatch(editPost({
-      postId: id,
-      title: data.title,
-      category: categoryList[currentCategory].toLowerCase(),
-      status: statusList[currentStatus].toLowerCase(),
-      description: data.description,
-    }))
-    props.handleAppData((prevValue) => {
-      let oldFeedback = prevValue.productRequests.find((req) => req.id == id);
-      let feedbackIndex = prevValue.productRequests.findIndex(
-        (req) => req.id == id
-      );
-      let newFeedback = {
-        id: oldFeedback.id,
+    dispatch(
+      editPost({
+        postId: id,
         title: data.title,
         category: categoryList[currentCategory].toLowerCase(),
-        upvotes: oldFeedback.upvotes,
         status: statusList[currentStatus].toLowerCase(),
         description: data.description,
-      };
-      if (oldFeedback.comments) {
-        newFeedback.comments = oldFeedback.comments;
-      }
-      let tempValue = { ...prevValue };
-      tempValue.productRequests[feedbackIndex] = newFeedback;
-      return tempValue;
-    });
+      })
+    );
   }
 
   function handleDelete(event) {
@@ -104,19 +91,14 @@ function CreateEditFeedBack(props) {
 
   useEffect(() => {
     if (props.isEdit) {
-      setCurrentCategory((prevVaule) => {
-        let index = categoryList.findIndex(
-          (category) => category.toLowerCase() == CURRENTFEEDBACK.category
-        );
-        return index;
-      });
-
-      setCurrentStatus((prevVaule) => {
-        let index = statusList.findIndex(
-          (status) => status.toLowerCase() == CURRENTFEEDBACK.status
-        );
-        return index;
-      });
+      let currentCategoryIndex = categoryList.findIndex(
+        (category) => category.toLowerCase() == CURRENTFEEDBACK.category
+      );
+      let currentStatusIndex = statusList.findIndex(
+        (status) => status.toLowerCase() == CURRENTFEEDBACK.status
+      );
+      setCurrentCategory(currentCategoryIndex);
+      setCurrentStatus(currentStatusIndex);
     }
   }, []);
 

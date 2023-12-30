@@ -66,10 +66,8 @@ const productRequestsSlice = createSlice({
       });
     },
     editPost(state, action) {
-      let oldFeedback = prevValue.productRequests.find(
-        (req) => req.id == action.payload.postId
-      );
-      let feedbackIndex = prevValue.productRequests.findIndex(
+      let oldFeedback = state.find((req) => req.id == action.payload.postId);
+      let feedbackIndex = state.findIndex(
         (req) => req.id == action.payload.postId
       );
       let newFeedback = {
@@ -77,7 +75,7 @@ const productRequestsSlice = createSlice({
         title: action.payload.title,
         category: action.payload.category,
         upvotes: oldFeedback.upvotes,
-        status: action.payload.state,
+        status: action.payload.status,
         description: action.payload.description,
       };
       if (oldFeedback.comments) {
@@ -89,7 +87,7 @@ const productRequestsSlice = createSlice({
   },
 });
 
-export const { increaseVote, addComment, addReplay, addPost } =
+export const { increaseVote, addComment, addReplay, addPost, editPost } =
   productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
