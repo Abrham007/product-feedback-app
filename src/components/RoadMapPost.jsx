@@ -6,7 +6,8 @@ import Tag from "./Tag";
 
 function RoadMapPost(props) {
   return (
-    <div
+    <Link
+      to={`/feedbackdetail/${props.id}`}
       className="RoadMapPost"
       style={{ borderTop: `6px solid ${props.color}` }}
     >
@@ -18,31 +19,19 @@ function RoadMapPost(props) {
           ></span>
           {props.status}
         </h3>
-        <h4>
-          <Link
-            className="RoadMapPost__sub-heading"
-            to={`/feedbackdetail/${props.id}`}
-          >
-            {props.title}
-          </Link>
-        </h4>
+        <h4 className="RoadMapPost__sub-heading">{props.title}</h4>
 
         <p>{props.description}</p>
       </div>
 
       <Tag text={props.category} />
       <div className="RoadMapPost__sub-content">
-        <ScoreButton
-          score={props.upvotes}
-          id={props.id}
-          handleAppData={props.handleAppData}
-          inRoadMap={true}
-        />
+        <ScoreButton upvotes={props.upvotes} id={props.id} inRoadMap={true} />
         <PostComments
           numOfComments={props.comments ? props.comments.length : 0}
         />
       </div>
-    </div>
+    </Link>
   );
 }
 

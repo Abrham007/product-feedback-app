@@ -7,6 +7,7 @@
   padding: 32px;
   border-radius: 5px;
   background: #fff;
+  text-decoration: none;
 }
 
 .RoadMapPost__header {
@@ -41,7 +42,7 @@
   text-decoration: none;
 }
 
-.RoadMapPost__sub-heading:hover {
+.RoadMapPost:hover .RoadMapPost__sub-heading {
   cursor: pointer;
   color: #4661e6;
 }
