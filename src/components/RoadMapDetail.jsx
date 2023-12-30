@@ -17,7 +17,6 @@ function RoadMapDetail(props) {
             key={item.id}
             {...item}
             color={props.detailList[0].color}
-            handleAppData={props.handleAppData}
           />
         ))}
       </div>

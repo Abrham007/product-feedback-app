@@ -8,7 +8,7 @@ function RoadMapTabs(props) {
           <button
             style={
               props.selectedStatus === item[0].status
-                ? { borderBottom: "4px solid #ad1fea" }
+                ? { borderBottom: `4px solid ${item[0].color}` }
                 : {}
             }
             className="RoadMapTabs__btn"
