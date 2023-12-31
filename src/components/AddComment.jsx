@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddComment.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { addComment } from "../features/productRequests/productRequestsSlice";
 function AddComment(props) {
   const [newContent, setNewContent] = useState("");
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentUser = useSelector((state) => state.currentUser.user);
   const navigate = useNavigate();
   const charLeft = 250 - newContent.length;
 

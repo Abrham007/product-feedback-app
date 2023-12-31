@@ -8,7 +8,7 @@ function CommentPost(props) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state) => state.currentUser);
+  const currentUser = useSelector((state) => state.currentUser.user);
   let replayTextArea = useRef(null);
   const userImgs = new URL(props.user.image.replace(".", ".."), import.meta.url)
     .href;
