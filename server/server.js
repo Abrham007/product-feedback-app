@@ -54,6 +54,8 @@ app.get("/posts", async (req, res) => {
   res.json(posts);
 });
 
+app.post("/post", async (req, res) => {});
+
 app.get("/user", async (req, res) => {
   let user = await User.find();
   console.log(user);

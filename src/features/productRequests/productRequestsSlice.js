@@ -19,6 +19,21 @@ export const fetchPosts = createAsyncThunk(
   }
 );
 
+export const addNewPost = createAsyncThunk(
+  "productRequests/addpost",
+  async (post) => {
+    const response = await fetch("http://127.0.0.1:4000/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+
+    return response.data;
+  }
+);
+
 const productRequestsSlice = createSlice({
   name: "productRequests",
   initialState: initialState,
