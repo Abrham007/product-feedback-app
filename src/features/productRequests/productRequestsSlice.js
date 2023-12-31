@@ -1,9 +1,27 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
-import data from "../../../data.json";
+import {
+  createSelector,
+  createSlice,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
+
+const initialState = {
+  posts: [],
+  status: "idle",
+  error: null,
+};
+
+export const fetchPosts = createAsyncThunk(
+  "productRequests/fetchPosts",
+  async () => {
+    const response = await fetch("http://127.0.0.1:4000/posts");
+    const json = await response.json();
+    return json;
+  }
+);
 
 const productRequestsSlice = createSlice({
-  name: "productrequests",
-  initialState: data.productRequests,
+  name: "productRequests",
+  initialState: initialState,
   reducers: {
     increaseVote(state, action) {
       let id = action.payload.id;
@@ -91,6 +109,20 @@ const productRequestsSlice = createSlice({
       state.splice(feedbackIndex, 1);
     },
   },
+  extraReducers(builder) {
+    builder
+      .addCase(fetchPosts.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchPosts.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.posts = state.posts.concat(action.payload);
+      })
+      .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });
+  },
 });
 
 export const {
@@ -104,7 +136,7 @@ export const {
 
 export default productRequestsSlice.reducer;
 
-export const selectProductRequests = (state) => state.productRequests;
+export const selectProductRequests = (state) => state.productRequests.posts;
 
 export const selectSuggestionList = createSelector(
   selectProductRequests,
