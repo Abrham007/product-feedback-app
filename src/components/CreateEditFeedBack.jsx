@@ -8,7 +8,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import FeedBackInput from "./FeedBackInput";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addPost,
+  addNewPost,
   editPost,
   deletePost,
   selectProductRequests,
@@ -33,7 +33,7 @@ function CreateEditFeedBack(props) {
   let categoryList = ["Feature", "UI", "UX", "Enhancement", "Bug"];
   let statusList = ["Suggestion", "Planned", "In-Progress", "Live"];
 
-  let CURRENTFEEDBACK = productRequests.find((req) => req.id == id);
+  let CURRENTFEEDBACK = productRequests.find((req) => req._id == id);
 
   function handleCurrentCategory(categoryIndex) {
     setCurrentCategory(categoryIndex);
@@ -43,37 +43,48 @@ function CreateEditFeedBack(props) {
     setCurrentStatus(statusIndex);
   }
 
-  function addData(data) {
-    dispatch(
-      addPost({
-        title: data.title,
-        category: categoryList[currentCategory].toLowerCase(),
-        upvotes: 0,
-        status: statusList[currentStatus].toLowerCase(),
-        description: data.description,
-      })
-    );
+  async function addData(data) {
+    try {
+      dispatch(
+        addNewPost({
+          title: data.title,
+          category: categoryList[currentCategory].toLowerCase(),
+          upvotes: 0,
+          status: statusList[currentStatus].toLowerCase(),
+          description: data.description,
+        })
+      );
+    } catch (err) {
+      console.log("Failed to save the post: ", err);
+    }
   }
 
-  function editData(data) {
-    dispatch(
-      editPost({
-        postId: id,
-        title: data.title,
-        category: categoryList[currentCategory].toLowerCase(),
-        status: statusList[currentStatus].toLowerCase(),
-        description: data.description,
-      })
-    );
+  async function editData(data) {
+    try {
+      dispatch(
+        editPost({
+          postId: id,
+          title: data.title,
+          category: categoryList[currentCategory].toLowerCase(),
+          status: statusList[currentStatus].toLowerCase(),
+          description: data.description,
+        })
+      );
+    } catch (err) {
+      console.error("Failed to edit the post: ", err);
+    }
   }
 
   function handleDelete(event) {
     event.preventDefault();
-    dispatch(
-      deletePost({
-        postId: id,
-      })
-    );
+    try {
+      dispatch(
+        deletePost({
+          postId: id,
+        })
+      );
+    } catch {}
+
     navigate("/");
   }
 
