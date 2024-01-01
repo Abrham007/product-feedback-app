@@ -10,7 +10,7 @@ function FeedBackDetail() {
   const productRequests = useSelector(selectProductRequests);
   let { id } = useParams();
 
-  const FEEDBACKDETAIL = productRequests.find((req) => req.id == id);
+  const FEEDBACKDETAIL = productRequests.find((req) => req._id == id);
 
   const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL?.comments;
 

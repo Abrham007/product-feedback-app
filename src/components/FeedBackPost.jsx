@@ -8,12 +8,12 @@ import { Link } from "react-router-dom";
 function FeedBackPost(props) {
   return (
     <Link
-      to={`/feedbackdetail/${props.id}`}
+      to={`/feedbackdetail/${props._id}`}
       className="FeedBackPost"
       style={{ textDecoration: "none" }}
     >
       <div className="FeedBackPost__score">
-        <ScoreButton upvotes={props.upvotes} id={props.id} />
+        <ScoreButton upvotes={props.upvotes} id={props._id} />
       </div>
 
       <div className="FeedBackPost__text">
