@@ -20,7 +20,7 @@ export const fetchPosts = createAsyncThunk(
 );
 
 export const addNewPost = createAsyncThunk(
-  "productRequests/addpost",
+  "productRequests/addNewpost",
   async (post) => {
     const response = await fetch("http://127.0.0.1:4000/post", {
       method: "POST",
@@ -29,8 +29,38 @@ export const addNewPost = createAsyncThunk(
       },
       body: JSON.stringify(post),
     });
+    const json = await response.json();
+    return json;
+  }
+);
 
-    return response.data;
+export const editPost = createAsyncThunk(
+  "productRequests/editpost",
+  async (post) => {
+    const response = await fetch("http://127.0.0.1:4000/post", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(post),
+    });
+    const updatedPost = await response.json();
+    return { updatedPost, postId: post.postId };
+  }
+);
+
+export const deletePost = createAsyncThunk(
+  "productRequests/deletepost",
+  async (postId) => {
+    const response = await fetch("http://127.0.0.1:4000/post", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postId),
+    });
+
+    return postId;
   }
 );
 
@@ -39,8 +69,8 @@ const productRequestsSlice = createSlice({
   initialState: initialState,
   reducers: {
     increaseVote(state, action) {
-      let id = action.payload.id;
-      let index = state.posts.findIndex((item) => item.id === id);
+      let _id = action.payload._id;
+      let index = state.posts.findIndex((item) => item._id === _id);
       let votes = state.posts[index].upvotes;
       if (!votes.isClicked) {
         state.posts[index].upvotes = {
@@ -60,12 +90,12 @@ const productRequestsSlice = createSlice({
       let lastComment =
         lastPostWithComment.comments[lastPostWithComment.comments.length - 1];
       let newComment = {
-        id: lastComment.id + 1,
+        _id: lastComment._id + 1,
         content: action.payload.content,
         user: action.payload.user,
       };
       let feedBackPostIndex = state.posts.findIndex(
-        (req) => req.id == action.payload.postId
+        (req) => req._id == action.payload.postId
       );
       let productObj = state.posts[feedBackPostIndex];
       if (productObj.comments) {
@@ -76,14 +106,14 @@ const productRequestsSlice = createSlice({
     },
     addReplay(state, action) {
       let feedBackPostIndex = state.posts.findIndex(
-        (req) => req.id == action.payload.feedbackPostId
+        (req) => req._id == action.payload.feedbackPostId
       );
       let commentsArray = state.posts[feedBackPostIndex].comments;
       let commentId = action.payload.parentCommentId
         ? action.payload.parentCommentId
         : action.payload.id;
       let commentIndex = commentsArray.findIndex(
-        (comment) => comment.id === commentId
+        (comment) => comment._id === commentId
       );
       let repliesArrya = commentsArray[commentIndex].replies
         ? commentsArray[commentIndex].replies
@@ -96,33 +126,7 @@ const productRequestsSlice = createSlice({
       state.posts[feedBackPostIndex].comments[commentIndex].replies =
         repliesArrya;
     },
-    addPost(state, action) {
-      state.posts.push({
-        id: state.posts.length + 1,
-        ...action.payload,
-      });
-    },
-    editPost(state, action) {
-      let oldFeedback = state.posts.find(
-        (req) => req.id == action.payload.postId
-      );
-      let feedbackIndex = state.posts.findIndex(
-        (req) => req.id == action.payload.postId
-      );
-      let newFeedback = {
-        id: oldFeedback.id,
-        title: action.payload.title,
-        category: action.payload.category,
-        upvotes: oldFeedback.upvotes,
-        status: action.payload.status,
-        description: action.payload.description,
-      };
-      if (oldFeedback.comments) {
-        newFeedback.comments = oldFeedback.comments;
-      }
 
-      state.posts[feedbackIndex] = newFeedback;
-    },
     deletePost(state, action) {
       let feedbackIndex = state.posts.findIndex(
         (req) => req.id == action.payload.postId
@@ -143,17 +147,26 @@ const productRequestsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       });
+    builder.addCase(addNewPost.fulfilled, (state, action) => {
+      state.posts.push(action.payload);
+    });
+    builder.addCase(editPost.fulfilled, (state, action) => {
+      let postIndex = state.posts.findIndex(
+        (post) => post._id == action.payload.postId
+      );
+      state.posts[postIndex] = action.payload.updatedPost;
+    });
+    builder.addCase(deletePost.fulfilled, (state, action) => {
+      let feedbackIndex = state.posts.findIndex(
+        (req) => req._id == action.payload.postId
+      );
+      state.posts.splice(feedbackIndex, 1);
+    });
   },
 });
 
-export const {
-  increaseVote,
-  addComment,
-  addReplay,
-  addPost,
-  editPost,
-  deletePost,
-} = productRequestsSlice.actions;
+export const { increaseVote, addComment, addReplay } =
+  productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
 
