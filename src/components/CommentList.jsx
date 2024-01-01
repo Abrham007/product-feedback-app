@@ -10,13 +10,13 @@ function CommentList(props) {
       {props.list?.map((comment) => {
         if (!comment.replies) {
           return (
-            <Fragment key={comment.id}>
+            <Fragment key={comment._id}>
               <CommentPost
-                key={comment.id}
+                key={comment._id}
                 feedbackPostId={props.id}
                 {...comment}
               />
-              <hr key={"line" + comment.id} className="CommentList__line"></hr>
+              <hr key={"line" + comment._id} className="CommentList__line"></hr>
             </Fragment>
           );
         } else {
@@ -25,23 +25,23 @@ function CommentList(props) {
               key={index}
               feedbackPostId={props.id}
               {...replie}
-              parentCommentId={comment.id}
+              parentCommentId={comment._id}
             />
           ));
           return (
-            <Fragment key={comment.id}>
+            <Fragment key={comment._id}>
               <CommentPostWithReplay
-                key={comment.id}
+                key={comment._id}
                 comment={
                   <CommentPost
-                    key={comment.id}
+                    key={comment._id}
                     feedbackPostId={props.id}
                     {...comment}
                   />
                 }
                 replies={commentReplies}
               />
-              <hr key={"line" + comment.id} className="CommentList__line"></hr>
+              <hr key={"line" + comment._id} className="CommentList__line"></hr>
             </Fragment>
           );
         }

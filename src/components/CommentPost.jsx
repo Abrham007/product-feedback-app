@@ -27,7 +27,7 @@ function CommentPost(props) {
         user: currentUser,
         feedbackPostId: props.feedbackPostId,
         parentCommentId: props.parentCommentId,
-        id: props.id,
+        id: props._id,
       })
     );
 
