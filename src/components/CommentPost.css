@@ -36,6 +36,8 @@
 
 .CommentPost__btn-get {
   grid-area: btn;
+  width: min-content;
+  justify-self: flex-end;
   border: none;
   outline: none;
   background: transparent;
