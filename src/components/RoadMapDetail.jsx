@@ -14,7 +14,7 @@ function RoadMapDetail(props) {
       <div className="RoadMapDetail__content">
         {props.detailList[1].map((item) => (
           <RoadMapPost
-            key={item.id}
+            key={item._id}
             {...item}
             color={props.detailList[0].color}
           />

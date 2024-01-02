@@ -7,7 +7,7 @@ import Tag from "./Tag";
 function RoadMapPost(props) {
   return (
     <Link
-      to={`/feedbackdetail/${props.id}`}
+      to={`/feedbackdetail/${props._id}`}
       className="RoadMapPost"
       style={{ borderTop: `6px solid ${props.color}` }}
     >
@@ -26,7 +26,7 @@ function RoadMapPost(props) {
 
       <Tag text={props.category} />
       <div className="RoadMapPost__sub-content">
-        <ScoreButton upvotes={props.upvotes} id={props.id} inRoadMap={true} />
+        <ScoreButton upvotes={props.upvotes} id={props._id} inRoadMap={true} />
         <PostComments
           numOfComments={props.comments ? props.comments.length : 0}
         />
