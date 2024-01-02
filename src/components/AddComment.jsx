@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./AddComment.css";
 import { useDispatch, useSelector } from "react-redux";
-import { addComment } from "../features/productRequests/productRequestsSlice";
+import { addNewComment } from "../features/productRequests/productRequestsSlice";
 
 function AddComment(props) {
   const [newContent, setNewContent] = useState("");
@@ -21,7 +21,7 @@ function AddComment(props) {
 
     if (newContent) {
       dispatch(
-        addComment({
+        addNewComment({
           content: newContent,
           user: currentUser,
           postId: props.id,
