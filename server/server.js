@@ -112,6 +112,25 @@ app.post("/post/comment", async (req, res) => {
   res.json(fullUpdatedPost);
 });
 
+app.post("/post/comment/replay", async (req, res) => {
+  let post = await ProductRequest.find({ _id: req.body.postId });
+  let postComments = [...post[0].comments];
+  let commentIndex = postComments.findIndex(
+    (comment) => comment._id == req.body.commentId
+  );
+  postComments[commentIndex].replies.push({
+    content: req.body.content,
+    replyingTo: req.body.replyingTo,
+    user: req.body.user,
+  });
+  let fullUpdatedPost = await ProductRequest.findOneAndUpdate(
+    { _id: req.body.postId },
+    { comments: postComments },
+    { new: true }
+  );
+  res.json(fullUpdatedPost);
+});
+
 app.listen(port, () => {
   console.log(`listinig on port ${port}`);
 });
