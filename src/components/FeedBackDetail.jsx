@@ -7,10 +7,11 @@ import BackBtn from "./BackBtn";
 import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 import { useSelector } from "react-redux";
 function FeedBackDetail() {
-  const productRequests = useSelector(selectProductRequests);
   let { id } = useParams();
 
-  const FEEDBACKDETAIL = productRequests.find((req) => req._id == id);
+  const FEEDBACKDETAIL = useSelector((state) =>
+    state.productRequests.posts.find((req) => req._id == id)
+  );
 
   const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL?.comments;
 

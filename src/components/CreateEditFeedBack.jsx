@@ -7,6 +7,7 @@ import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import FeedBackInput from "./FeedBackInput";
 import { useDispatch, useSelector } from "react-redux";
+import BackBtn from "./BackBtn";
 import {
   addNewPost,
   editPost,
@@ -16,7 +17,6 @@ import {
 
 function CreateEditFeedBack(props) {
   let { id } = useParams();
-  const productRequests = useSelector(selectProductRequests);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {
@@ -33,7 +33,9 @@ function CreateEditFeedBack(props) {
   let categoryList = ["Feature", "UI", "UX", "Enhancement", "Bug"];
   let statusList = ["Suggestion", "Planned", "In-Progress", "Live"];
 
-  let CURRENTFEEDBACK = productRequests.find((req) => req._id == id);
+  let CURRENTFEEDBACK = useSelector((state) =>
+    state.productRequests.posts.find((req) => req._id == id)
+  );
 
   function handleCurrentCategory(categoryIndex) {
     setCurrentCategory(categoryIndex);
@@ -118,10 +120,7 @@ function CreateEditFeedBack(props) {
   }, [formState]);
   return (
     <div className="CreateEditFeedBack">
-      <button onClick={() => navigate(-1)} className="CreateEditFeedBack__link">
-        <img src={arrowLeftIcon} alt=""></img>
-        Go Back
-      </button>
+      <BackBtn />
       <img
         src={props.isEdit ? editFeedbackIcon : newFeedbackIcon}
         alt=""

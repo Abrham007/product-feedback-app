@@ -64,6 +64,21 @@ export const deletePost = createAsyncThunk(
   }
 );
 
+export const addNewComment = createAsyncThunk(
+  "productRequests/addNewComment",
+  async (comment) => {
+    const response = await fetch("http://127.0.0.1:4000/post/comment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    });
+    const updatedPost = await response.json();
+    return { updatedPost, postId: comment.postId };
+  }
+);
+
 const productRequestsSlice = createSlice({
   name: "productRequests",
   initialState: initialState,
@@ -79,31 +94,31 @@ const productRequestsSlice = createSlice({
         };
       }
     },
-    addComment(state, action) {
-      let lastPostWithComment = { comments: [] };
-      for (let i = state.posts.length - 1; i > 0; i--) {
-        if (state.posts[i].comments) {
-          lastPostWithComment = state.posts[i];
-          break;
-        }
-      }
-      let lastComment =
-        lastPostWithComment.comments[lastPostWithComment.comments.length - 1];
-      let newComment = {
-        _id: lastComment._id + 1,
-        content: action.payload.content,
-        user: action.payload.user,
-      };
-      let feedBackPostIndex = state.posts.findIndex(
-        (req) => req._id == action.payload.postId
-      );
-      let productObj = state.posts[feedBackPostIndex];
-      if (productObj.comments) {
-        productObj.comments.push(newComment);
-      } else {
-        productObj.comments = [newComment];
-      }
-    },
+    // addComment(state, action) {
+    //   let lastPostWithComment = { comments: [] };
+    //   for (let i = state.posts.length - 1; i > 0; i--) {
+    //     if (state.posts[i].comments) {
+    //       lastPostWithComment = state.posts[i];
+    //       break;
+    //     }
+    //   }
+    //   let lastComment =
+    //     lastPostWithComment.comments[lastPostWithComment.comments.length - 1];
+    //   let newComment = {
+    //     _id: lastComment._id + 1,
+    //     content: action.payload.content,
+    //     user: action.payload.user,
+    //   };
+    //   let feedBackPostIndex = state.posts.findIndex(
+    //     (req) => req._id == action.payload.postId
+    //   );
+    //   let productObj = state.posts[feedBackPostIndex];
+    //   if (productObj.comments) {
+    //     productObj.comments.push(newComment);
+    //   } else {
+    //     productObj.comments = [newComment];
+    //   }
+    // },
     addReplay(state, action) {
       let feedBackPostIndex = state.posts.findIndex(
         (req) => req._id == action.payload.feedbackPostId
@@ -125,13 +140,6 @@ const productRequestsSlice = createSlice({
       });
       state.posts[feedBackPostIndex].comments[commentIndex].replies =
         repliesArrya;
-    },
-
-    deletePost(state, action) {
-      let feedbackIndex = state.posts.findIndex(
-        (req) => req.id == action.payload.postId
-      );
-      state.posts.splice(feedbackIndex, 1);
     },
   },
   extraReducers(builder) {
@@ -161,6 +169,12 @@ const productRequestsSlice = createSlice({
         (req) => req._id == action.payload.postId
       );
       state.posts.splice(feedbackIndex, 1);
+    });
+    builder.addCase(addNewComment.fulfilled, (state, action) => {
+      let postIndex = state.posts.findIndex(
+        (post) => post._id == action.payload.postId
+      );
+      state.posts[postIndex] = action.payload.updatedPost;
     });
   },
 });

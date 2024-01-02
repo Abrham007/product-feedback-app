@@ -5,17 +5,22 @@ import { useSelector } from "react-redux";
 import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 
 function RoadMapView(props) {
-  const productRequests = useSelector(selectProductRequests);
+  let plannedNum = useSelector(
+    (state) =>
+      state.productRequests.posts.filter((req) => req.status === "planned")
+        .length
+  );
 
-  let plannedNum = productRequests.filter(
-    (req) => req.status === "planned"
-  ).length;
+  let inProgressNum = useSelector(
+    (state) =>
+      state.productRequests.posts.filter((req) => req.status === "in-progress")
+        .length
+  );
 
-  let inProgressNum = productRequests.filter(
-    (req) => req.status === "in-progress"
-  ).length;
-
-  let liveNum = productRequests.filter((req) => req.status === "live").length;
+  let liveNum = useSelector(
+    (state) =>
+      state.productRequests.posts.filter((req) => req.status === "live").length
+  );
 
   return (
     <div className="RoadMapView">
