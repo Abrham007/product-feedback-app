@@ -59,6 +59,11 @@ const ProductRequest = mongoose.model("request", requestSchema);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get("/user", async (req, res) => {
+  let user = await User.find();
+  res.json(user);
+});
+
 app.get("/posts", async (req, res) => {
   let posts = await ProductRequest.find();
   res.json(posts);
@@ -92,9 +97,19 @@ app.delete("/post", async (req, res) => {
   res.sendStatus(200);
 });
 
-app.get("/user", async (req, res) => {
-  let user = await User.find();
-  res.json(user);
+app.post("/post/comment", async (req, res) => {
+  let post = await ProductRequest.find({ _id: req.body.postId });
+  let postComments = [...post[0].comments];
+  postComments.push({
+    content: req.body.content,
+    user: req.body.user,
+  });
+  let fullUpdatedPost = await ProductRequest.findOneAndUpdate(
+    { _id: req.body.postId },
+    { comments: postComments },
+    { new: true }
+  );
+  res.json(fullUpdatedPost);
 });
 
 app.listen(port, () => {
