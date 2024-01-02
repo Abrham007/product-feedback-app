@@ -5,17 +5,10 @@ import TagList from "./TagList";
 import RoadMapView from "./RoadMapView";
 import SuggestionsTab from "./SuggestionsTab";
 import FeedBackList from "./FeedBackList";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectSuggestionList,
-  fetchPosts,
-} from "../features/productRequests/productRequestsSlice";
-import { fetchUser } from "../features/currentUser/currentUserSlice";
+import { useSelector } from "react-redux";
+import { selectSuggestionList } from "../features/productRequests/productRequestsSlice";
 
 function Suggestions() {
-  const dispatch = useDispatch();
-  const postStatus = useSelector((state) => state.productRequests.status);
-  const userStatus = useSelector((state) => state.currentUser.status);
   const suggestions = useSelector(selectSuggestionList);
 
   const [suggestionList, setSuggestionList] = useState(suggestions);
@@ -28,18 +21,6 @@ function Suggestions() {
   useEffect(() => {
     handleSuggestions(suggestions);
   }, [suggestions]);
-
-  useEffect(() => {
-    if (postStatus === "idle") {
-      dispatch(fetchPosts());
-    }
-  }, [postStatus, dispatch]);
-
-  useEffect(() => {
-    if (userStatus === "idle") {
-      dispatch(fetchUser());
-    }
-  }, [userStatus, dispatch]);
 
   return (
     <div className="Suggestions">
