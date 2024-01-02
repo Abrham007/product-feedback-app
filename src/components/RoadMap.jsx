@@ -69,7 +69,7 @@ function RoadMap() {
     <div className="RoadMap">
       <div className="RoadMap__header">
         <div className="RoadMap__header-box">
-          <BackBtn color={"#fff"} />
+          <BackBtn color={"#fff"} stroke={"#CDD2EE"} />
           <h2 className="RoadMap__heading">Roadmap</h2>
         </div>
         <AddBtn />
