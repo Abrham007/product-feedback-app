@@ -78,6 +78,20 @@ export const addNewComment = createAsyncThunk(
     return { updatedPost, postId: comment.postId };
   }
 );
+export const addNewReplay = createAsyncThunk(
+  "productRequests/addNewReplay",
+  async (replay) => {
+    const response = await fetch("http://127.0.0.1:4000/post/comment/replay", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(replay),
+    });
+    const updatedPost = await response.json();
+    return { updatedPost, postId: replay.postId };
+  }
+);
 
 const productRequestsSlice = createSlice({
   name: "productRequests",
@@ -93,53 +107,6 @@ const productRequestsSlice = createSlice({
           currentVotes: votes + 1,
         };
       }
-    },
-    // addComment(state, action) {
-    //   let lastPostWithComment = { comments: [] };
-    //   for (let i = state.posts.length - 1; i > 0; i--) {
-    //     if (state.posts[i].comments) {
-    //       lastPostWithComment = state.posts[i];
-    //       break;
-    //     }
-    //   }
-    //   let lastComment =
-    //     lastPostWithComment.comments[lastPostWithComment.comments.length - 1];
-    //   let newComment = {
-    //     _id: lastComment._id + 1,
-    //     content: action.payload.content,
-    //     user: action.payload.user,
-    //   };
-    //   let feedBackPostIndex = state.posts.findIndex(
-    //     (req) => req._id == action.payload.postId
-    //   );
-    //   let productObj = state.posts[feedBackPostIndex];
-    //   if (productObj.comments) {
-    //     productObj.comments.push(newComment);
-    //   } else {
-    //     productObj.comments = [newComment];
-    //   }
-    // },
-    addReplay(state, action) {
-      let feedBackPostIndex = state.posts.findIndex(
-        (req) => req._id == action.payload.feedbackPostId
-      );
-      let commentsArray = state.posts[feedBackPostIndex].comments;
-      let commentId = action.payload.parentCommentId
-        ? action.payload.parentCommentId
-        : action.payload.id;
-      let commentIndex = commentsArray.findIndex(
-        (comment) => comment._id === commentId
-      );
-      let repliesArrya = commentsArray[commentIndex].replies
-        ? commentsArray[commentIndex].replies
-        : [];
-      repliesArrya.push({
-        content: action.payload.content,
-        replyingTo: action.payload.replyingTo,
-        user: action.payload.user,
-      });
-      state.posts[feedBackPostIndex].comments[commentIndex].replies =
-        repliesArrya;
     },
   },
   extraReducers(builder) {
@@ -176,11 +143,16 @@ const productRequestsSlice = createSlice({
       );
       state.posts[postIndex] = action.payload.updatedPost;
     });
+    builder.addCase(addNewReplay.fulfilled, (state, action) => {
+      let postIndex = state.posts.findIndex(
+        (post) => post._id == action.payload.postId
+      );
+      state.posts[postIndex] = action.payload.updatedPost;
+    });
   },
 });
 
-export const { increaseVote, addComment, addReplay } =
-  productRequestsSlice.actions;
+export const { increaseVote } = productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
 

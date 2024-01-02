@@ -2,7 +2,7 @@ import "./CommentPost.css";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addReplay } from "../features/productRequests/productRequestsSlice";
+import { addNewReplay } from "../features/productRequests/productRequestsSlice";
 
 function CommentPost(props) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +21,12 @@ function CommentPost(props) {
     event.preventDefault();
 
     dispatch(
-      addReplay({
+      addNewReplay({
         content: replayTextArea.current.value,
         replyingTo: props.user.username,
         user: currentUser,
-        feedbackPostId: props.feedbackPostId,
-        parentCommentId: props.parentCommentId,
-        id: props._id,
+        postId: props.feedbackPostId,
+        commentId: props.parentCommentId ? props.parentCommentId : props._id,
       })
     );
 
