@@ -11,8 +11,8 @@ function ScoreButton(props) {
   const dispatch = useDispatch();
 
   function handleUpVotes(event) {
-    dispatch(increaseVote({ id: props.id }));
     event.preventDefault();
+    dispatch(increaseVote({ id: props.id }));
   }
 
   let btnStyles = {};
