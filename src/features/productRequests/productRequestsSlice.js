@@ -98,8 +98,8 @@ const productRequestsSlice = createSlice({
   initialState: initialState,
   reducers: {
     increaseVote(state, action) {
-      let _id = action.payload._id;
-      let index = state.posts.findIndex((item) => item._id === _id);
+      let id = action.payload.id;
+      let index = state.posts.findIndex((post) => post._id === id);
       let votes = state.posts[index].upvotes;
       if (!votes.isClicked) {
         state.posts[index].upvotes = {
