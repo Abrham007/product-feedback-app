@@ -16,6 +16,8 @@ function CompanyName(props) {
         <img
           src={props.isOpen ? closeIcon : hamburgerIcon}
           alt="menu icon"
+          width={20}
+          height={17}
         ></img>
       </button>
     </div>

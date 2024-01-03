@@ -15,8 +15,18 @@ function FormSelect(props) {
   function toggleIsOpen() {
     setIsOpen((pervValue) => !pervValue);
   }
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      setIsOpen((pervValue) => !pervValue);
+    }
+  }
   return (
-    <div className="FromSelect" onClick={toggleIsOpen}>
+    <div
+      className="FromSelect"
+      onClick={toggleIsOpen}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+    >
       <span>{props.selectList[props.selectedIndex]}</span>
       {isOpen ? (
         <img src={arrowUpIcon} alt=""></img>

@@ -11,9 +11,19 @@ function DropMenu(props) {
   }
 
   return (
-    <menu className="DropMenu">
+    <menu className="DropMenu" aria-live="polite">
       {props.menuList.map((item, index) => (
-        <li className="DropMenu__item" key={index}>
+        <li
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleClick(index);
+              event.preventDefault();
+            }
+          }}
+          className="DropMenu__item"
+          key={index}
+        >
           <button
             onClick={(event) => {
               handleClick(index);
