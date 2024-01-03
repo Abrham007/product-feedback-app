@@ -40,7 +40,14 @@ const requestSchema = new mongoose.Schema({
   status: String,
   description: String,
   comments: [commentSchema],
-  usersWhoVoted: [mongoose.ObjectId],
+  usersWhoVoted: {
+    type: [mongoose.ObjectId],
+    validate: {
+      validator: function (v) {
+        return !this.includes(v);
+      },
+    },
+  },
 });
 
 const User = mongoose.model("user", userSchema);
@@ -56,6 +63,8 @@ const ProductRequest = mongoose.model("request", requestSchema);
 // ProductRequest.find().then((data) => {
 //   console.log(data);
 // });
+
+// ProductRequest.updateMany({}, { usersWhoVoted: [] });
 
 // Middleware
 app.use(bodyParser.json());
@@ -101,7 +110,7 @@ app.delete("/post", async (req, res) => {
 
 app.post("/post/upvotes", async (req, res) => {
   let post = await ProductRequest.find({ _id: req.body.postId });
-  console.log(post[0]);
+
   if (!post[0].usersWhoVoted.includes(req.body.curretnUser)) {
     let newUpvotes = post[0].upvotes + 1;
     let newUsersWhoVoted = [...post[0].usersWhoVoted, req.body.curretnUser];
@@ -112,7 +121,7 @@ app.post("/post/upvotes", async (req, res) => {
     );
     res.json(fullUpdatedPost);
   } else {
-    res.sendStatus(400).json({ error: "user already voted" });
+    res.sendStatus(400);
   }
 });
 
