@@ -164,12 +164,17 @@ const productRequestsSlice = createSlice({
       );
       state.posts[postIndex] = action.payload.updatedPost;
     });
-    builder.addCase(increaseVote.fulfilled, (state, action) => {
-      let postIndex = state.posts.findIndex(
-        (post) => post._id == action.payload.postId
-      );
-      state.posts[postIndex] = action.payload.updatedPost;
-    });
+    builder
+      .addCase(increaseVote.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(increaseVote.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        let postIndex = state.posts.findIndex(
+          (post) => post._id == action.payload.postId
+        );
+        state.posts[postIndex] = action.payload.updatedPost;
+      });
   },
 });
 
