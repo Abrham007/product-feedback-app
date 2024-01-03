@@ -1,18 +1,20 @@
 import "./ScoreButton.css";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { increaseVote } from "../features/productRequests/productRequestsSlice";
 
 function ScoreButton(props) {
+  const currentUser = useSelector((state) => state.currentUser.user);
+
   let isClicked = false;
-  if (props.upvotes?.isClicked) {
+  if (props.usersWhoVoted?.includes(currentUser)) {
     isClicked = true;
   }
   const dispatch = useDispatch();
 
   function handleUpVotes(event) {
     event.preventDefault();
-    dispatch(increaseVote({ id: props.id }));
+    dispatch(increaseVote({ postId: props.id, curretnUser: currentUser }));
   }
 
   let btnStyles = {};
@@ -41,7 +43,7 @@ function ScoreButton(props) {
       >
         <path d="M1 6l4-4 4 4" strokeWidth="2" fill="none" fillRule="evenodd" />
       </svg>
-      <span>{isClicked ? props.upvotes.currentVotes : props.upvotes}</span>
+      <span>{props.upvotes}</span>
     </button>
   );
 }

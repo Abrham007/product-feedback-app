@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
+
 // import data from "../data.json" assert { type: "json" };
 const app = express();
 const port = 4000;
@@ -39,6 +40,7 @@ const requestSchema = new mongoose.Schema({
   status: String,
   description: String,
   comments: [commentSchema],
+  usersWhoVoted: [mongoose.ObjectId],
 });
 
 const User = mongoose.model("user", userSchema);
@@ -95,6 +97,23 @@ app.delete("/post", async (req, res) => {
   let id = req.body.postId;
   let deleteInfo = await ProductRequest.deleteOne({ _id: id });
   res.sendStatus(200);
+});
+
+app.post("/post/upvotes", async (req, res) => {
+  let post = await ProductRequest.find({ _id: req.body.postId });
+  console.log(post[0]);
+  if (!post[0].usersWhoVoted.includes(req.body.curretnUser)) {
+    let newUpvotes = post[0].upvotes + 1;
+    let newUsersWhoVoted = [...post[0].usersWhoVoted, req.body.curretnUser];
+    let fullUpdatedPost = await ProductRequest.findOneAndUpdate(
+      { _id: req.body.postId },
+      { upvotes: newUpvotes, usersWhoVoted: newUsersWhoVoted },
+      { new: true }
+    );
+    res.json(fullUpdatedPost);
+  } else {
+    res.sendStatus(400).json({ error: "user already voted" });
+  }
 });
 
 app.post("/post/comment", async (req, res) => {

@@ -93,21 +93,36 @@ export const addNewReplay = createAsyncThunk(
   }
 );
 
+export const increaseVote = createAsyncThunk(
+  "productRequests/increaseVote",
+  async (voteInfo) => {
+    const response = await fetch("http://127.0.0.1:4000/post/upvotes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(voteInfo),
+    });
+    const updatedPost = await response.json();
+    return { updatedPost, postId: voteInfo.postId };
+  }
+);
+
 const productRequestsSlice = createSlice({
   name: "productRequests",
   initialState: initialState,
   reducers: {
-    increaseVote(state, action) {
-      let id = action.payload.id;
-      let index = state.posts.findIndex((post) => post._id === id);
-      let votes = state.posts[index].upvotes;
-      if (!votes.isClicked) {
-        state.posts[index].upvotes = {
-          isClicked: true,
-          currentVotes: votes + 1,
-        };
-      }
-    },
+    // increaseVote(state, action) {
+    //   let id = action.payload.id;
+    //   let index = state.posts.findIndex((post) => post._id === id);
+    //   let votes = state.posts[index].upvotes;
+    //   if (!votes.isClicked) {
+    //     state.posts[index].upvotes = {
+    //       isClicked: true,
+    //       currentVotes: votes + 1,
+    //     };
+    //   }
+    // },
   },
   extraReducers(builder) {
     builder
@@ -149,10 +164,16 @@ const productRequestsSlice = createSlice({
       );
       state.posts[postIndex] = action.payload.updatedPost;
     });
+    builder.addCase(increaseVote.fulfilled, (state, action) => {
+      let postIndex = state.posts.findIndex(
+        (post) => post._id == action.payload.postId
+      );
+      state.posts[postIndex] = action.payload.updatedPost;
+    });
   },
 });
 
-export const { increaseVote } = productRequestsSlice.actions;
+// export const { increaseVote } = productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
 
