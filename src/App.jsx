@@ -18,6 +18,11 @@ function App() {
   const postStatus = useSelector((state) => state.productRequests.status);
   const userStatus = useSelector((state) => state.currentUser.status);
 
+  let isLoading = false;
+  if (postStatus === "loading") {
+    isLoading = true;
+  }
+
   useEffect(() => {
     if (postStatus === "idle") {
       dispatch(fetchPosts());
@@ -31,11 +36,11 @@ function App() {
   }, [userStatus, dispatch]);
 
   return (
-    <div className="App">
-      <Router>
+    <div className="App" style={{ cursor: isLoading ? "progress" : "default" }}>
+      <Router reload>
         <Routes>
           <Route path="/" element={<Suggestions />}></Route>
-          <Route path="feedbackdetail/:id" element={<FeedBackDetail />} />
+          <Route path="/feedbackdetail/:id" element={<FeedBackDetail />} />
           <Route path="add" element={<CreateEditFeedBack />}></Route>
           <Route
             path="edit/:id"
