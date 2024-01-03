@@ -26,7 +26,12 @@ function RoadMapPost(props) {
 
       <Tag text={props.category} />
       <div className="RoadMapPost__sub-content">
-        <ScoreButton upvotes={props.upvotes} id={props._id} inRoadMap={true} />
+        <ScoreButton
+          upvotes={props.upvotes}
+          usersWhoVoted={props.usersWhoVoted}
+          id={props._id}
+          inRoadMap={true}
+        />
         <PostComments
           numOfComments={props.comments ? props.comments.length : 0}
         />

@@ -13,7 +13,11 @@ function FeedBackPost(props) {
       style={{ textDecoration: "none" }}
     >
       <div className="FeedBackPost__score">
-        <ScoreButton upvotes={props.upvotes} id={props._id} />
+        <ScoreButton
+          upvotes={props.upvotes}
+          usersWhoVoted={props.usersWhoVoted}
+          id={props._id}
+        />
       </div>
 
       <div className="FeedBackPost__text">
