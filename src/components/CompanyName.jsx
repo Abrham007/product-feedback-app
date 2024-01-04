@@ -1,12 +1,10 @@
-import "./CompanyName.css";
 import hamburgerIcon from "../assets/shared/mobile/icon-hamburger.svg";
 import closeIcon from "../assets/shared/mobile/icon-close.svg";
-
-export function sum(a, b) {
-  return a + b;
-}
+import "./CompanyName.css";
 
 function CompanyName(props) {
+  //  This function handles the click of the hamberger menu
+  //  and shows the suggestions board in the suggestions component
   function handleClick() {
     props.setIsOpen((prevValue) => !prevValue);
   }

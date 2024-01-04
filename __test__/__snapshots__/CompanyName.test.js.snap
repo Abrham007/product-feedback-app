@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompanyName renders the correct JSX components 1`] = `
+<div
+  className="CompanyName"
+>
+  <div>
+    <h1
+      className="CompanyName__header"
+    >
+      Your Company
+    </h1>
+    <p
+      className="CompanyName__paragraph"
+    >
+      Feedback Board
+    </p>
+  </div>
+  <button
+    className="CompanyName__btn"
+    onClick={[Function]}
+  >
+    <img
+      alt="menu icon"
+      height={17}
+      width={20}
+    />
+  </button>
+</div>
+`;
