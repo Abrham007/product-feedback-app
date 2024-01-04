@@ -64,7 +64,9 @@ const ProductRequest = mongoose.model("request", requestSchema);
 //   console.log(data);
 // });
 
-// ProductRequest.updateMany({}, { usersWhoVoted: [] });
+// ProductRequest.updateMany({}, { usersWhoVoted: [] }).then((error) => {
+//   console.log("reseted the list");
+// });
 
 // Middleware
 app.use(bodyParser.json());
@@ -75,7 +77,7 @@ app.get("/user", async (req, res) => {
   res.json(user);
 });
 
-app.get("/posts", async (req, res) => {
+app.get("/post", async (req, res) => {
   let posts = await ProductRequest.find();
   res.json(posts);
 });

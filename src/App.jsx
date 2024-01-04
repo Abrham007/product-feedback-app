@@ -5,10 +5,7 @@ import CreateEditFeedBack from "./components/CreateEditFeedBack";
 import RoadMap from "./components/RoadMap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectSuggestionList,
-  fetchPosts,
-} from "./features/productRequests/productRequestsSlice";
+import { fetchPosts } from "./features/productRequests/productRequestsSlice";
 import { fetchUser } from "./features/currentUser/currentUserSlice";
 import { useEffect } from "react";
 
@@ -37,16 +34,16 @@ function App() {
 
   return (
     <div className="App" style={{ cursor: isLoading ? "progress" : "default" }}>
-      <Router reload>
+      <Router>
         <Routes>
           <Route path="/" element={<Suggestions />}></Route>
           <Route path="/feedbackdetail/:id" element={<FeedBackDetail />} />
-          <Route path="add" element={<CreateEditFeedBack />}></Route>
+          <Route path="/add" element={<CreateEditFeedBack />}></Route>
           <Route
-            path="edit/:id"
+            path="/edit/:id"
             element={<CreateEditFeedBack isEdit={true} />}
           ></Route>
-          <Route path="roadmap" element={<RoadMap />}></Route>
+          <Route path="/roadmap" element={<RoadMap />}></Route>
         </Routes>
       </Router>
     </div>

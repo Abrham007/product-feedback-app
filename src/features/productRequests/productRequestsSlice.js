@@ -13,7 +13,7 @@ const initialState = {
 export const fetchPosts = createAsyncThunk(
   "productRequests/fetchPosts",
   async () => {
-    const response = await fetch("http://127.0.0.1:4000/posts");
+    const response = await fetch("http://127.0.0.1:4000/post");
     const json = await response.json();
     return json;
   }
@@ -111,19 +111,7 @@ export const increaseVote = createAsyncThunk(
 const productRequestsSlice = createSlice({
   name: "productRequests",
   initialState: initialState,
-  reducers: {
-    // increaseVote(state, action) {
-    //   let id = action.payload.id;
-    //   let index = state.posts.findIndex((post) => post._id === id);
-    //   let votes = state.posts[index].upvotes;
-    //   if (!votes.isClicked) {
-    //     state.posts[index].upvotes = {
-    //       isClicked: true,
-    //       currentVotes: votes + 1,
-    //     };
-    //   }
-    // },
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchPosts.pending, (state, action) => {
@@ -177,8 +165,6 @@ const productRequestsSlice = createSlice({
       });
   },
 });
-
-// export const { increaseVote } = productRequestsSlice.actions;
 
 export default productRequestsSlice.reducer;
 
