@@ -2,9 +2,8 @@ import { Link } from "react-router-dom";
 import "./RoadMapView.css";
 import RoadMapViewItem from "./RoadMapViewItem";
 import { useSelector } from "react-redux";
-import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 
-function RoadMapView(props) {
+function RoadMapView() {
   let plannedNum = useSelector(
     (state) =>
       state.productRequests.posts.filter((req) => req.status === "planned")

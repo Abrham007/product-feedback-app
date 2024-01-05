@@ -1,6 +1,5 @@
 import renderer from "react-test-renderer";
 import TagList from "../src/components/TagList";
-import { render, screen, fireEvent } from "@testing-library/react";
 
 describe("TagList", () => {
   it("renders the correct JSX when first mounted ", () => {

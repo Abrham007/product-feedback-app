@@ -26,7 +26,7 @@ function TagList(props) {
     setSelectedTag(category);
   }
   return (
-    <div className="TagList">
+    <menu className="TagList">
       {tagList.map((item) => (
         <Tag
           key={item}
@@ -35,7 +35,7 @@ function TagList(props) {
           onClick={onTagClick}
         />
       ))}
-    </div>
+    </menu>
   );
 }
 
