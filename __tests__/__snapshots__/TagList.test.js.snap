@@ -1,19 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TagList renders the correct JSX when first mounted  1`] = `
-<div
+exports[`TagList renders the correct JSX 1`] = `
+<menu
   className="TagList"
 >
   <button
     className="Tag"
     disabled={false}
     onClick={[Function]}
-    style={
-      {
-        "backgroundColor": "#4661e6",
-        "color": "#fff",
-      }
-    }
+    style={{}}
   >
     All
   </button>
@@ -37,7 +32,12 @@ exports[`TagList renders the correct JSX when first mounted  1`] = `
     className="Tag"
     disabled={false}
     onClick={[Function]}
-    style={{}}
+    style={
+      {
+        "backgroundColor": "#4661e6",
+        "color": "#fff",
+      }
+    }
   >
     Enhancement
   </button>
@@ -57,18 +57,23 @@ exports[`TagList renders the correct JSX when first mounted  1`] = `
   >
     Feature
   </button>
-</div>
+</menu>
 `;
 
-exports[`TagList renders the correct JSX when it's clicked 1`] = `
-<div
+exports[`TagList renders the correct JSX when first mounted  1`] = `
+<menu
   className="TagList"
 >
   <button
     className="Tag"
     disabled={false}
     onClick={[Function]}
-    style={{}}
+    style={
+      {
+        "backgroundColor": "#4661e6",
+        "color": "#fff",
+      }
+    }
   >
     All
   </button>
@@ -92,12 +97,7 @@ exports[`TagList renders the correct JSX when it's clicked 1`] = `
     className="Tag"
     disabled={false}
     onClick={[Function]}
-    style={
-      {
-        "backgroundColor": "#4661e6",
-        "color": "#fff",
-      }
-    }
+    style={{}}
   >
     Enhancement
   </button>
@@ -117,5 +117,5 @@ exports[`TagList renders the correct JSX when it's clicked 1`] = `
   >
     Feature
   </button>
-</div>
+</menu>
 `;
