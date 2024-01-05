@@ -1,10 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import currentUserReducer from "../features/currentUser/currentUserSlice";
 import productRequestsReducer from "../features/productRequests/productRequestsSlice";
 
-export default configureStore({
-  reducer: {
-    currentUser: currentUserReducer,
-    productRequests: productRequestsReducer,
-  },
+const rootReducer = combineReducers({
+  currentUser: currentUserReducer,
+  productRequests: productRequestsReducer,
 });
+
+export function setupStore(preloadedState) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });
+}
