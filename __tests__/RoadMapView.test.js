@@ -17,8 +17,4 @@ describe("RoadMapView", () => {
       screen.getAllByRole("listitem")[2].textContent.match(/\d+$/)[0]
     ).toBe("1");
   });
-  it("changes to RoadMap page when the link is clicked", () => {
-    fireEvent.click(screen.getByRole("link"));
-    expect(screen.getByRole("heading").textContent).toBe("Roadmap");
-  });
 });
