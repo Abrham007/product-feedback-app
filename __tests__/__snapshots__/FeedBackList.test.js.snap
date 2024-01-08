@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FeedBackList shows the correct JSX when empty 1`] = `
+<div
+  className="FeedBackList FeedBackList--empty"
+>
+  <div
+    className="FeedBackEmpty "
+  >
+    <img
+      alt=""
+      className="FeedBackEmpty__icon"
+      height={136}
+      width={130}
+    />
+    <div
+      className="FeedBackEmpty__text"
+    >
+      <h2
+        className="FeedBackEmpty__header"
+      >
+        There is no feedback yet.
+      </h2>
+      <p
+        className="FeedBackEmpty__paragraph"
+      >
+        Got a suggestion? Found a bug that needs to be squashed? We love hearing about new ideas to improve our app.
+      </p>
+    </div>
+    <a
+      className="AddBtn"
+      href="/add"
+      onClick={[Function]}
+    >
+      <svg
+        fill="#F2F4FE"
+        height="12"
+        viewBox="0 -960 960 960"
+        width="12"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M417-417H166v-126h251v-251h126v251h251v126H543v251H417v-251Z"
+        />
+      </svg>
+      <span>
+        Add Feedback
+      </span>
+    </a>
+  </div>
+</div>
+`;

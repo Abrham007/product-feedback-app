@@ -3,6 +3,7 @@ import "./FeedBackList.css";
 import FeedBackPost from "./FeedBackPost";
 
 function FeedBackList(props) {
+  // checks whether there is a list of suggestions passed by the parent
   let isEmpty = props.listOfFeedback.length === 0;
 
   return (
