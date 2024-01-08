@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SuggestionsSort renders the correct JSX after user clickes btn 1`] = `
+<div
+  className="SuggestionsSort"
+>
+  <button
+    className="SuggestionsSort__btn"
+    onClick={[Function]}
+  >
+    <span>
+      Sort by :
+    </span>
+    <span
+      className="SuggestionsSort__selected"
+    >
+      Most Upvotes
+    </span>
+    <svg
+      height="7"
+      width="10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 6l4-4 4 4"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeWidth="2"
+      />
+    </svg>
+  </button>
+  <div
+    className="SuggestionsSort__drop-menu"
+  >
+    <menu
+      aria-live="polite"
+      className="DropMenu"
+    >
+      <li
+        className="DropMenu__item"
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <button
+          className="DropMenu__btn"
+          onClick={[Function]}
+        >
+          <span>
+            Most Upvotes
+          </span>
+          <img
+            alt="check icon"
+            aria-live="polite"
+            className="DropMenu__icon"
+            height={7.5}
+            style={
+              {
+                "visibility": "visible",
+              }
+            }
+            width={11}
+          />
+        </button>
+      </li>
+      <li
+        className="DropMenu__item"
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <button
+          className="DropMenu__btn"
+          onClick={[Function]}
+        >
+          <span>
+            Least Upvotes
+          </span>
+          <img
+            alt="check icon"
+            aria-live="polite"
+            className="DropMenu__icon"
+            height={7.5}
+            style={{}}
+            width={11}
+          />
+        </button>
+      </li>
+      <li
+        className="DropMenu__item"
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <button
+          className="DropMenu__btn"
+          onClick={[Function]}
+        >
+          <span>
+            Most Comments
+          </span>
+          <img
+            alt="check icon"
+            aria-live="polite"
+            className="DropMenu__icon"
+            height={7.5}
+            style={{}}
+            width={11}
+          />
+        </button>
+      </li>
+      <li
+        className="DropMenu__item"
+        onKeyDown={[Function]}
+        tabIndex={0}
+      >
+        <button
+          className="DropMenu__btn"
+          onClick={[Function]}
+        >
+          <span>
+            Least Comments
+          </span>
+          <img
+            alt="check icon"
+            aria-live="polite"
+            className="DropMenu__icon"
+            height={7.5}
+            style={{}}
+            width={11}
+          />
+        </button>
+      </li>
+    </menu>
+  </div>
+</div>
+`;
+
+exports[`SuggestionsSort renders the correct JSX when first mounted  1`] = `
+<div
+  className="SuggestionsSort"
+>
+  <button
+    className="SuggestionsSort__btn"
+    onClick={[Function]}
+  >
+    <span>
+      Sort by :
+    </span>
+    <span
+      className="SuggestionsSort__selected"
+    >
+      Most Upvotes
+    </span>
+    <svg
+      height="7"
+      width="10"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M1 1l4 4 4-4"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#FFF"
+        strokeWidth="2"
+      />
+    </svg>
+  </button>
+</div>
+`;
