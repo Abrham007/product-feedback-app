@@ -4,18 +4,21 @@ import RoadMapViewItem from "./RoadMapViewItem";
 import { useSelector } from "react-redux";
 
 function RoadMapView() {
+  // We get the planned product Request posts from the state
   let plannedNum = useSelector(
     (state) =>
       state.productRequests.posts.filter((req) => req.status === "planned")
         .length
   );
 
+  // We get the in-progress product Request posts from the state
   let inProgressNum = useSelector(
     (state) =>
       state.productRequests.posts.filter((req) => req.status === "in-progress")
         .length
   );
 
+  // We get the live product Request posts from the state
   let liveNum = useSelector(
     (state) =>
       state.productRequests.posts.filter((req) => req.status === "live").length
