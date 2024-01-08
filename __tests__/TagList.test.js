@@ -10,7 +10,7 @@ describe("TagList", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders the correct JSX", () => {
+  it("renders the correct JSX after user clickes tag", () => {
     const component = renderer.create(
       <TagList handleSuggestions={() => {}} suggestions={[]} />
     );
