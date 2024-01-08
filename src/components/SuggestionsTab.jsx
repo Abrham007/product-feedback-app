@@ -13,29 +13,29 @@ function SuggestionsTab(props) {
 
   function handleSort(sortIndex) {
     if (sortList[sortIndex] === "Most Upvotes") {
-      props.handleSuggestions(
-        props.suggestions.toSorted((a, b) => b.upvotes - a.upvotes)
-      );
+      props.handleSuggestions([
+        ...props.suggestions.sort((a, b) => b.upvotes - a.upvotes),
+      ]);
     } else if (sortList[sortIndex] === "Least Upvotes") {
-      props.handleSuggestions(
-        props.suggestions.toSorted((a, b) => a.upvotes - b.upvotes)
-      );
+      props.handleSuggestions([
+        ...props.suggestions.sort((a, b) => a.upvotes - b.upvotes),
+      ]);
     } else if (sortList[sortIndex] === "Most Comments") {
-      props.handleSuggestions(
-        props.suggestions.toSorted((a, b) => {
+      props.handleSuggestions([
+        ...props.suggestions.sort((a, b) => {
           let AComments = a.comments ? a.comments.length : 0;
           let BComments = b.comments ? b.comments.length : 0;
           return BComments - AComments;
-        })
-      );
+        }),
+      ]);
     } else if (sortList[sortIndex] === "Least Comments") {
-      props.handleSuggestions(
-        props.suggestions.toSorted((a, b) => {
+      props.handleSuggestions([
+        ...props.suggestions.sort((a, b) => {
           let AComments = a.comments ? a.comments.length : 0;
           let BComments = b.comments ? b.comments.length : 0;
           return AComments - BComments;
-        })
-      );
+        }),
+      ]);
     }
   }
   return (
