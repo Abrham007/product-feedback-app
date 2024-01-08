@@ -21,7 +21,7 @@ function FeedBackPost(props) {
       </div>
 
       <div className="FeedBackPost__text">
-        <h2 className="FeedBackPost__header">{props.title}</h2>
+        <h3 className="FeedBackPost__header">{props.title}</h3>
         <p className="FeedBackPost__paragraph">{props.description}</p>
         <Tag text={props.category} />
       </div>
