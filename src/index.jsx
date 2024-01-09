@@ -3,11 +3,14 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import { setupStore } from "./store/store.js";
+import { BrowserRouterProps as Router } from "react-router-dom";
 
 const domNode = document.getElementById("root");
 const root = createRoot(domNode);
 root.render(
-  <Provider store={setupStore()}>
-    <App />
-  </Provider>
+  <Router>
+    <Provider store={setupStore()}>
+      <App />
+    </Provider>
+  </Router>
 );

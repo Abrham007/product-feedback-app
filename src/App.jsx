@@ -34,18 +34,16 @@ function App() {
 
   return (
     <div className="App" style={{ cursor: isLoading ? "progress" : "default" }}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Suggestions />}></Route>
-          <Route path="/feedbackdetail/:id" element={<FeedBackDetail />} />
-          <Route path="/add" element={<CreateEditFeedBack />}></Route>
-          <Route
-            path="/edit/:id"
-            element={<CreateEditFeedBack isEdit={true} />}
-          ></Route>
-          <Route path="/roadmap" element={<RoadMap />}></Route>
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Suggestions />}></Route>
+        <Route path="/feedbackdetail/:id" element={<FeedBackDetail />} />
+        <Route path="/add" element={<CreateEditFeedBack />}></Route>
+        <Route
+          path="/edit/:id"
+          element={<CreateEditFeedBack isEdit={true} />}
+        ></Route>
+        <Route path="/roadmap" element={<RoadMap />}></Route>
+      </Routes>
     </div>
   );
 }
