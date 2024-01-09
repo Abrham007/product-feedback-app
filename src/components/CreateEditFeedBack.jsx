@@ -16,6 +16,7 @@ import {
 } from "../features/productRequests/productRequestsSlice";
 
 function CreateEditFeedBack(props) {
+  // The id passed for editing from the FeedBackDeatil component
   let { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,16 +28,19 @@ function CreateEditFeedBack(props) {
     formState: { errors, isSubmitSuccessful },
   } = useForm();
 
+  // This is for the custom select input
   const [currentCategory, setCurrentCategory] = useState(0);
   const [currentStatus, setCurrentStatus] = useState(0);
 
   let categoryList = ["Feature", "UI", "UX", "Enhancement", "Bug"];
   let statusList = ["Suggestion", "Planned", "In-Progress", "Live"];
 
+  // This will get the post for editing for better UX from the redux store
   let CURRENTFEEDBACK = useSelector((state) =>
     state.productRequests.posts.find((req) => req._id == id)
   );
 
+  // This is passed to the custom select input's
   function handleCurrentCategory(categoryIndex) {
     setCurrentCategory(categoryIndex);
   }
@@ -45,6 +49,7 @@ function CreateEditFeedBack(props) {
     setCurrentStatus(statusIndex);
   }
 
+  // This will add new post directly to the database through redux
   async function addData(data) {
     try {
       dispatch(
@@ -61,6 +66,7 @@ function CreateEditFeedBack(props) {
     }
   }
 
+  // This will edit old post directly to the database through redux
   async function editData(data) {
     try {
       dispatch(
@@ -77,6 +83,7 @@ function CreateEditFeedBack(props) {
     }
   }
 
+  // This will delelte a post directly on the database through redux
   function handleDelete(event) {
     event.preventDefault();
     try {
@@ -90,6 +97,8 @@ function CreateEditFeedBack(props) {
     navigate("/");
   }
 
+  // This will determine to edit post or create the post and navigate
+  // to the respective pages
   function onSubmit(data) {
     if (props.isEdit) {
       editData(data);
@@ -100,6 +109,8 @@ function CreateEditFeedBack(props) {
     }
   }
 
+  // This will load the correct catagory and status if it is on edit
+  // from the redux store
   useEffect(() => {
     if (props.isEdit) {
       let currentCategoryIndex = categoryList.findIndex(
@@ -113,6 +124,7 @@ function CreateEditFeedBack(props) {
     }
   }, []);
 
+  // This will reset the input fields upon successful submtion
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset({ title: "", description: "" });
@@ -121,6 +133,7 @@ function CreateEditFeedBack(props) {
   return (
     <div className="CreateEditFeedBack">
       <BackBtn />
+
       <img
         src={props.isEdit ? editFeedbackIcon : newFeedbackIcon}
         alt=""
@@ -128,6 +141,7 @@ function CreateEditFeedBack(props) {
         width={56}
         className="CreateEditFeedBack__logo"
       ></img>
+
       <form
         role="form"
         onSubmit={handleSubmit(onSubmit)}
@@ -138,6 +152,7 @@ function CreateEditFeedBack(props) {
             ? `Editing ‘${CURRENTFEEDBACK.title}’`
             : "Create New Feedback"}
         </h2>
+
         <div className="CreateEditFeedBack__input-section">
           <FeedBackInput
             register={register}
@@ -183,6 +198,7 @@ function CreateEditFeedBack(props) {
             defaultValue={props.isEdit ? CURRENTFEEDBACK.description : ""}
           />
         </div>
+
         <div className="CreateEditFeedBack__btn-box">
           {props.isEdit && (
             <button
@@ -192,12 +208,14 @@ function CreateEditFeedBack(props) {
               Delete
             </button>
           )}
+
           <button
             onClick={() => navigate(-1)}
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--cancel"
           >
             Cancel
           </button>
+
           <button
             type="submit"
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
