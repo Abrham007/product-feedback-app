@@ -30,13 +30,13 @@ describe("CreateEditFeedBack", () => {
     expect(
       screen.getByRole("textbox", {
         name: "Feedback Title Add a short, descriptive headline",
-      }).value
-    ).toBe(title);
+      })
+    ).toHaveValue(title);
     expect(
       screen.getByRole("textbox", {
         name: "Feedback Detail Include any specific comments on what should be improved, added, etc.",
-      }).value
-    ).toBe(description);
+      })
+    ).toHaveValue(description);
     expect(
       screen.getByRole("heading", { name: `Editing ‘${title}’` })
     ).toBeTruthy();
