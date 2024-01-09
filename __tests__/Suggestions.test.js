@@ -3,9 +3,11 @@ import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders } from "../utils/test-utils";
 
 describe("Suggestions", () => {
+  const server = setupServer(...handlers);
   beforeEach(() => {
     renderWithProviders(<Suggestions></Suggestions>);
   });
+
   test("loads the correct number of posts from state", async () => {
     expect((await screen.findAllByRole("link")).length - 2).toBe(6);
   });
