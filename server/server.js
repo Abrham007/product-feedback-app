@@ -44,7 +44,7 @@ const requestSchema = new mongoose.Schema({
     type: [mongoose.ObjectId],
     validate: {
       validator: function (v) {
-        return !this.includes(v);
+        return !this.includes?.(v);
       },
     },
   },
