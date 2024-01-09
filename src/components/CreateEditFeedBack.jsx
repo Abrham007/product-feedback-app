@@ -129,6 +129,7 @@ function CreateEditFeedBack(props) {
         className="CreateEditFeedBack__logo"
       ></img>
       <form
+        role="form"
         onSubmit={handleSubmit(onSubmit)}
         className="CreateEditFeedBack__form"
       >
