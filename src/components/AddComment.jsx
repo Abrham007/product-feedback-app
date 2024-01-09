@@ -35,8 +35,11 @@ function AddComment(props) {
 
   return (
     <form onSubmit={handleSubmit} className="AddComment">
-      <h4 className="AddComment__header">Add Comment</h4>
+      <label htmlFor="comment" className="AddComment__header">
+        Add Comment
+      </label>
       <textarea
+        id="comment"
         name="comment"
         className="AddComment__input"
         placeholder="Type your comment here"
