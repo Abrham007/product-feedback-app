@@ -1,10 +1,15 @@
 import RoadMapView from "../src/components/RoadMapView";
 import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders } from "../utils/test-utils";
+import { BrowserRouter } from "react-router-dom";
 
 describe("RoadMapView", () => {
   beforeEach(() => {
-    renderWithProviders(<RoadMapView></RoadMapView>);
+    renderWithProviders(
+      <BrowserRouter>
+        <RoadMapView></RoadMapView>
+      </BrowserRouter>
+    );
   });
   it("loads the correct infromation from state", () => {
     expect(

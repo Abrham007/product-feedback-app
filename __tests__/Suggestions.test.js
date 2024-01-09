@@ -1,11 +1,15 @@
 import Suggestions from "../src/components/Suggestions";
 import { fireEvent, screen } from "@testing-library/react";
 import { renderWithProviders } from "../utils/test-utils";
+import { BrowserRouter } from "react-router-dom";
 
 describe("Suggestions", () => {
-  const server = setupServer(...handlers);
   beforeEach(() => {
-    renderWithProviders(<Suggestions></Suggestions>);
+    renderWithProviders(
+      <BrowserRouter>
+        <Suggestions></Suggestions>
+      </BrowserRouter>
+    );
   });
 
   test("loads the correct number of posts from state", async () => {
