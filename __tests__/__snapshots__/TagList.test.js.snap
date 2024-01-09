@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TagList renders the correct JSX 1`] = `
+exports[`TagList renders the correct JSX after user clickes tag 1`] = `
 <menu
   className="TagList"
 >
