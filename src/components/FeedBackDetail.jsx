@@ -2,18 +2,20 @@ import "./FeedBackDetail.css";
 import FeedBackPost from "./FeedBackPost";
 import CommentList from "./CommentList";
 import AddComment from "./AddComment";
-import { Link, useParams, redirect, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import BackBtn from "./BackBtn";
-import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
 import { useSelector } from "react-redux";
 function FeedBackDetail() {
+  // This is the id we get from either the suggesitons page or
+  // the roadmap page
   let { id } = useParams();
-  let navigate = useNavigate();
 
+  // We filter the post to show the show the post with the specific _id
   const FEEDBACKDETAIL = useSelector((state) =>
     state.productRequests.posts.find((req) => req._id == id)
   );
 
+  // we isolate the comment of that post if it exist or it is undefiend
   const FEEDBACKDETAILCOMMENTS = FEEDBACKDETAIL?.comments;
 
   return (
