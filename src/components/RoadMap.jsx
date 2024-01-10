@@ -8,8 +8,12 @@ import { selectProductRequests } from "../features/productRequests/productReques
 import { useSelector } from "react-redux";
 
 function RoadMap() {
+  // This state is responsible for the selected states planned, in-progress or live
+  // it is only used for mobile devices
   const [selectedStatus, setSelectedStatus] = useState("");
   const productRequests = useSelector(selectProductRequests);
+
+  // This sets up the color and text used for every status
   let statusData = [
     {
       status: "Planned",
@@ -28,6 +32,7 @@ function RoadMap() {
     },
   ];
 
+  // This creates the data for the RoadMapDetail component
   let roadMapData = statusData.map((item) => {
     let roadMapList = productRequests.filter(
       (req) => req.status === item.status.toLowerCase()
@@ -35,12 +40,16 @@ function RoadMap() {
     return [item, roadMapList];
   });
 
+  // Since we can't use CSS mediaqueries b/c it uses state to determine
+  // the current roadMapDetailList showing we use javascript mediaqueries
   const mediaQuery = window.matchMedia("(max-width: 768px)");
 
+  // for desktop and tablet we show all the data
   let roadMapDetailList = roadMapData.map((item) => (
     <RoadMapDetail key={item[0].status} detailList={item} />
   ));
 
+  // for mobile we show one at a time
   if (mediaQuery.matches && selectedStatus !== "") {
     let tempRoadMapDetail = roadMapData.find(
       (item) => item[0].status === selectedStatus
@@ -49,6 +58,7 @@ function RoadMap() {
     roadMapDetailList = <RoadMapDetail detailList={tempRoadMapDetail} />;
   }
 
+  // we listin for change in the display
   mediaQuery.addEventListener("change", () => {
     if (mediaQuery.matches) {
       if (selectedStatus === "") {
@@ -61,6 +71,7 @@ function RoadMap() {
     }
   });
 
+  // This is used by the tabpanal for mobile dispaly
   function handleSelectedStatus(newStatus) {
     setSelectedStatus(newStatus);
   }
