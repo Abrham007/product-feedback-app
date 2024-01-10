@@ -1,46 +1,42 @@
-import { screen } from "@testing-library/dom";
 import CreateEditFeedBack from "../src/components/CreateEditFeedBack";
-import { renderWithProviders } from "../utils/test-utils";
 import { Route, MemoryRouter, Routes, BrowserRouter } from "react-router-dom";
+import { preloadedData } from "../utils/test-utils";
+import { setupStore } from "../src/store/store";
+import { Provider } from "react-redux";
+import renderer from "react-test-renderer";
 
 describe("CreateEditFeedBack", () => {
-  test("renders the correct JSX on create", () => {
-    renderWithProviders(
-      <BrowserRouter>
-        <CreateEditFeedBack></CreateEditFeedBack>
-      </BrowserRouter>
+  describe("on create", () => {
+    const component = (
+      <Provider store={setupStore(preloadedData)}>
+        <BrowserRouter>
+          <CreateEditFeedBack></CreateEditFeedBack>
+        </BrowserRouter>
+      </Provider>
     );
-    expect(screen.getAllByRole("heading").length).toBe(4);
-    expect(screen.getAllByRole("button").length).toBe(3);
+    test("renders the correct JSX", () => {
+      let tree = renderer.create(component).toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
-  test("renders the correct JSX on edit", () => {
-    const title = "Add tags for solutions";
-    const description =
-      "Easier to search for solutions based on a specific stack.";
-    renderWithProviders(
-      <MemoryRouter initialEntries={[`/edit/${1}`]}>
-        <Routes>
-          <Route
-            path="/edit/:id"
-            element={<CreateEditFeedBack isEdit={true}></CreateEditFeedBack>}
-          ></Route>
-        </Routes>
-      </MemoryRouter>
-    );
-    expect(
-      screen.getByRole("textbox", {
-        name: "Feedback Title Add a short, descriptive headline",
-      })
-    ).toHaveValue(title);
-    expect(
-      screen.getByRole("textbox", {
-        name: "Feedback Detail Include any specific comments on what should be improved, added, etc.",
-      })
-    ).toHaveValue(description);
-    expect(
-      screen.getByRole("heading", { name: `Editing ‘${title}’` })
-    ).toBeTruthy();
-    expect(screen.getAllByRole("heading").length).toBe(5);
-    expect(screen.getAllByRole("button").length).toBe(4);
+  describe("on edit", () => {
+    test("renders the correct JSX", () => {
+      let component = renderer.create(
+        <Provider store={setupStore(preloadedData)}>
+          <MemoryRouter initialEntries={[`/edit/${1}`]}>
+            <Routes>
+              <Route
+                path="/edit/:id"
+                element={
+                  <CreateEditFeedBack isEdit={true}></CreateEditFeedBack>
+                }
+              ></Route>
+            </Routes>
+          </MemoryRouter>
+        </Provider>
+      );
+      let tree = component.toJSON();
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

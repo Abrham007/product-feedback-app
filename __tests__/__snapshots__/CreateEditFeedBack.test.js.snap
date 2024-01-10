@@ -1,0 +1,355 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateEditFeedBack on create renders the correct JSX 1`] = `
+<div
+  className="CreateEditFeedBack"
+>
+  <button
+    className="BackBtn"
+    onClick={[Function]}
+    style={
+      {
+        "color": "#647196",
+      }
+    }
+  >
+    <svg
+      height="10"
+      width="7"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 9L2 5l4-4"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#4661E6"
+        strokeWidth="2"
+      />
+    </svg>
+    <span>
+      Go Back
+    </span>
+  </button>
+  <img
+    alt=""
+    className="CreateEditFeedBack__logo"
+    height={56}
+    width={56}
+  />
+  <form
+    className="CreateEditFeedBack__form"
+    onSubmit={[Function]}
+    role="form"
+  >
+    <h2
+      className="CreateEditFeedBack__header"
+    >
+      Create New Feedback
+    </h2>
+    <div
+      className="CreateEditFeedBack__input-section"
+    >
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor="title"
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Feedback Title
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Add a short, descriptive headline
+          </p>
+        </label>
+        <input
+          className="FeedBackInput__input"
+          defaultValue=""
+          id="title"
+          name="title"
+          onBlur={[Function]}
+          onChange={[Function]}
+          style={{}}
+        />
+      </div>
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor={null}
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Category
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Choose a category for your feedback
+          </p>
+        </label>
+        <div
+          className="FromSelect"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+        >
+          <span>
+            Feature
+          </span>
+          <img
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor="description"
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Feedback Detail
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Include any specific comments on what should be improved, added, etc.
+          </p>
+        </label>
+        <textarea
+          className="FeedBackInput__input FeedBackInput__input--text-area"
+          defaultValue=""
+          id="description"
+          name="description"
+          onBlur={[Function]}
+          onChange={[Function]}
+          style={{}}
+        />
+      </div>
+    </div>
+    <div
+      className="CreateEditFeedBack__btn-box"
+    >
+      <button
+        className="CreateEditFeedBack__btn CreateEditFeedBack__btn--cancel"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+      <button
+        className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
+        type="submit"
+      >
+        Add Feedback
+      </button>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`CreateEditFeedBack on edit renders the correct JSX 1`] = `
+<div
+  className="CreateEditFeedBack"
+>
+  <button
+    className="BackBtn"
+    onClick={[Function]}
+    style={
+      {
+        "color": "#647196",
+      }
+    }
+  >
+    <svg
+      height="10"
+      width="7"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 9L2 5l4-4"
+        fill="none"
+        fillRule="evenodd"
+        stroke="#4661E6"
+        strokeWidth="2"
+      />
+    </svg>
+    <span>
+      Go Back
+    </span>
+  </button>
+  <img
+    alt=""
+    className="CreateEditFeedBack__logo"
+    height={56}
+    width={56}
+  />
+  <form
+    className="CreateEditFeedBack__form"
+    onSubmit={[Function]}
+    role="form"
+  >
+    <h2
+      className="CreateEditFeedBack__header"
+    >
+      Editing ‘Add tags for solutions’
+    </h2>
+    <div
+      className="CreateEditFeedBack__input-section"
+    >
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor="title"
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Feedback Title
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Add a short, descriptive headline
+          </p>
+        </label>
+        <input
+          className="FeedBackInput__input"
+          defaultValue="Add tags for solutions"
+          id="title"
+          name="title"
+          onBlur={[Function]}
+          onChange={[Function]}
+          style={{}}
+        />
+      </div>
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor={null}
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Category
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Choose a category for your feedback
+          </p>
+        </label>
+        <div
+          className="FromSelect"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+        >
+          <span>
+            Feature
+          </span>
+          <img
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor={null}
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Update Status
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Change feedback state
+          </p>
+        </label>
+        <div
+          className="FromSelect"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          tabIndex={0}
+        >
+          <span>
+            Suggestion
+          </span>
+          <img
+            alt=""
+          />
+        </div>
+      </div>
+      <div
+        className="FeedBackInput"
+      >
+        <label
+          className="FeedBackInput__label"
+          htmlFor="description"
+        >
+          <h3
+            className="FeedBackInput__header"
+          >
+            Feedback Detail
+          </h3>
+          <p
+            className="FeedBackInput__description"
+          >
+            Include any specific comments on what should be improved, added, etc.
+          </p>
+        </label>
+        <textarea
+          className="FeedBackInput__input FeedBackInput__input--text-area"
+          defaultValue="Easier to search for solutions based on a specific stack."
+          id="description"
+          name="description"
+          onBlur={[Function]}
+          onChange={[Function]}
+          style={{}}
+        />
+      </div>
+    </div>
+    <div
+      className="CreateEditFeedBack__btn-box"
+    >
+      <button
+        className="CreateEditFeedBack__btn CreateEditFeedBack__btn--delete"
+        onClick={[Function]}
+      >
+        Delete
+      </button>
+      <button
+        className="CreateEditFeedBack__btn CreateEditFeedBack__btn--cancel"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+      <button
+        className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
+        type="submit"
+      >
+        Save Changes
+      </button>
+    </div>
+  </form>
+</div>
+`;
