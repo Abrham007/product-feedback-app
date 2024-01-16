@@ -11,15 +11,17 @@ import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
-
+  // This is were we determine the state of the fetch
   const postStatus = useSelector((state) => state.productRequests.status);
   const userStatus = useSelector((state) => state.currentUser.status);
 
+  // We set up a minor cursor loader for the loading stage
   let isLoading = false;
   if (postStatus === "loading") {
     isLoading = true;
   }
 
+  // We fetch the data as soon as the component mounts
   useEffect(() => {
     if (postStatus === "idle") {
       dispatch(fetchPosts());
