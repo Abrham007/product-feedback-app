@@ -16,29 +16,59 @@ app.use(
 await mongoose.connect("mongodb://0.0.0.0:27017/feedbackDB");
 
 const userSchema = new mongoose.Schema({
-  image: String,
-  name: String,
-  username: String,
+  image: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
 });
 
 const replaySchema = new mongoose.Schema({
-  content: String,
-  replyingTo: String,
+  content: {
+    type: String,
+    required: true,
+  },
+  replyingTo: {
+    type: String,
+    required: true,
+  },
   user: userSchema,
 });
 
 const commentSchema = new mongoose.Schema({
-  content: String,
+  content: {
+    type: String,
+    required: true,
+  },
   user: userSchema,
   replies: [replaySchema],
 });
 
 const requestSchema = new mongoose.Schema({
-  title: String,
-  category: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
   upvotes: Number,
-  status: String,
-  description: String,
+  status: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
   comments: [commentSchema],
   usersWhoVoted: {
     type: [mongoose.ObjectId],
