@@ -1,5 +1,5 @@
 export async function getUser() {
-  const response = await fetch("http://127.0.0.1:4000/api/user");
+  const response = await fetch("/api/user");
 
   if (!response.ok) {
     throw Error("Error when fetching the user");
@@ -10,7 +10,7 @@ export async function getUser() {
 }
 
 export async function getProductRequest() {
-  const response = await fetch("http://127.0.0.1:4000/api/product-request");
+  const response = await fetch("/api/product-request");
 
   if (!response.ok) {
     throw Error("Error when fetching the product request");
@@ -21,7 +21,7 @@ export async function getProductRequest() {
 }
 
 export async function postProductRequest(post) {
-  const response = await fetch("http://127.0.0.1:4000/api/product-request", {
+  const response = await fetch("/api/product-request", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export async function postProductRequest(post) {
 }
 
 export async function patchProductRequest(post) {
-  const response = await fetch("http://127.0.0.1:4000/api/product-request", {
+  const response = await fetch("/api/product-request", {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export async function patchProductRequest(post) {
 }
 
 export async function deleteProductRequest(postId) {
-  const response = await fetch("http://127.0.0.1:4000/api/product-request", {
+  const response = await fetch("/api/product-request", {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -71,16 +71,13 @@ export async function deleteProductRequest(postId) {
 }
 
 export async function postProductRequestComment(comment) {
-  const response = await fetch(
-    "http://127.0.0.1:4000/api/product-request/comment",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(comment),
-    }
-  );
+  const response = await fetch("/api/product-request/comment", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(comment),
+  });
 
   if (!response.ok) {
     throw Error("Error when creating the product request comment");
@@ -91,16 +88,13 @@ export async function postProductRequestComment(comment) {
 }
 
 export async function postProductRequestReplay(replay) {
-  const response = await fetch(
-    "http://127.0.0.1:4000/api/product-request/comment/replay",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(replay),
-    }
-  );
+  const response = await fetch("/api/product-request/comment/replay", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(replay),
+  });
 
   if (!response.ok) {
     throw Error("Error when creating the product request replay");
@@ -111,16 +105,13 @@ export async function postProductRequestReplay(replay) {
 }
 
 export async function patchProductRequestUpvotes(voteInfo) {
-  const response = await fetch(
-    "http://127.0.0.1:4000/api/product-request/upvotes",
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(voteInfo),
-    }
-  );
+  const response = await fetch("/api/product-request/upvotes", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(voteInfo),
+  });
 
   if (!response.ok) {
     throw Error("Error when updating the product request upvotes");
