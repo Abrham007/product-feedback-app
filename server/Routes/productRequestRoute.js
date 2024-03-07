@@ -6,8 +6,8 @@ import {
   updateProductRequest,
   deleteProductRequest,
   updateProductRequestUpvotes,
-  updateProductRequestComments,
-  updateProductRequestReplay,
+  createProductRequestComments,
+  createProductRequestReplay,
 } from "../Controllers/productRequestController.js";
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.post("/product-request", createProductRequest);
 router.patch("/product-request", updateProductRequest);
 router.delete("/product-request", deleteProductRequest);
 router.patch("/product-request/upvotes", updateProductRequestUpvotes);
-router.patch("/product-request/comments", updateProductRequestComments);
-router.patch("/product-request/replay", updateProductRequestReplay);
+router.post("/product-request/comments", createProductRequestComments);
+router.post("/product-request/replay", createProductRequestReplay);
 
 export default router;
