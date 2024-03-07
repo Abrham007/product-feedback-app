@@ -51,48 +51,39 @@ function CreateEditFeedBack(props) {
 
   // This will add new post directly to the database through redux
   async function addData(data) {
-    try {
-      dispatch(
-        addNewPost({
-          title: data.title,
-          category: categoryList[currentCategory].toLowerCase(),
-          upvotes: 0,
-          status: statusList[currentStatus].toLowerCase(),
-          description: data.description,
-        })
-      );
-    } catch (err) {
-      console.log("Failed to save the post: ", err);
-    }
+    dispatch(
+      addNewPost({
+        title: data.title,
+        category: categoryList[currentCategory].toLowerCase(),
+        upvotes: 0,
+        status: statusList[currentStatus].toLowerCase(),
+        description: data.description,
+      })
+    );
   }
 
   // This will edit old post directly to the database through redux
   async function editData(data) {
-    try {
-      dispatch(
-        editPost({
-          postId: id,
-          title: data.title,
-          category: categoryList[currentCategory].toLowerCase(),
-          status: statusList[currentStatus].toLowerCase(),
-          description: data.description,
-        })
-      );
-    } catch (err) {
-      console.error("Failed to edit the post: ", err);
-    }
+    dispatch(
+      editPost({
+        postId: id,
+        title: data.title,
+        category: categoryList[currentCategory].toLowerCase(),
+        status: statusList[currentStatus].toLowerCase(),
+        description: data.description,
+      })
+    );
   }
 
   // This will delelte a post directly on the database through redux
   function handleDelete(event) {
     event.preventDefault();
-    try {
-      dispatch(
-        deletePost({
-          postId: id,
-        })
-      );
-    } catch {}
+
+    dispatch(
+      deletePost({
+        postId: id,
+      })
+    );
 
     navigate("/");
   }
