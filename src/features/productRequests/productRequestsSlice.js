@@ -72,8 +72,8 @@ const productRequestsSlice = createSlice({
         state.status.fetchPosts = "loading";
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.status.fetchPosts = "succeeded";
         state.posts = state.posts.concat(action.payload);
+        state.status.fetchPosts = "succeeded";
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status.fetchPosts = "failed";
@@ -86,6 +86,7 @@ const productRequestsSlice = createSlice({
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         state.posts.push(action.payload);
+        state.status.addNewPost = "succeeded";
       })
       .addCase(addNewPost.rejected, (state, action) => {
         state.status.addNewPost = "failed";
@@ -101,6 +102,7 @@ const productRequestsSlice = createSlice({
           (post) => post._id == action.payload.postId
         );
         state.posts[postIndex] = action.payload.updatedPost;
+        state.status.editPost = "succeeded";
       })
       .addCase(editPost.rejected, (state, action) => {
         state.status.editPost = "failed";
@@ -116,6 +118,7 @@ const productRequestsSlice = createSlice({
           (req) => req._id == action.payload.postId
         );
         state.posts.splice(feedbackIndex, 1);
+        state.status.deletePost = "succeeded";
       })
       .addCase(deletePost.rejected, (state, action) => {
         state.status.deletePost = "failed";
@@ -131,6 +134,7 @@ const productRequestsSlice = createSlice({
           (post) => post._id == action.payload.postId
         );
         state.posts[postIndex] = action.payload.updatedPost;
+        state.status.addNewComment = "succeeded";
       })
       .addCase(addNewComment.rejected, (state, action) => {
         state.status.addNewComment = "failed";
@@ -146,6 +150,7 @@ const productRequestsSlice = createSlice({
           (post) => post._id == action.payload.postId
         );
         state.posts[postIndex] = action.payload.updatedPost;
+        state.status.addNewReplay = "succeeded";
       })
       .addCase(addNewReplay.rejected, (state, action) => {
         state.status.addNewReplay = "failed";
@@ -157,11 +162,11 @@ const productRequestsSlice = createSlice({
         state.status.increaseVote = "loading";
       })
       .addCase(increaseVote.fulfilled, (state, action) => {
-        state.status.increaseVote = "succeeded";
         let postIndex = state.posts.findIndex(
           (post) => post._id == action.payload.postId
         );
         state.posts[postIndex] = action.payload.updatedPost;
+        state.status.increaseVote = "succeeded";
       })
       .addCase(increaseVote.rejected, (state, action) => {
         state.status.increaseVote = "failed";
