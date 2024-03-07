@@ -7,9 +7,18 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "./features/productRequests/productRequestsSlice";
 import { fetchUser } from "./features/currentUser/currentUserSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Modal from "./components/Modal";
+import Error from "./components/Error";
 
 function App() {
+  // This is were determine errors
+  const postError = useSelector((state) => state.productRequests.error);
+  const userError = useSelector((state) => state.currentUser.error);
+
+  const [hasError, setHasError] = useState(!!postError && !!userError);
+  let errorMessage = postError || userError;
+
   const dispatch = useDispatch();
   // This is were we determine the state of the fetch
   const postStatus = useSelector((state) => state.productRequests.status);
@@ -31,6 +40,12 @@ function App() {
     }
   }, [postStatus, userStatus, dispatch]);
 
+  // This to change the error state when an error occures
+  useEffect(() => {
+    setHasError(!!postError && !!userError);
+    errorMessage = postError || userError;
+  }, [postError, userError]);
+
   return (
     <div className="App" style={{ cursor: isLoading ? "progress" : "default" }}>
       <Routes>
@@ -43,6 +58,9 @@ function App() {
         ></Route>
         <Route path="/roadmap" element={<RoadMap />}></Route>
       </Routes>
+      <Modal isOpen={hasError} setIsOpen={setHasError}>
+        <Error message={errorMessage}></Error>
+      </Modal>
     </div>
   );
 }
