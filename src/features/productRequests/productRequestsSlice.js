@@ -70,33 +70,58 @@ const productRequestsSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       });
-    builder.addCase(addNewPost.fulfilled, (state, action) => {
+    builder
+    .addCase(addNewPost.fulfilled, (state, action) => {
       state.posts.push(action.payload);
+    })
+    .addCase(addNewPost.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
     });
-    builder.addCase(editPost.fulfilled, (state, action) => {
+    builder
+    .addCase(editPost.fulfilled, (state, action) => {
       let postIndex = state.posts.findIndex(
         (post) => post._id == action.payload.postId
       );
       state.posts[postIndex] = action.payload.updatedPost;
+    })
+    .addCase(editPost.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
     });
-    builder.addCase(deletePost.fulfilled, (state, action) => {
+    builder
+    .addCase(deletePost.fulfilled, (state, action) => {
       let feedbackIndex = state.posts.findIndex(
         (req) => req._id == action.payload.postId
       );
       state.posts.splice(feedbackIndex, 1);
-    });
-    builder.addCase(addNewComment.fulfilled, (state, action) => {
+    })
+    .addCase(deletePost.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    });;
+    builder
+    .addCase(addNewComment.fulfilled, (state, action) => {
       let postIndex = state.posts.findIndex(
         (post) => post._id == action.payload.postId
       );
       state.posts[postIndex] = action.payload.updatedPost;
-    });
-    builder.addCase(addNewReplay.fulfilled, (state, action) => {
+    })
+    .addCase(addNewComment.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    });;
+    builder
+    .addCase(addNewReplay.fulfilled, (state, action) => {
       let postIndex = state.posts.findIndex(
         (post) => post._id == action.payload.postId
       );
       state.posts[postIndex] = action.payload.updatedPost;
-    });
+    })
+    .addCase(addNewReplay.rejected, (state, action) => {
+      state.status = "failed";
+      state.error = action.error.message;
+    });;
     builder
       .addCase(increaseVote.pending, (state, action) => {
         state.status = "loading";
@@ -107,7 +132,11 @@ const productRequestsSlice = createSlice({
           (post) => post._id == action.payload.postId
         );
         state.posts[postIndex] = action.payload.updatedPost;
-      });
+      })
+      .addCase(increaseVote.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      });;
   },
 });
 
