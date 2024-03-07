@@ -11,26 +11,29 @@ function AddComment(props) {
   const navigate = useNavigate();
   const charLeft = 250 - newContent.length;
 
+  let isCreatingComment =
+    useSelector((state) => state.productRequests.status.addNewComment) ===
+    "loading";
+
   function handleChange(event) {
     const { value } = event.target;
     setNewContent(value);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    if (newContent) {
-      dispatch(
+    if (newContent !== "") {
+      await dispatch(
         addNewComment({
           content: newContent,
           user: currentUser,
           postId: props.id,
         })
       );
+      setNewContent("");
+      navigate(`/feedbackdetail/${props.id}`);
     }
-
-    setNewContent("");
-    navigate(`/feedbackdetail/${props.id}`);
   }
 
   return (
@@ -50,7 +53,7 @@ function AddComment(props) {
       <div className="AddComment__box">
         <p className="AddComment__char">{charLeft} Characters left</p>
         <button className="AddComment__btn" type="submit">
-          Post Comment
+          {isCreatingComment ? "Sending..." : "Post Comment"}
         </button>
       </div>
     </form>

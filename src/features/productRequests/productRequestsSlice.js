@@ -122,6 +122,10 @@ const productRequestsSlice = createSlice({
         state.error = action.error.message;
       });
     builder
+      .addCase(addNewComment.pending, (state, action) => {
+        state.error = null;
+        state.status.addNewComment = "loading";
+      })
       .addCase(addNewComment.fulfilled, (state, action) => {
         let postIndex = state.posts.findIndex(
           (post) => post._id == action.payload.postId
@@ -133,6 +137,10 @@ const productRequestsSlice = createSlice({
         state.error = action.error.message;
       });
     builder
+      .addCase(addNewReplay.pending, (state, action) => {
+        state.error = null;
+        state.status.addNewReplay = "loading";
+      })
       .addCase(addNewReplay.fulfilled, (state, action) => {
         let postIndex = state.posts.findIndex(
           (post) => post._id == action.payload.postId
@@ -145,6 +153,7 @@ const productRequestsSlice = createSlice({
       });
     builder
       .addCase(increaseVote.pending, (state, action) => {
+        state.error = null;
         state.status.increaseVote = "loading";
       })
       .addCase(increaseVote.fulfilled, (state, action) => {

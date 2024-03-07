@@ -11,26 +11,32 @@ function CommentPost(props) {
   const currentUser = useSelector((state) => state.currentUser.user);
   let replayTextArea = useRef(null);
 
+  let isCreatingReplay =
+    useSelector((state) => state.productRequests.status.addNewReplay) ===
+    "loading";
+
   function toggleReplay() {
     setIsOpen((prevValue) => !prevValue);
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    dispatch(
-      addNewReplay({
-        content: replayTextArea.current.value,
-        replyingTo: props.user.username,
-        user: currentUser,
-        postId: props.feedbackPostId,
-        commentId: props.parentCommentId ? props.parentCommentId : props._id,
-      })
-    );
+    if (replayTextArea.current.value !== "") {
+      await dispatch(
+        addNewReplay({
+          content: replayTextArea.current.value,
+          replyingTo: props.user.username,
+          user: currentUser,
+          postId: props.feedbackPostId,
+          commentId: props.parentCommentId ? props.parentCommentId : props._id,
+        })
+      );
 
-    replayTextArea.current.value = "";
-    setIsOpen(false);
-    navigate(`/feedbackdetail/${props.feedbackPostId}`);
+      replayTextArea.current.value = "";
+      setIsOpen(false);
+      navigate(`/feedbackdetail/${props.feedbackPostId}`);
+    }
   }
   return (
     <div className="CommentPost">
@@ -61,8 +67,8 @@ function CommentPost(props) {
             className="CommentPost__input"
             maxLength={250}
           ></textarea>
-          <button className="CommentPost__btn-post" type="submit">
-            Post Reply
+          <button className="CommentPost__btn-post">
+            {isCreatingReplay ? "Sending..." : "Post Reply"}
           </button>
         </form>
       )}
