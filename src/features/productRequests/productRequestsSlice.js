@@ -15,7 +15,15 @@ import {
 
 const initialState = {
   posts: [],
-  status: "idle",
+  status: {
+    fetchPosts: "idle",
+    addNewPost: "idle",
+    editPost: "idle",
+    deletePost: "idle",
+    addNewComment: "idle",
+    addNewReplay: "idle",
+    increaseVote: "idle",
+  },
   error: null,
 };
 
@@ -60,83 +68,96 @@ const productRequestsSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchPosts.pending, (state, action) => {
-        state.status = "loading";
+        state.error = null;
+        state.status.fetchPosts = "loading";
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status.fetchPosts = "succeeded";
         state.posts = state.posts.concat(action.payload);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
-        state.status = "failed";
+        state.status.fetchPosts = "failed";
         state.error = action.error.message;
       });
     builder
-    .addCase(addNewPost.fulfilled, (state, action) => {
-      state.posts.push(action.payload);
-    })
-    .addCase(addNewPost.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    });
+      .addCase(addNewPost.pending, (state, action) => {
+        state.error = null;
+        state.status.addNewPost = "loading";
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload);
+      })
+      .addCase(addNewPost.rejected, (state, action) => {
+        state.status.addNewPost = "failed";
+        state.error = action.error.message;
+      });
     builder
-    .addCase(editPost.fulfilled, (state, action) => {
-      let postIndex = state.posts.findIndex(
-        (post) => post._id == action.payload.postId
-      );
-      state.posts[postIndex] = action.payload.updatedPost;
-    })
-    .addCase(editPost.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    });
+      .addCase(editPost.pending, (state, action) => {
+        state.error = null;
+        state.status.editPost = "loading";
+      })
+      .addCase(editPost.fulfilled, (state, action) => {
+        let postIndex = state.posts.findIndex(
+          (post) => post._id == action.payload.postId
+        );
+        state.posts[postIndex] = action.payload.updatedPost;
+      })
+      .addCase(editPost.rejected, (state, action) => {
+        state.status.editPost = "failed";
+        state.error = action.error.message;
+      });
     builder
-    .addCase(deletePost.fulfilled, (state, action) => {
-      let feedbackIndex = state.posts.findIndex(
-        (req) => req._id == action.payload.postId
-      );
-      state.posts.splice(feedbackIndex, 1);
-    })
-    .addCase(deletePost.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    });;
+      .addCase(deletePost.pending, (state, action) => {
+        state.error = null;
+        state.status.deletePost = "loading";
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        let feedbackIndex = state.posts.findIndex(
+          (req) => req._id == action.payload.postId
+        );
+        state.posts.splice(feedbackIndex, 1);
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.status.deletePost = "failed";
+        state.error = action.error.message;
+      });
     builder
-    .addCase(addNewComment.fulfilled, (state, action) => {
-      let postIndex = state.posts.findIndex(
-        (post) => post._id == action.payload.postId
-      );
-      state.posts[postIndex] = action.payload.updatedPost;
-    })
-    .addCase(addNewComment.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    });;
+      .addCase(addNewComment.fulfilled, (state, action) => {
+        let postIndex = state.posts.findIndex(
+          (post) => post._id == action.payload.postId
+        );
+        state.posts[postIndex] = action.payload.updatedPost;
+      })
+      .addCase(addNewComment.rejected, (state, action) => {
+        state.status.addNewComment = "failed";
+        state.error = action.error.message;
+      });
     builder
-    .addCase(addNewReplay.fulfilled, (state, action) => {
-      let postIndex = state.posts.findIndex(
-        (post) => post._id == action.payload.postId
-      );
-      state.posts[postIndex] = action.payload.updatedPost;
-    })
-    .addCase(addNewReplay.rejected, (state, action) => {
-      state.status = "failed";
-      state.error = action.error.message;
-    });;
+      .addCase(addNewReplay.fulfilled, (state, action) => {
+        let postIndex = state.posts.findIndex(
+          (post) => post._id == action.payload.postId
+        );
+        state.posts[postIndex] = action.payload.updatedPost;
+      })
+      .addCase(addNewReplay.rejected, (state, action) => {
+        state.status.addNewReplay = "failed";
+        state.error = action.error.message;
+      });
     builder
       .addCase(increaseVote.pending, (state, action) => {
-        state.status = "loading";
+        state.status.increaseVote = "loading";
       })
       .addCase(increaseVote.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status.increaseVote = "succeeded";
         let postIndex = state.posts.findIndex(
           (post) => post._id == action.payload.postId
         );
         state.posts[postIndex] = action.payload.updatedPost;
       })
       .addCase(increaseVote.rejected, (state, action) => {
-        state.status = "failed";
+        state.status.increaseVote = "failed";
         state.error = action.error.message;
-      });;
+      });
   },
 });
 

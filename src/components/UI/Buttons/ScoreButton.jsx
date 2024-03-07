@@ -5,7 +5,9 @@ import { increaseVote } from "../../../features/productRequests/productRequestsS
 
 function ScoreButton(props) {
   const currentUser = useSelector((state) => state.currentUser.user);
-  const voteStatus = useSelector((state) => state.productRequests.status);
+  const voteStatus = useSelector(
+    (state) => state.productRequests.status.increaseVote
+  );
 
   let isClicked = false;
   if (props.usersWhoVoted.includes(currentUser._id)) {

@@ -3,7 +3,9 @@ import { getUser } from "../../../http";
 
 const initialState = {
   user: {},
-  status: "idle",
+  status: {
+    fetchUser: "idle",
+  },
   error: null,
 };
 
@@ -16,14 +18,15 @@ const currentUserSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchUser.pending, (state, action) => {
-        state.status = "loading";
+        state.error = null;
+        state.status.fetchUser = "loading";
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
+        state.status.fetchUser = "succeeded";
         state.user = action.payload[0];
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        state.status = "failed";
+        state.status.fetchUser = "failed";
         state.error = action.error.message;
       });
   },

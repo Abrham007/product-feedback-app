@@ -5,7 +5,9 @@ import AddBtn from "../UI/Buttons/AddBtn";
 import { useSelector } from "react-redux";
 
 function FeedBackEmpty() {
-  const postStatus = useSelector((state) => state.productRequests.status);
+  const postStatus = useSelector(
+    (state) => state.productRequests.status.fetchPosts
+  );
 
   // We set up a loading state for the loading stage
   let isLoading = false;

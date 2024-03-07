@@ -21,8 +21,10 @@ function App() {
 
   const dispatch = useDispatch();
   // This is were we determine the state of the fetch
-  const postStatus = useSelector((state) => state.productRequests.status);
-  const userStatus = useSelector((state) => state.currentUser.status);
+  const postStatus = useSelector(
+    (state) => state.productRequests.status.fetchPosts
+  );
+  const userStatus = useSelector((state) => state.currentUser.status.fetchUser);
 
   // We set up a minor cursor loader for the loading stage
   let isLoading = false;
@@ -43,7 +45,6 @@ function App() {
   // This to change the error state when an error occures
   useEffect(() => {
     setHasError(!!postError && !!userError);
-    errorMessage = postError || userError;
   }, [postError, userError]);
 
   return (

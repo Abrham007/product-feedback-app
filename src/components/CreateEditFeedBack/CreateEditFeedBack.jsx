@@ -40,6 +40,17 @@ function CreateEditFeedBack(props) {
     state.productRequests.posts.find((req) => req._id == id)
   );
 
+  let isCreating =
+    useSelector((state) => state.productRequests.status.addNewPost) ===
+    "loading";
+
+  let isEditing =
+    useSelector((state) => state.productRequests.status.editPost) === "loading";
+
+  let isDeleting =
+    useSelector((state) => state.productRequests.status.deletePost) ===
+    "loading";
+
   // This is passed to the custom select input's
   function handleCurrentCategory(categoryIndex) {
     setCurrentCategory(categoryIndex);
@@ -51,7 +62,7 @@ function CreateEditFeedBack(props) {
 
   // This will add new post directly to the database through redux
   async function addData(data) {
-    dispatch(
+    await dispatch(
       addNewPost({
         title: data.title,
         category: categoryList[currentCategory].toLowerCase(),
@@ -64,7 +75,7 @@ function CreateEditFeedBack(props) {
 
   // This will edit old post directly to the database through redux
   async function editData(data) {
-    dispatch(
+    await dispatch(
       editPost({
         postId: id,
         title: data.title,
@@ -76,10 +87,10 @@ function CreateEditFeedBack(props) {
   }
 
   // This will delelte a post directly on the database through redux
-  function handleDelete(event) {
+  async function handleDelete(event) {
     event.preventDefault();
 
-    dispatch(
+    await dispatch(
       deletePost({
         postId: id,
       })
@@ -90,14 +101,20 @@ function CreateEditFeedBack(props) {
 
   // This will determine to edit post or create the post and navigate
   // to the respective pages
-  function onSubmit(data) {
+  async function onSubmit(data) {
     if (props.isEdit) {
-      editData(data);
+      await editData(data);
       navigate(`/feedbackdetail/${id}`);
     } else {
-      addData(data);
+      await addData(data);
       navigate("/");
     }
+  }
+
+  let btnText = "Add Feedback";
+
+  if (props.isEdit) {
+    btnText = "Save Changes";
   }
 
   // This will load the correct catagory and status if it is on edit
@@ -196,7 +213,7 @@ function CreateEditFeedBack(props) {
               onClick={handleDelete}
               className="CreateEditFeedBack__btn CreateEditFeedBack__btn--delete"
             >
-              Delete
+              {isDeleting ? "Deleting..." : "Delete"}
             </button>
           )}
 
@@ -211,7 +228,7 @@ function CreateEditFeedBack(props) {
             type="submit"
             className="CreateEditFeedBack__btn CreateEditFeedBack__btn--add"
           >
-            {props.isEdit ? "Save Changes" : "Add Feedback"}
+            {isCreating || isEditing ? "Sending..." : btnText}
           </button>
         </div>
       </form>
