@@ -13,7 +13,7 @@ const initialState = {
 export const fetchPosts = createAsyncThunk(
   "productRequests/fetchPosts",
   async () => {
-    const response = await fetch("http://127.0.0.1:4000/post");
+    const response = await fetch("http://127.0.0.1:4000/api/product-request");
     const json = await response.json();
     return json;
   }
@@ -22,7 +22,7 @@ export const fetchPosts = createAsyncThunk(
 export const addNewPost = createAsyncThunk(
   "productRequests/addNewpost",
   async (post) => {
-    const response = await fetch("http://127.0.0.1:4000/post", {
+    const response = await fetch("http://127.0.0.1:4000/api/product-request", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export const addNewPost = createAsyncThunk(
 export const editPost = createAsyncThunk(
   "productRequests/editpost",
   async (post) => {
-    const response = await fetch("http://127.0.0.1:4000/post", {
+    const response = await fetch("http://127.0.0.1:4000/api/product-request", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const editPost = createAsyncThunk(
 export const deletePost = createAsyncThunk(
   "productRequests/deletepost",
   async (postId) => {
-    const response = await fetch("http://127.0.0.1:4000/post", {
+    const response = await fetch("http://127.0.0.1:4000/api/product-request", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -67,13 +67,16 @@ export const deletePost = createAsyncThunk(
 export const addNewComment = createAsyncThunk(
   "productRequests/addNewComment",
   async (comment) => {
-    const response = await fetch("http://127.0.0.1:4000/post/comment", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(comment),
-    });
+    const response = await fetch(
+      "http://127.0.0.1:4000/api/product-request/comment",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(comment),
+      }
+    );
     const updatedPost = await response.json();
     return { updatedPost, postId: comment.postId };
   }
@@ -81,13 +84,16 @@ export const addNewComment = createAsyncThunk(
 export const addNewReplay = createAsyncThunk(
   "productRequests/addNewReplay",
   async (replay) => {
-    const response = await fetch("http://127.0.0.1:4000/post/comment/replay", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(replay),
-    });
+    const response = await fetch(
+      "http://127.0.0.1:4000/api/product-request/comment/replay",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(replay),
+      }
+    );
     const updatedPost = await response.json();
     return { updatedPost, postId: replay.postId };
   }
@@ -96,13 +102,16 @@ export const addNewReplay = createAsyncThunk(
 export const increaseVote = createAsyncThunk(
   "productRequests/increaseVote",
   async (voteInfo) => {
-    const response = await fetch("http://127.0.0.1:4000/post/upvotes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(voteInfo),
-    });
+    const response = await fetch(
+      "http://127.0.0.1:4000/api/product-request/upvotes",
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(voteInfo),
+      }
+    );
     const updatedPost = await response.json();
     return { updatedPost, postId: voteInfo.postId };
   }

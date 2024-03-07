@@ -7,7 +7,7 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk("currentUser/fetchUser", async () => {
-  const response = await fetch("http://127.0.0.1:4000/user");
+  const response = await fetch("http://127.0.0.1:4000/api/user");
   const json = await response.json();
   return json;
 });
