@@ -17,7 +17,7 @@ router.post("/product-request", createProductRequest);
 router.patch("/product-request", updateProductRequest);
 router.delete("/product-request", deleteProductRequest);
 router.patch("/product-request/upvotes", updateProductRequestUpvotes);
-router.post("/product-request/comments", createProductRequestComments);
-router.post("/product-request/replay", createProductRequestReplay);
+router.post("/product-request/comment", createProductRequestComments);
+router.post("/product-request/comment/replay", createProductRequestReplay);
 
 export default router;

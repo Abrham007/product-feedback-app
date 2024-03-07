@@ -21,7 +21,7 @@ function FeedBackDetail() {
   return (
     <div className="FeedBackDetail">
       <div className="FeedBackDetail__header">
-        <BackBtn />
+        <BackBtn nav="/" />
         <Link to={`/edit/${id}`} className="FeedBackDetail__link">
           Edit Feedback
         </Link>

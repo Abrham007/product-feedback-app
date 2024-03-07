@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 function BackBtn({
   stroke = "#4661E6",
   color = "#647196",
+  nav = -1,
   ...props
 }) {
   let navigate = useNavigate();
   return (
     <button
       {...props}
-      onClick={() => navigate(-1)}
+      onClick={() => navigate(nav)}
       className="BackBtn"
       style={{ color: color }}
     >

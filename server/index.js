@@ -36,6 +36,7 @@ await mongoose.connect("mongodb://0.0.0.0:27017/feedbackDB");
 
 // Middleware
 app.use(express.json());
+app.use(express.static("images"));
 
 app.use("/api", userRoute);
 app.use("/api", productRequestRoute);

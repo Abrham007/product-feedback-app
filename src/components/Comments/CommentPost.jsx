@@ -10,8 +10,6 @@ function CommentPost(props) {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser.user);
   let replayTextArea = useRef(null);
-  const userImgs = new URL(props.user.image.replace(".", ".."), import.meta.url)
-    .href;
 
   function toggleReplay() {
     setIsOpen((prevValue) => !prevValue);
@@ -38,7 +36,7 @@ function CommentPost(props) {
     <div className="CommentPost">
       <img
         className="CommentPost__avatar"
-        src={userImgs}
+        src={`http://127.0.0.1:4000/${props.user.image}`}
         alt=""
         width={40}
         height={40}
