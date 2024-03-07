@@ -1,0 +1,40 @@
+.Error {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.Error__heading {
+  color: #d73737;
+}
+
+.Error__paragraph {
+  color: #828fa3;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.4375rem;
+}
+
+.Error__form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Error__btn {
+  border-radius: 10px;
+  background: #d73737;
+  width: 50%;
+  border: none;
+  outline: none;
+  padding: 12px 24px;
+  color: #f2f4fe;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 10px;
+}
+
+.Error__btn:hover {
+  cursor: pointer;
+  background: #e98888;
+}
