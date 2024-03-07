@@ -52,9 +52,9 @@ export async function deleteProductRequest(req, res) {
 export async function updateProductRequestUpvotes(req, res) {
   let post = await ProductRequest.find({ _id: req.body.postId });
   try {
-    if (!post[0].usersWhoVoted.includes(req.body.curretnUser)) {
+    if (!post[0].usersWhoVoted.includes(req.body.currentUser)) {
       let newUpvotes = post[0].upvotes + 1;
-      let newUsersWhoVoted = [...post[0].usersWhoVoted, req.body.curretnUser];
+      let newUsersWhoVoted = [...post[0].usersWhoVoted, req.body.currentUser];
       let fullUpdatedPost = await ProductRequest.findOneAndUpdate(
         { _id: req.body.postId },
         { upvotes: newUpvotes, usersWhoVoted: newUsersWhoVoted },

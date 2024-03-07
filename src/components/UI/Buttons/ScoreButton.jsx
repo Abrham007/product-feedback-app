@@ -20,7 +20,7 @@ function ScoreButton(props) {
 
   function handleUpVotes(event) {
     event.preventDefault();
-    dispatch(increaseVote({ postId: props.id, curretnUser: currentUser._id }));
+    dispatch(increaseVote({ postId: props.id, currentUser: currentUser._id }));
   }
 
   let btnStyles = {};
