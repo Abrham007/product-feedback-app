@@ -1,7 +1,7 @@
 import "./SuggestionsTab.css";
-import suggestionIcon from "../assets/shared/suggestions/icon-suggestions.svg";
+import suggestionIcon from "../../assets/shared/suggestions/icon-suggestions.svg";
 import SuggestionsSort from "./SuggestionsSort";
-import AddBtn from "./AddBtn";
+import AddBtn from "../UI/Buttons/AddBtn";
 
 function SuggestionsTab(props) {
   const sortList = [

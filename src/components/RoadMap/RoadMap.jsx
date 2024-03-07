@@ -1,10 +1,10 @@
 import "./RoadMap.css";
-import BackBtn from "./BackBtn";
-import AddBtn from "./AddBtn";
+import BackBtn from "../UI/Buttons/BackBtn";
+import AddBtn from "../UI/Buttons/AddBtn";
 import RoadMapDetail from "./RoadMapDetail";
 import RoadMapTabs from "./RoadMapTabs";
 import { useState } from "react";
-import { selectProductRequests } from "../features/productRequests/productRequestsSlice";
+import { selectProductRequests } from "../../features/productRequests/productRequestsSlice";
 import { useSelector } from "react-redux";
 
 function RoadMap() {

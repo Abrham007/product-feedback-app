@@ -1,8 +1,8 @@
 import "./App.css";
-import Suggestions from "./components/Suggestions";
-import FeedBackDetail from "./components/FeedbackDetail";
-import CreateEditFeedBack from "./components/CreateEditFeedBack";
-import RoadMap from "./components/RoadMap";
+import Suggestions from "./components/Suggestions/Suggestions";
+import FeedBackDetail from "./components/FeedBackDetail/FeedBackDetail";
+import CreateEditFeedBack from "./components/CreateEditFeedBack/CreateEditFeedBack";
+import RoadMap from "./components/RoadMap/RoadMap";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts } from "./features/productRequests/productRequestsSlice";
@@ -26,13 +26,10 @@ function App() {
     if (postStatus === "idle") {
       dispatch(fetchPosts());
     }
-  }, [postStatus, dispatch]);
-
-  useEffect(() => {
     if (userStatus === "idle") {
       dispatch(fetchUser());
     }
-  }, [userStatus, dispatch]);
+  }, [postStatus, userStatus, dispatch]);
 
   return (
     <div className="App" style={{ cursor: isLoading ? "progress" : "default" }}>

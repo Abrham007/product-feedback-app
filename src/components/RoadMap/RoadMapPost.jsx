@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import PostComments from "./PostComments";
+import PostComments from "../Comments/PostComments";
 import "./RoadMapPost.css";
-import ScoreButton from "./ScoreButton";
-import Tag from "./Tag";
+import ScoreButton from "../UI/Buttons/ScoreButton";
+import Tag from "../Tag";
 
 function RoadMapPost(props) {
   return (

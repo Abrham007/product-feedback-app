@@ -1,7 +1,7 @@
 import "./FeedBackEmpty.css";
-import emptyIcon from "../assets/suggestions/illustration-empty.svg";
+import emptyIcon from "../../assets/suggestions/illustration-empty.svg";
 
-import AddBtn from "./AddBtn";
+import AddBtn from "../UI/Buttons/AddBtn";
 
 function FeedBackEmpty() {
   return (

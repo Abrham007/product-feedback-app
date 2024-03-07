@@ -2,7 +2,7 @@ import "./CommentPost.css";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addNewReplay } from "../features/productRequests/productRequestsSlice";
+import { addNewReplay } from "../../features/productRequests/productRequestsSlice";
 
 function CommentPost(props) {
   const [isOpen, setIsOpen] = useState(false);

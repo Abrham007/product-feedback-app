@@ -1,19 +1,19 @@
 import "./CreateEditFeedBack.css";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import arrowLeftIcon from "../assets/shared/icon-arrow-left.svg";
-import newFeedbackIcon from "../assets/shared/icon-new-feedback.svg";
-import editFeedbackIcon from "../assets/shared/icon-edit-feedback.svg";
+import arrowLeftIcon from "../../assets/shared/icon-arrow-left.svg";
+import newFeedbackIcon from "../../assets/shared/icon-new-feedback.svg";
+import editFeedbackIcon from "../../assets/shared/icon-edit-feedback.svg";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import FeedBackInput from "./FeedBackInput";
+import FeedBackInput from "../UI/Inputs/FeedBackInput";
 import { useDispatch, useSelector } from "react-redux";
-import BackBtn from "./BackBtn";
+import BackBtn from "../UI/Buttons/BackBtn";
 import {
   addNewPost,
   editPost,
   deletePost,
   selectProductRequests,
-} from "../features/productRequests/productRequestsSlice";
+} from "../../features/productRequests/productRequestsSlice";
 
 function CreateEditFeedBack(props) {
   // The id passed for editing from the FeedBackDeatil component

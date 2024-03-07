@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import plusIcon from "../assets/shared/icon-plus.svg";
+import plusIcon from "../../../assets/shared/icon-plus.svg";
 import "./AddBtn.css";
 
 function AddBtn({ ...props }) {

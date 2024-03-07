@@ -1,5 +1,5 @@
 import "./DropMenu.css";
-import checkIcon from "../assets/shared/icon-check.svg";
+import checkIcon from "../../../assets/shared/icon-check.svg";
 
 function DropMenu(props) {
   function handleClick(index, event) {

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import "./FeedBackPost.css";
-import PostComments from "./PostComments";
-import ScoreButton from "./ScoreButton";
-import Tag from "./Tag";
+import PostComments from "../Comments/PostComments";
+import ScoreButton from "../UI/Buttons/ScoreButton";
+import Tag from "../Tag";
 import { Link } from "react-router-dom";
 
 function FeedBackPost(props) {

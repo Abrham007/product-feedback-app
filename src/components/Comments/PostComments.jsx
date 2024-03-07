@@ -1,5 +1,5 @@
 import "./PostComments.css";
-import commentIcon from "../assets/shared/icon-comments.svg";
+import commentIcon from "../../assets/shared/icon-comments.svg";
 
 function PostComments(props) {
   return (

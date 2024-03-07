@@ -1,7 +1,7 @@
 import "./ScoreButton.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { increaseVote } from "../features/productRequests/productRequestsSlice";
+import { increaseVote } from "../../../features/productRequests/productRequestsSlice";
 
 function ScoreButton(props) {
   const currentUser = useSelector((state) => state.currentUser.user);

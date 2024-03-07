@@ -1,9 +1,9 @@
 import "./FeedBackDetail.css";
 import FeedBackPost from "./FeedBackPost";
-import CommentList from "./CommentList";
-import AddComment from "./AddComment";
+import CommentList from "../Comments/CommentList";
+import AddComment from "../Comments/AddComment";
 import { Link, useParams } from "react-router-dom";
-import BackBtn from "./BackBtn";
+import BackBtn from "../UI/Buttons/BackBtn";
 import { useSelector } from "react-redux";
 function FeedBackDetail() {
   // This is the id we get from either the suggesitons page or

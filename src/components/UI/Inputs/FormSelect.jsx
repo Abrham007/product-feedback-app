@@ -1,6 +1,6 @@
 import "./FormSelect.css";
-import arrowDownIcon from "../assets/shared/icon-arrow-down.svg";
-import arrowUpIcon from "../assets/shared/icon-arrow-up.svg";
+import arrowDownIcon from "../../../assets/shared/icon-arrow-down.svg";
+import arrowUpIcon from "../../../assets/shared/icon-arrow-up.svg";
 import { useState } from "react";
 import DropMenu from "./DropMenu";
 

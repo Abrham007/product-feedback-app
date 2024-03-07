@@ -1,12 +1,12 @@
 import "./Suggestions.css";
 import { useEffect, useState } from "react";
-import CompanyName from "./CompanyName";
-import TagList from "./TagList";
-import RoadMapView from "./RoadMapView";
+import CompanyName from "../CompanyName";
+import TagList from "../TagList";
+import RoadMapView from "../RoadMap/RoadMapView";
 import SuggestionsTab from "./SuggestionsTab";
-import FeedBackList from "./FeedBackList";
+import FeedBackList from "../FeedBackDetail/FeedBackList";
 import { useSelector } from "react-redux";
-import { selectSuggestionList } from "../features/productRequests/productRequestsSlice";
+import { selectSuggestionList } from "../../features/productRequests/productRequestsSlice";
 
 function Suggestions() {
   // we get the suggestions list from the productReqests posts list

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DropMenu from "./DropMenu";
+import DropMenu from "../UI/Inputs/DropMenu";
 import "./SuggestionsSort.css";
 
 function SuggestionsSort(props) {
