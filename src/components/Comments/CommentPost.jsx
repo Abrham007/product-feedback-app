@@ -42,7 +42,7 @@ function CommentPost(props) {
     <div className="CommentPost">
       <img
         className="CommentPost__avatar"
-        src={`http://127.0.0.1:4000/${props.user.image}`}
+        src={`/${props.user.image}`}
         alt=""
         width={40}
         height={40}
