@@ -6,6 +6,8 @@ import RoadMapTabs from "./RoadMapTabs";
 import { useState } from "react";
 import { selectProductRequests } from "../../features/productRequests/productRequestsSlice";
 import { useSelector } from "react-redux";
+import { useMediaQuery } from "react-responsive";
+import { useEffect } from "react";
 
 function RoadMap() {
   // This state is responsible for the selected states planned, in-progress or live
@@ -42,7 +44,7 @@ function RoadMap() {
 
   // Since we can't use CSS mediaqueries b/c it uses state to determine
   // the current roadMapDetailList showing we use javascript mediaqueries
-  const mediaQuery = window.matchMedia("(max-width: 768px)");
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 768px)" });
 
   // for desktop and tablet we show all the data
   let roadMapDetailList = roadMapData.map((item) => (
@@ -50,7 +52,7 @@ function RoadMap() {
   ));
 
   // for mobile we show one at a time
-  if (mediaQuery.matches && selectedStatus !== "") {
+  if (isSmallScreen && selectedStatus !== "") {
     let tempRoadMapDetail = roadMapData.find(
       (item) => item[0].status === selectedStatus
     );
@@ -59,17 +61,15 @@ function RoadMap() {
   }
 
   // we listin for change in the display
-  mediaQuery.addEventListener("change", () => {
-    if (mediaQuery.matches) {
-      if (selectedStatus === "") {
-        setSelectedStatus("In-Progress");
-      }
-    } else {
-      if (selectedStatus !== "") {
-        setSelectedStatus("");
-      }
+  if (isSmallScreen) {
+    if (selectedStatus === "") {
+      setSelectedStatus("In-Progress");
     }
-  });
+  } else {
+    if (selectedStatus !== "") {
+      setSelectedStatus("");
+    }
+  }
 
   // This is used by the tabpanal for mobile dispaly
   function handleSelectedStatus(newStatus) {
