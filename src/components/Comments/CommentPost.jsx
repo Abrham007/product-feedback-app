@@ -42,7 +42,7 @@ function CommentPost(props) {
     <div className="CommentPost">
       <img
         className="CommentPost__avatar"
-        src={`https://product-feedback-app-6f9b6af9349f.herokuapp.com/${props.user.image}`}
+        src={`/images/${props.user.image}`}
         alt=""
         width={40}
         height={40}

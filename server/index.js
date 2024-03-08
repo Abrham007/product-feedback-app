@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static("images"));
+app.use("/images", express.static(__dirname + "/images"));
 
 app.use("/api", userRoute);
 app.use("/api", productRequestRoute);
