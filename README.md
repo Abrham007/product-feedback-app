@@ -13,7 +13,7 @@
 
 ### About Project
 
-This project took me about 2 weeks to finish. It's fully backed with a Node.js heroku server and Atlas/MongoDB database. It has a full set of test suites both unit and integretion test's with jest as a test runner .I used a Desktop-first workflow. i used Modular-CSS as a CSS Pattern
+This project took me about 2 weeks to finish. It's fully backed with a Node.js heroku server and Atlas/MongoDB database. It has a full set of test suites both unit and integration test's with jest as a test runner .I used a Desktop-first workflow. i used Modular-CSS as a CSS Pattern
 
 ### Built with
 
