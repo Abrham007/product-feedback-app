@@ -13,7 +13,7 @@
 
 ### About Project
 
-This project took me about 2 weeks to finish. It's fully backed with a Node.js heroku server and Atlas/MongoDB database. It has a full set of test suites both unit and integration test's with jest as a test runner .I used a Desktop-first workflow. i used Modular-CSS as a CSS Pattern
+This project is a product feedback app that like the name suggests it is used to let user's of a product or service comment or suggest improvement on the aforementioned product or service. It even has a board to let the users know were the status of there suggested improvement is in or if the company has choosen to discard the suggested improvements. It has responsive design for desktop, tablet and mobile screens. I used React and ModularCSS with a desktop first workflow for the front-end and node.js and Atlas/MongoDB database for the back-end. It is fully online on a Heroku server.
 
 ### Built with
 
